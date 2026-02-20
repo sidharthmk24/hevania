@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme {
+  --font-playfair: var(--font-playfair-display);
+  --font-inter: var(--font-inter);
+
+  --color-luxury-green: #A8C3A0;
+  --color-soft-sage: #C7D9C1;
+  --color-dark-forest: #2F3E2F;
+  --color-cream: #F5F5F0;
+  --color-muted-gold: #C6A75E;
+
+  --animate-fade-in: fade-in 0.6s ease-in-out forwards;
+  --animate-fade-out: fade-out 0.6s ease-in-out forwards;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+}
+
+:root {
+  --background: #F5F5F0;
+  --foreground: #2F3E2F;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
