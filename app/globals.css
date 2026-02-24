@@ -3,8 +3,7 @@
 @plugin "tailwindcss-animate";
 
 @theme {
-  --font-playfair: var(--font-playfair-display);
-  --font-inter: var(--font-inter);
+  --font-julius: var(--font-julius-sans);
 
   --color-luxury-green: #A8C3A0;
   --color-soft-sage: #C7D9C1;
@@ -16,12 +15,23 @@
   --animate-fade-out: fade-out 0.6s ease-in-out forwards;
 
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
+
   @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
   }
 }
 
@@ -33,12 +43,17 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-julius), sans-serif;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-julius), sans-serif;
 }
 
 .lenis.lenis-smooth {
