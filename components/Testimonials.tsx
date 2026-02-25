@@ -36,11 +36,6 @@ export default function Testimonial(): React.ReactElement {
         {/* Testimonial Header Section */}
         <header className="flex items-center justify-center flex-col lg:mb-[90px] mb-9">
           <h2 className="sr-only">Client Testimonials</h2>
-          <h1
-            className="text-customBrown md:text-lg text-xs 2xl:text-[2.125rem] font-freightNeoMedium"
-          >
-            CLIENT TESTIMONIALS
-          </h1>
           <h2
             className="text-customBrown text-[1.5rem] sm:text-[1.5rem] md:text-[2.5rem] lg2:text-[3.5rem] 2xl:text-[5rem] leading-[28px] md:leading-[72px] xl:leading-[67px] 2xl:leading-[90px] font-freightNeoMedium"
           >

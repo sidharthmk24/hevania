@@ -88,14 +88,14 @@ export default function FtCarous({ images, content }: Props) {
             {/* Section content - given higher z-index */}
             <div className="absolute inset-x-0 bottom-0 p-6 text-white z-[1]">
                 <h2
-                    className="font-freightNeoMedium text-white text-center"
+                    className="font-freightNeoMedium text-white text-center text-xl md:text-2xl lg:text-3xl"
                     aria-label={`Mobile Title: ${content.mobile[currentIndex].title}`}
                 >
                     {section.title}
                 </h2>
                 {/* Hover description */}
                 <div className="overflow-hidden h-0 group-hover/section:h-24 transition-all duration-300">
-                    <h3 className="font-FreightNeoProNormal font-normal mt-[5px] text-white text-center">
+                    <h3 className="font-FreightNeoProNormal font-normal mt-[5px] text-white text-center text-sm md:text-base lg:text-md">
                         {section.description}
                     </h3>
                 </div>

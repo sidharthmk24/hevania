@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Julius_Sans_One } from "next/font/google";
+import { Aboreto } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "lenis/react";
 import Navbar from "@/components/Navbar";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
 
-const juliusSansOne = Julius_Sans_One({
-  variable: "--font-julius-sans",
+const aboreto = Aboreto({
+  variable: "--font-aboreto",
   weight: "400",
   subsets: ["latin"],
   display: "swap",
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${juliusSansOne.variable} antialiased bg-cream text-dark-forest font-sans`}
+        className={`${aboreto.variable} antialiased bg-cream text-dark-forest font-sans`}
       >
         <ReactLenis root>
           <Loader />

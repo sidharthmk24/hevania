@@ -26,7 +26,7 @@ export const InfiniteMovingCards = ({
         <div
             ref={containerRef}
             className={cn(
-                "scroller relative  2xl:max-w-[150rem] xl:max-w-[100rem] lg:max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+                "scroller relative w-full max-w-full 2xl:max-w-[150rem] xl:max-w-[100rem] lg:max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]",
                 className
             )}
         >
@@ -37,10 +37,13 @@ export const InfiniteMovingCards = ({
                     direction === "left" ? "animate-scroll-left" : "animate-scroll-right",
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
+                style={{
+                    "--animation-duration": speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s",
+                } as React.CSSProperties}
             >
                 {[...items, ...items].map((item, idx) => (
                     <li
-                        className="md:w-[361px] sm:w-[263px] 2xl:w-[500px]  w-[300px] relative  border-[#4F3737] border-[1px] rounded-[14px] pt-[30px] pb-[26px] px-[21px]"
+                        className="md:w-[20vw] sm:w-[20vw] 2xl:w-[35vw] w-[210px] min-h-[40vh] relative border-[#4F3737] border-[1px] rounded-[14px] pt-[30px] pb-[26px] px-[21px] shrink-0"
                         key={idx}
                     >
                         <blockquote>
