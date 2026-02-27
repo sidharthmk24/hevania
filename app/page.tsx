@@ -10,6 +10,7 @@ import Testimonials from "@/components/Testimonials";
 import NumberCounter2ELite from "@/components/NumberCount";
 import FeaturesSection from "@/components/featuresSection";
 import { FeatureItem } from "@/components/featuresSection";
+import FaqSection from "@/components/FaqSection";
 
 export default function Home() {
 
@@ -102,7 +103,7 @@ export default function Home() {
       {/* <SvgOutline button="Explore" /> */}
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0  ">
-        <h2 className="text-4xl md:text-5xl lg:text-7xl  tracking-wide text-[#425042] text-center mb-16 lg:mb-24 font-normal w-full leading-[1.1]">
+        <h2 className="text-3xl md:text-4xl lg:text-6xl  tracking-wide text-[#425042] md:text-center mb-16 lg:mb-24 font-normal w-full leading-[1.1]">
 
           <span className="font-thin">Curated Decor</span>  & Modern  <br className="hidden md:block" />Rental Solutions
         </h2>
@@ -114,6 +115,8 @@ export default function Home() {
 
       <NumberCounter2ELite data={data} />
       <Testimonials />
+
+      <FaqSection/>
       
 
  

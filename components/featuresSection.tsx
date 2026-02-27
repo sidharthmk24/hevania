@@ -31,12 +31,12 @@ export default function FeaturesSection({ features, heading, variant = "center",
             <div className=" mx-auto px-6 lg:px-20 xl:px-54 ">
                 {/* Header */}
                 {variant === "center" ? (
-                    <h2 className="text-4xl md:text-5xl lg:text-[68px] text-[#424244] font-normal text-center mb-16 lg:mb-28 tracking-tight leading-tight">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-28 tracking-tight leading-tight">
                         {heading}
                     </h2>
                 ) : (
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-16 lg:mb-28">
-                        <h2 className="text-4xl md:text-5xl lg:text-[68px] text-[#424244] font-normal tracking-tight leading-tight">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight">
                             {heading}
                         </h2>
                         <button className="flex items-center gap-2 px-4 py-5 border border-[#0097DC] text-[#0097DC] hover:bg-[#0097DC]/10 transition-colors uppercase tracking-widest text-sm font-medium shrink-0">
@@ -61,11 +61,11 @@ export default function FeaturesSection({ features, heading, variant = "center",
                                     }`}
                             >
                                 {/* Icon Wrapper */}
-                                <div className="w-10 h-10 flex items-center justify-center text-[#505153] group-hover:text-[#0097DC] transition-all duration-500 transform group-hover:scale-110 shrink-0">
+                                <div className="w-10 h-10 flex items-center justify-center text-[#425042] group-hover:text-[#425042]/30  transition-all duration-300 transform group-hover:scale-110 shrink-0">
                                     <Icon />
                                 </div>
                                 {/* Text Label */}
-                                <span className="text-[#505153] text-[15px] lg:text-[16px] leading-snug font-normal tracking-wide transition-colors duration-300 group-hover:text-[#424244]">
+                                <span className="text-[#425042] text-[15px] lg:text-[16px] leading-snug font-normal tracking-wide transition-colors duration-300 group-hover:text-[#425042]">
                                     {item.label}
                                 </span>
                             </div>
@@ -77,7 +77,7 @@ export default function FeaturesSection({ features, heading, variant = "center",
                 <div className="flex justify-start md:hidden mb-20">
                     <button
                         onClick={() => setIsExpanded(!isExpanded)}
-                        className="text-[#424244] text-[15px] border-b border-[#424244] pb-0.5 hover:text-[#0097DC] hover:border-[#0097DC] transition-colors duration-300"
+                        className="text-[#425042] text-[15px] border-b border-[#425042] pb-0.5 hover:text-[#0097DC] hover:border-[#0097DC] transition-colors duration-300"
                     >
                         {isExpanded ? "Read Less" : "Read More"}
                     </button>

@@ -60,7 +60,7 @@ export default function AboutPage() {
                 >
                     <span className="block text-sm uppercase tracking-widest text-muted-gold mb-6 font-medium">Who We Are</span>
                     <p className="text-xl md:text-2xl font-light leading-relaxed text-gray-700">
-                        At Mukund Events, we believe that a venue is more than just a location;
+                        At HEVANIA, we believe that a venue is more than just a location;
                         it is the canvas upon which life's most beautiful memories are painted.
                         Founded with a vision to redefine celebrations, we offer access to
                         exclusive, nature-immersed plots that blend breathtaking scenery with

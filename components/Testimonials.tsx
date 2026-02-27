@@ -34,10 +34,10 @@ export default function Testimonial(): React.ReactElement {
     <>
       <section className="xl:mt-[166px] lg:mt-[206px] mt-12">
         {/* Testimonial Header Section */}
-        <header className="flex items-center justify-center flex-col lg:mb-[90px] mb-9">
+        <header className="flex items-center justify-center flex-col lg:mb-[90px] mb-9 px-4 md:px-0 text-center">
           <h2 className="sr-only">Client Testimonials</h2>
           <h2
-            className="text-customBrown text-[1.5rem] sm:text-[1.5rem] md:text-[2.5rem] lg2:text-[3.5rem] 2xl:text-[5rem] leading-[28px] md:leading-[72px] xl:leading-[67px] 2xl:leading-[90px] font-freightNeoMedium"
+            className=" text-[1.5rem] sm:text-[1.5rem] md:text-[2.5rem] lg2:text-[3.5rem] 2xl:text-[5rem] leading-[28px] md:leading-[72px] xl:leading-[67px] 2xl:leading-[90px] "
           >
             What Our Clients Say
           </h2>

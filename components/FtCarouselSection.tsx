@@ -88,14 +88,14 @@ export default function FtCarous({ images, content }: Props) {
             {/* Section content - given higher z-index */}
             <div className="absolute inset-x-0 bottom-0 p-6 text-white z-[1]">
                 <h2
-                    className="font-freightNeoMedium text-white text-center text-xl md:text-2xl lg:text-3xl"
+                    className="font-freightNeoMedium text-white text-center text-xl md:text-lg lg:text-2xl"
                     aria-label={`Mobile Title: ${content.mobile[currentIndex].title}`}
                 >
                     {section.title}
                 </h2>
                 {/* Hover description */}
                 <div className="overflow-hidden h-0 group-hover/section:h-24 transition-all duration-300">
-                    <h3 className="font-FreightNeoProNormal font-normal mt-[5px] text-white text-center text-sm md:text-base lg:text-md">
+                    <h3 className="font-light mt-[5px] text-white text-center text-sm md:text-sm lg:text-sm">
                         {section.description}
                     </h3>
                 </div>
@@ -135,10 +135,11 @@ export default function FtCarous({ images, content }: Props) {
                                     />
                                 </motion.div>
                             ))}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
                         </div>
 
                         {/* Vertical dividing lines */}
-                        <div className="absolute inset-0 flex">
+                        <div className="absolute inset-0 flex pointer-events-none">
                             <div className="flex-1 border-r border-white"></div>
                             <div className="flex-1 border-r border-white"></div>
                             <div className="flex-1"></div>
@@ -157,7 +158,7 @@ export default function FtCarous({ images, content }: Props) {
                             className="w-full h-[679px] transition-all object-cover duration-500"
                         // loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
                         <div className="absolute inset-0 flex flex-col justify-end items-center text-center p-6">
                             <h2
                                 className="font-freightNeoMedium text-white text-2xl"

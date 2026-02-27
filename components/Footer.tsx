@@ -38,7 +38,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-[#F5F5F0] overflow-hidden pt-24 md:pt-32 pb-6 w-full z-10 font-sans border-t border-[#425042]/50">
+        <footer className="relative  bg-[#F5F5F0] overflow-hidden pt-24 md:pt-32 pb-6 w-full z-10 font-sans border-t border-[#425042]/50">
 
             {/* Background radial glow matching the image */}
             <div
@@ -137,7 +137,7 @@ export default function Footer() {
                     <div className="flex flex-col sm:flex-row gap-16 lg:gap-32 w-full lg:w-auto lg:min-w-[400px]">
                         {/* Navigation Section */}
                         <div className="flex-1">
-                            <h4 className="text-[11px] uppercase tracking-wider text-black/40 mb-4">Navigation</h4>
+                            <h4 className="text-[11px] uppercase tracking-wider text-black/40 mb-4">Quick LINKS</h4>
                             <ul className="space-y-2">
                                 <li><Link href="/about" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">About Us</Link></li>
                                 <li><Link href="/blog" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">Event Journal</Link></li>

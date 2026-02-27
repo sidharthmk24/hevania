@@ -45,7 +45,7 @@ export default function ExperienceSection() {
     return (
         <section ref={sectionRef} className="pt-24 pb-12 md:pb-0 md:pt-32 w-full overflow-hidden ">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-                <h2 className="text-4xl md:text-5xl lg:text-7xl tracking-wide text-[#2F3E2F]/90 text-left mb-16 lg:mb-24 font-normal md:max-w-[80%] leading-[1.1]">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-wide text-[#2F3E2F]/90 text-left mb-16 lg:mb-24 font-normal md:max-w-[80%] leading-[1.1]">
                     <span className="font-thin">Where Exceptional</span> Experiences Take Shape
                 </h2>
 
@@ -80,7 +80,7 @@ export default function ExperienceSection() {
                         </div>
 
                         {/* Front Image (Bottom Left, Overlapping) */}
-                        <div ref={img2Ref} className="absolute bottom-[5%] sm:bottom-[15%] left-0 lg:left-[0%] w-[80%] sm:w-[75%] lg:w-[65%] h-[60%] sm:h-[45%] z-10 shadow-xl select-none">
+                        <div ref={img2Ref} className="absolute bottom-[5%] sm:bottom-[15%] left-0 lg:left-[0%] w-[80%] sm:w-[75%] lg:w-[65%] h-[60%] sm:h-[45%] z-10  select-none">
                             <Image
                                 src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"
                                 alt="Modern luxury bedroom interior"

@@ -101,53 +101,57 @@ export default function NumberCounter2ELite({
     noBorder?: boolean;
 }) {
     return (
-        <section className="relative h-[50vh] flex flex-col justify-center bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('/images/heroImages/carousel1.jpeg')" }}>
+        <section className="relative min-h-[50vh] py-16 lg:py-0 flex flex-col justify-center bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('/images/heroImages/carousel1.jpeg')" }}>
             <div className="absolute inset-0 bg-[#F5F5F0]/90 z-0"></div>
-            <div className="container px-4 lg:px-0 mx-auto relative z-30">
-                <div className="grid grid-cols-1 lg:grid-cols-4">
+            <div className="container px-4 sm:px-8 md:px-12 lg:px-20 mx-auto relative z-30">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-4 lg:gap-y-0 lg:gap-x-8">
                     {data?.map((item, index) => (
-                        <div key={index} className={`text-center py-6 space-y-2 lg:py-10`}>
-                            <div className="flex gap-6 mx-auto justify-center">
-                                <div className="flex items-center gap-2">
-                                    <h3
-                                        className={`text-[32px] sm:text-[34px] text-customBrown lg2:text-[40px] xl:text-[60px] leading-[100%] font-CandideCondensedNormal tabular-nums animate-[pulse_0.3s_ease-out]`}
-                                    >
-                                        {/* Split numeric and text parts */}
-                                        {(() => {
-                                            const match = item.title.match(/[0-9,.]+/); // get first number
-                                            const numberPart = match ? match[0] : "";
-                                            const textPart = match ? item.title.replace(numberPart, "") : item.title;
+                        <div key={index} className={`text-center space-y-2 sm:space-y-3 lg:space-y-4 lg:py-10 ${!noBorder && index !== data.length - 1 ? 'lg:border-r border-[#1C1213]/20' : ''}`}>
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3">
+                                <h3
+                                    className={`text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl text-customBrown leading-tight font-CandideCondensedNormal tabular-nums animate-[pulse_0.3s_ease-out]`}
+                                >
+                                    {/* Split numeric and text parts */}
+                                    {(() => {
+                                        const match = item.title.match(/[0-9,.]+/); // get first number
+                                        const numberPart = match ? match[0] : "";
+                                        const textPart = match ? item.title.replace(numberPart, "") : item.title;
 
-                                            return (
-                                                <>
-                                                    {/* Animate only the numeric part */}
-                                                    {numberPart && <Counter value={numberPart} />}
-                                                    {/* Show remaining text */}
-                                                    {textPart && <span>{textPart}</span>}
-                                                </>
-                                            );
-                                        })()}
-                                    </h3>
+                                        return (
+                                            <span className="flex items-center justify-center">
+                                                {/* Animate only the numeric part */}
+                                                {numberPart && <Counter value={numberPart} />}
+                                                {/* Show remaining text */}
+                                                {textPart && <span className="ml-1">{textPart}</span>}
+                                            </span>
+                                        );
+                                    })()}
+                                </h3>
 
-                                    <h2 className="text-xl font-freightNeoMedium sm:text-xl font-semibold text-customBrown pt-1 md:pt-4">{item.subtitle}</h2>
-                                </div>
+                                {item.subtitle && (
+                                    <h2 className="text-[13px] sm:text-base md:text-lg lg:text-xl font-freightNeoMedium font-medium text-customBrown opacity-90 sm:pt-2">
+                                        {item.subtitle}
+                                    </h2>
+                                )}
                             </div>
 
                             {item.description && (
-                                <p className={`font-FreightNeoProNormal text-customBrown text-[18px] leading-[24px] px-4`}>{RenderStyledText(item.description)}</p>
+                                <p className={`font-FreightNeoProNormal text-customBrown text-sm sm:text-base lg:text-[18px] leading-snug lg:leading-[24px] px-2 sm:px-4 mx-auto max-w-[200px] sm:max-w-none`}>
+                                    {RenderStyledText(item.description)}
+                                </p>
                             )}
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-6 flex items-center justify-center">
+                <div className="mt-8 flex items-center justify-center">
                     {/* Brochure link (still commented) */}
                     {/* <Link
-            href="/brochure.pdf"
-            className="inline-block px-6 py-2 border text-[#1C1213] font-FreightNeoProNormal border-black rounded-full text-sm tracking-wider hover:bg-black hover:text-white transition"
-          >
-            DOWNLOAD BROCHURE →
-          </Link> */}
+                        href="/brochure.pdf"
+                        className="inline-block px-6 py-2 border text-[#1C1213] font-FreightNeoProNormal border-black rounded-full text-sm tracking-wider hover:bg-black hover:text-white transition"
+                    >
+                        DOWNLOAD BROCHURE →
+                    </Link> */}
                 </div>
             </div>
         </section>
