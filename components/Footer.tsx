@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
 export default function Footer() {
     const [formData, setFormData] = useState({
@@ -38,131 +40,137 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative  bg-[#F5F5F0] overflow-hidden pt-24 md:pt-32 pb-6 w-full z-10 font-sans border-t border-[#425042]/50">
+        <footer className="relative bg-[#F5F5F0] pt-32 pb-12 w-full z-10 border-t border-[#2F3E2F]/5">
+            <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24 w-full">
 
-            {/* Background radial glow matching the image */}
-            <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] max-w-[2000px] h-[800px] pointer-events-none -z-10"
-                style={{
-                    background: "radial-gradient(ellipse at bottom, rgba(92, 128, 33, 0.15) 0%, rgba(92, 128, 33, 0.15) 35%, rgba(13,10,10,0) 70%)"
-                }}
-            ></div>
+                {/* Top Section: Three Column Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24 mb-24">
 
-            <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20 w-full flex flex-col justify-between min-h-[500px]">
+                    {/* Brand Info */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                    >
+                        <h2 className="text-[24px] font-aboreto text-[#2F3E2F] mb-8 tracking-widest uppercase">
+                            HEVANIA
+                        </h2>
+                        <p className="text-[14px] font-light text-[#2F3E2F]/60 leading-relaxed max-w-sm mb-10">
+                            Curating extraordinary experiences in the world's most exquisite settings. Every detail, a testament to elegance.
+                        </p>
 
-                {/* Top Section */}
-                <div className="flex flex-col lg:flex-row justify-between w-full">
-                    {/* Left Column (Main Text & Form) */}
-                    <div className="max-w-xl w-full mb-16 lg:mb-0">
-                         
-                            <p className="text-lg sm:text-xl lg:text-[22px] font-light text-[#425042]/70 leading-[1.3] mb-10">
-                                Where your celebrations find their perfect home.
-                            </p>
-
-                        {/* Luxurious Form */}
-                        {status === "success" ? (
-                            <div className="mt-12 py-10 px-6 border border-[#425042]/20 text-center rounded-sm bg-[#425042]/5 backdrop-blur-sm">
-                                <h3 className="text-2xl font-serif text-[#425042] mb-3">Thank you!</h3>
-                                <p className="text-[#425042]/80 font-light">Your enquiry has been received. We will get back to you shortly.</p>
-                            </div>
-                        ) : (
-                            <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-10 max-w-lg">
-                                <div className="flex flex-col sm:flex-row gap-10">
-                                    <div className="relative w-full group">
-                                        <input
-                                            type="text"
-                                            id="footer-name"
-                                            required
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            className="peer w-full bg-transparent border-b border-[#425042]/30 text-[#425042] placeholder-transparent focus:outline-none focus:border-[#425042] transition-colors pb-2 text-sm"
-                                            placeholder="Name"
-                                        />
-                                        <label htmlFor="footer-name" className="absolute left-0 -top-4 text-[#425042]/60 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#425042] cursor-text">Name</label>
-                                    </div>
-                                    <div className="relative w-full group">
-                                        <input
-                                            type="email"
-                                            id="footer-email"
-                                            required
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            className="peer w-full bg-transparent border-b border-[#425042]/30 text-[#425042] placeholder-transparent focus:outline-none focus:border-[#425042] transition-colors pb-2 text-sm"
-                                            placeholder="Email"
-                                        />
-                                        <label htmlFor="footer-email" className="absolute left-0 -top-4 text-[#425042]/60 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#425042] cursor-text">Email</label>
-                                    </div>
-                                </div>
-                                <div className="relative w-full group">
-                                    <input
-                                        type="tel"
-                                        id="footer-phone"
-                                        required
-                                        value={formData.phone}
-                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        className="peer w-full bg-transparent border-b border-[#425042]/30 text-[#425042] placeholder-transparent focus:outline-none focus:border-[#425042] transition-colors pb-2 text-sm"
-                                        placeholder="Phone"
-                                    />
-                                    <label htmlFor="footer-phone" className="absolute left-0 -top-4 text-[#425042]/60 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#425042] cursor-text">Phone</label>
-                                </div>
-                                <div className="relative w-full group">
-                                    <textarea
-                                        id="footer-message"
-                                        rows={1}
-                                        required
-                                        value={formData.message}
-                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                        className="peer w-full bg-transparent border-b border-[#425042]/30 text-[#425042] placeholder-transparent focus:outline-none focus:border-[#425042] transition-colors pb-2 text-sm resize-none"
-                                        placeholder="Project Details"
-                                    ></textarea>
-                                    <label htmlFor="footer-message" className="absolute left-0 -top-4 text-[#425042]/60 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#425042] cursor-text">Message / Enquiry</label>
-                                </div>
-                                <div className="mt-2 flex flex-col gap-2">
-                                    <button
-                                        type="submit"
-                                        disabled={status === "submitting"}
-                                        className="w-fit text-[13px] tracking-[0.2em] uppercase border border-[#425042] text-[#425042] px-10 py-4 hover:bg-[#425042] hover:text-[#F5F5F0] transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        {status === "submitting" ? "Sending..." : "Submit Enquiry"}
-                                    </button>
-                                    {status === "error" && (
-                                        <p className="text-red-500 text-xs mt-2">Something went wrong. Please try again.</p>
-                                    )}
-                                </div>
-                            </form>
-                        )}
-                    </div>
-
-                    {/* Right Columns Container */}
-                    <div className="flex flex-col sm:flex-row gap-16 lg:gap-32 w-full lg:w-auto lg:min-w-[400px]">
-                        {/* Navigation Section */}
-                        <div className="flex-1">
-                            <h4 className="text-[11px] uppercase tracking-wider text-black/40 mb-4">Quick LINKS</h4>
-                            <ul className="space-y-2">
-                                <li><Link href="/about" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">About Us</Link></li>
-                                <li><Link href="/blog" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">Event Journal</Link></li>
-                                <li><Link href="/#properties" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">Venues</Link></li>
-                                <li><Link href="/contact" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">Contact</Link></li>
-                            </ul>
+                        <div className="flex gap-6 items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+                            {[
+                                { icon: Instagram, href: "#" },
+                                { icon: Facebook, href: "#" },
+                                { icon: Mail, href: "mailto:inquiry@hevania.com" }
+                            ].map((social, i) => (
+                                <a key={i} href={social.href} className="text-[#2F3E2F] hover:text-[#C6A75E] transition-colors">
+                                    <social.icon size={16} strokeWidth={1} />
+                                </a>
+                            ))}
                         </div>
+                    </motion.div>
 
-                        {/* Contact Section */}
-                        <div className="flex-1">
-                            <h4 className="text-[11px] uppercase tracking-wider text-black/40 mb-4">Contact</h4>
-                            <ul className="space-y-2">
-                                <li className="text-[15px] font-light text-[#425042]">123 Luxury Lane</li>
-                                <li className="text-[15px] font-light text-[#425042]">Mumbai, MH 400001</li>
-                                <li className="text-[15px] font-light text-[#425042]">+91 98765 43210</li>
-                                <li><a href="mailto:inquiry@hevania.com" className="text-[15px] font-light text-[#425042] hover:text-[#F3B6A7] transition-colors">inquiry@hevania.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    {/* Discovery Links */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                    >
+                        <h4 className="text-[10px] uppercase tracking-[0.4em] text-[#C6A75E] mb-8 font-semibold">Discovery</h4>
+                        <ul className="space-y-4">
+                            {[
+                                { name: "The Atelier", href: "/about" },
+                                { name: "Curated Venues", href: "/#properties" },
+                                { name: "Event Journal", href: "/blog" },
+                                { name: "Private Viewings", href: "/contact" }
+                            ].map((link) => (
+                                <li key={link.name}>
+                                    <Link href={link.href} className="text-[14px] font-light text-[#2F3E2F]/70 hover:text-[#2F3E2F] transition-colors relative group block w-fit">
+                                        {link.name}
+                                        <span className="absolute bottom-0 left-0 w-0 h-[0.5px] bg-[#2F3E2F] transition-all duration-500 group-hover:w-full"></span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+
+                    {/* Concierge Info */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                    >
+                        <h4 className="text-[10px] uppercase tracking-[0.4em] text-[#C6A75E] mb-8 font-semibold">Concierge</h4>
+                        <ul className="space-y-5 text-[14px] font-light text-[#2F3E2F]/60">
+                            <li className="flex flex-col gap-1">
+                                <span className="text-[9px] uppercase tracking-[0.2em] opacity-50">Localisation</span>
+                                123 Luxury Lane, Mumbai, MH 400001
+                            </li>
+                            <li className="flex flex-col gap-1">
+                                <span className="text-[9px] uppercase tracking-[0.2em] opacity-50">Direct Line</span>
+                                +91 98765 43210
+                            </li>
+                            <li>
+                                <a href="mailto:inquiry@hevania.com" className="hover:text-[#2F3E2F] transition-colors">inquiry@hevania.com</a>
+                            </li>
+                        </ul>
+                    </motion.div>
                 </div>
 
-                {/* Bottom Giant Text Section */}
-                <div className="w-full mt-32 md:mt-48 relative flex flex-col items-center">
+                {/* Middle Section: Minimal Enquiry Form */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.4 }}
+                    className="w-full max-w-2xl pt-16 border-t border-[#2F3E2F]/5"
+                >
+                    <h4 className="text-[10px] uppercase tracking-[0.4em] text-[#C6A75E] mb-10 font-semibold">Inquiries</h4>
 
-                    {/* The giant text + custom geometric shape matching the reference */}
+                    {status === "success" ? (
+                        <div className="py-8">
+                            <p className="text-[14px] font-light text-[#2F3E2F] italic">Thank you. We will reach out shortly.</p>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="space-y-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                                {[
+                                    { id: "name", label: "Full Name", type: "text" },
+                                    { id: "email", label: "Email Address", type: "email" },
+                                    { id: "phone", label: "Phone Number", type: "tel" },
+                                    { id: "message", label: "Event Details", type: "text" }
+                                ].map((field) => (
+                                    <div key={field.id} className="relative group">
+                                        <input
+                                            type={field.type}
+                                            required
+                                            value={formData[field.id as keyof typeof formData]}
+                                            onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
+                                            className="w-full bg-transparent border-b border-[#2F3E2F]/10 py-2 text-[13px] text-[#2F3E2F] focus:outline-none focus:border-[#C6A75E] transition-all placeholder-[#2F3E2F]/30"
+                                            placeholder={field.label}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={status === "submitting"}
+                                className="text-[11px] uppercase tracking-[0.4em] text-[#2F3E2F] border border-[#2F3E2F]/20 px-12 py-5 hover:bg-[#2F3E2F] hover:text-white transition-all duration-700 disabled:opacity-30"
+                            >
+                                {status === "submitting" ? "Processing..." : "Submit Enquiry"}
+                            </button>
+                        </form>
+                    )}
+                </motion.div>
+
+                {/* Bottom Section: Original Giant Text & Legal */}
+                <div className="w-full mt-32 md:mt-48 relative flex flex-col items-center">
+                    {/* The giant text matching original specifications */}
                     <div className="w-full flex items-center justify-center overflow-hidden mb-8 lg:mb-12">
                         <span className="text-[20vw] lg:text-[18vw] font-light tracking-tighter text-[#425042] leading-[0.75] select-none">
                             HEVANIA
@@ -170,7 +178,7 @@ export default function Footer() {
                     </div>
 
                     {/* Footer Bottom Line */}
-                    <div className="w-full border-t border-[#425042]/10 pt-6 pb-2 flex flex-col justify-center items-center">
+                    <div className="w-full border-t border-[#425042]/10 pt-6 pb-4 flex flex-col justify-center items-center">
                         <p className="text-[10px] md:text-sm text-[#425042] font-light text-center">
                             A Product of HEVANIA | All Rights Reserved HEVANIA ©{new Date().getFullYear()}
                         </p>
