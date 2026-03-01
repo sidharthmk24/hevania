@@ -65,7 +65,7 @@ export default function Home() {
     {
       description: "Total Project Area ",
       title: "1 Acre ",
-      subtitle: "(Approx.)",
+      subtitle: "",
     },
     {
       description: "Parks & Open Spaces",

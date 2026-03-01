@@ -1,12 +1,13 @@
 "use client";
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
 
 const HERO_IMAGES = [
-    '/images/heroImages/carousel1.jpeg',
+    // '/images/heroImages/carousel1.jpeg',
     '/images/heroImages/carousel2.jpg',
     '/images/heroImages/carousel4.webp',
     '/images/heroImages/carousel3.avif'
@@ -25,13 +26,33 @@ export default function HeroSection() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    const nextSlide = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, []);
+
+    const prevSlide = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
+    }, []);
 
     useEffect(() => {
+        if (!isAutoPlaying) return;
         const interval = setInterval(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+            nextSlide();
         }, 5000); // Change image every 5 seconds
         return () => clearInterval(interval);
-    }, []);
+    }, [isAutoPlaying, nextSlide]);
+
+    const handleManualNav = (direction: 'next' | 'prev') => {
+        setIsAutoPlaying(false);
+        if (direction === 'next') nextSlide();
+        else prevSlide();
+
+        // Resume autoplay after 10 seconds of inactivity
+        const timeout = setTimeout(() => setIsAutoPlaying(true), 10000);
+        return () => clearTimeout(timeout);
+    };
 
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
@@ -87,6 +108,58 @@ export default function HeroSection() {
                     className="px-8 py-4 bg-muted-gold text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none hover:bg-cream transition-colors shadow-lg"
                 >
                     Book Your Date
+                </motion.button>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 flex justify-between px-4 md:px-8 pointer-events-none">
+                <motion.button
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => handleManualNav('prev')}
+                    className="p-4 rounded-full border border-cream/20 bg-white/5 backdrop-blur-md text-cream transition-colors pointer-events-auto group hidden md:flex"
+                    aria-label="Previous slide"
+                >
+                    <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+                </motion.button>
+
+                <motion.button
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => handleManualNav('next')}
+                    className="p-4 rounded-full border border-cream/20 bg-white/5 backdrop-blur-md text-cream transition-colors pointer-events-auto group hidden md:flex"
+                    aria-label="Next slide"
+                >
+                    <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+                </motion.button>
+            </div>
+
+            {/* Mobile Navigation Arrows */}
+            <div className="absolute bottom-10 inset-x-0 md:hidden z-20 flex justify-center gap-8 pointer-events-none">
+                <motion.button
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => handleManualNav('prev')}
+                    className="p-3 rounded-full border border-cream/20 bg-white/5 backdrop-blur-md text-cream pointer-events-auto"
+                    aria-label="Previous slide"
+                >
+                    <ChevronLeft className="w-5 h-5" />
+                </motion.button>
+
+                <motion.button
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => handleManualNav('next')}
+                    className="p-3 rounded-full border border-cream/20 bg-white/5 backdrop-blur-md text-cream pointer-events-auto"
+                    aria-label="Next slide"
+                >
+                    <ChevronRight className="w-5 h-5" />
                 </motion.button>
             </div>
 

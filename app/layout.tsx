@@ -14,7 +14,7 @@ const aboreto = Aboreto({
 });
 
 export const metadata: Metadata = {
-  title: "Mukund Events | Luxury Event Venues",
+  title: "Hevania | Luxury Event Venues",
   description: "Exquisite plots and venues for weddings, parties, and corporate events.",
 };
 
