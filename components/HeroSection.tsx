@@ -1,12 +1,17 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import EnquiryModal from "./EnquiryModal";
 
-// Dummy hero image (replace with high quality luxury interior)
-const HERO_IMAGE = "https://images.unsplash.com/photo-1600596542815-27b88e5d1d40?q=80&w=2070&auto=format&fit=crop";
+const HERO_IMAGES = [
+    '/images/heroImages/carousel1.jpeg',
+    '/images/heroImages/carousel2.jpg',
+    '/images/heroImages/carousel4.webp',
+    '/images/heroImages/carousel3.avif'
+
+];
 
 export default function HeroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -19,19 +24,38 @@ export default function HeroSection() {
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        }, 5000); // Change image every 5 seconds
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-            {/* Background Image with Parallax */}
+        <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+            {/* Background Image Carousel with Parallax */}
             <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
-                <Image
-                    src={HERO_IMAGE}
-                    alt="Luxury Interior"
-                    fill
-                    priority
-                    className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30" />
+                <AnimatePresence mode="popLayout">
+                    <motion.div
+                        key={currentImageIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                        className="absolute inset-0"
+                    >
+                        <Image
+                            src={HERO_IMAGES[currentImageIndex]}
+                            alt={`Luxury Interior ${currentImageIndex + 1}`}
+                            fill
+                            priority
+                            className="object-cover"
+                        />
+                    </motion.div>
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-black/40 z-10" />
             </motion.div>
 
             {/* Content */}
@@ -40,9 +64,9 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-cream/90 text-sm md:text-base uppercase tracking-[0.2em] mb-4 font-light"
+                    className="text-cream/90 text-sm md:text-2xl uppercase  mb-4 font-light"
                 >
-                    Exquisite Locations for Timeless Moments
+                    Where Refined Celebrations Find Their Perfect Space
                 </motion.p>
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
@@ -50,7 +74,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.8 }}
                     className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream mb-8 leading-tight"
                 >
-                    Mukund Events
+                    HEVANIA
                 </motion.h1>
 
                 <motion.button
@@ -67,7 +91,7 @@ export default function HeroSection() {
             </div>
 
             {/* Scroll Indicator */}
-            <motion.div
+            {/* <motion.div
                 className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-cream/70 text-xs tracking-widest"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -84,7 +108,7 @@ export default function HeroSection() {
                         />
                     </div>
                 </div>
-            </motion.div>
+            </motion.div> */}
 
             <EnquiryModal
                 isOpen={isModalOpen}

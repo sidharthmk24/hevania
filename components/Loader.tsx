@@ -26,23 +26,16 @@ export default function Loader() {
                     <motion.h1
                         className="text-4xl md:text-6xl font-serif tracking-widest text-dark-forest mb-8 relative"
                         initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        animate={{ opacity: 1, scale: 1.35 }}
                         transition={{
                             duration: 1.5,
                             ease: "easeOut",
                         }}
                     >
-                        MUKUND EVENTS
+                        HEVANIA
                     </motion.h1>
 
-                    <div className="w-64 h-1 bg-gray-300 rounded-full overflow-hidden mt-8">
-                        <motion.div
-                            className="h-full bg-muted-gold"
-                            initial={{ width: "0%" }}
-                            animate={{ width: "100%" }}
-                            transition={{ duration: 2, ease: "easeInOut" }}
-                        />
-                    </div>
+
                 </motion.div>
             )}
         </AnimatePresence>

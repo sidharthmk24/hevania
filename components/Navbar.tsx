@@ -27,7 +27,7 @@ export default function Navbar() {
     });
 
     const links = [
-        { name: "Home", href: "/" },
+        // { name: "Home", href: "/" },
         { name: "Venues", href: "/#properties" },
         { name: "About", href: "/about" },
         { name: "Blog", href: "/blog" },
@@ -45,8 +45,8 @@ export default function Navbar() {
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-                <Link href="/" className="font-serif text-2xl tracking-widest text-dark-forest">
-                    MUKUND EVENTS
+                <Link href="/" className={`text-2xl tracking-widest ${scrolled ? "text-dark-forest" : "text-[#CDCFC8]"}`}>
+                    HEVANIA
                 </Link>
 
                 {/* Desktop Menu */}
@@ -55,7 +55,7 @@ export default function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-dark-forest text-sm font-medium uppercase tracking-wider hover:text-muted-gold transition-colors relative group"
+                            className={`text-sm font-medium uppercase tracking-wider hover:text-muted-gold transition-colors relative group ${scrolled ? "text-dark-forest" : "text-[#CDCFC8]"}`}
                         >
                             {link.name}
                             <span className="absolute left-0 bottom-[-4px] w-0 h-[1px] bg-muted-gold transition-all duration-300 group-hover:w-full" />
@@ -65,7 +65,7 @@ export default function Navbar() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-dark-forest"
+                    className="md:hidden text-[#CDCFC8]"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
                     {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -84,7 +84,7 @@ export default function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-dark-forest text-lg font-serif tracking-wide text-center"
+                            className="text-[#CDCFC8] text-lg font-serif tracking-wide text-center"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             {link.name}

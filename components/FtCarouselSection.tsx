@@ -1,0 +1,196 @@
+
+
+"use client";
+
+// ============= Component Imports =============
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+// ============= Types & Interfaces =============
+type Direction = "left" | "right";
+type ContentItem = {
+    title: string;
+    description: string;
+};
+
+interface Images {
+    desktop: string[];
+    mobile: string[];
+}
+
+interface Props {
+    images: Images;
+    content: {
+        desktop: ContentItem[][];
+        mobile: ContentItem[];
+    };
+}
+
+// ============= Constants =============
+const CAROUSEL_CONFIG = {
+    totalSlides: 3,
+    transitionDuration: 500,
+    autoplayInterval: 5000,
+    dimensions: {
+        desktop: { width: 1932, height: 1088 },
+        mobile: { width: 326, height: 568 },
+    },
+};
+
+/**
+ * Vision And Mission Component
+ * Displays company vision through an interactive carousel
+ *
+ * Features:
+ * 1. Auto-rotating carousel with smooth transitions
+ * 2. Responsive design with different layouts for desktop/mobile
+ * 3. Interactive hover states on desktop
+ * 4. Navigation dots on mobile
+ *
+ * @component
+ */
+export default function FtCarous({ images, content }: Props) {
+    // ============= State =============
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [direction, setDirection] = useState<Direction>("right");
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    // ============= Handlers =============
+    const handleTransition = useCallback(
+        (newDirection: Direction) => {
+            if (isAnimating) return;
+            setIsAnimating(true);
+            setDirection(newDirection);
+            const nextIndex =
+                newDirection === "right"
+                    ? (currentIndex + 1) % CAROUSEL_CONFIG.totalSlides
+                    : (currentIndex - 1 + CAROUSEL_CONFIG.totalSlides) % CAROUSEL_CONFIG.totalSlides;
+            setCurrentIndex(nextIndex);
+            setTimeout(() => setIsAnimating(false), CAROUSEL_CONFIG.transitionDuration);
+        },
+        [currentIndex, isAnimating]
+    );
+
+    // ============= Effects =============
+    useEffect(() => {
+        const timer = setInterval(() => handleTransition("right"), CAROUSEL_CONFIG.autoplayInterval);
+        return () => clearInterval(timer);
+    }, [handleTransition]);
+
+    // ============= Render Helpers =============
+    const renderDesktopSection = (section: ContentItem, index: number) => (
+        <div key={index} className="flex-1 group/section relative" onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
+            {/* Hover overlay - moved up in DOM order and given lower z-index */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover/section:opacity-100 transition-all duration-300 " />
+
+            {/* Section content - given higher z-index */}
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white z-[1]">
+                <h2
+                    className="font-freightNeoMedium text-white text-center text-xl md:text-lg lg:text-2xl"
+                    aria-label={`Mobile Title: ${content.mobile[currentIndex].title}`}
+                >
+                    {section.title}
+                </h2>
+                {/* Hover description */}
+                <div className="overflow-hidden h-0 group-hover/section:h-24 transition-all duration-300">
+                    <h3 className="font-light mt-[5px] text-white text-center text-sm md:text-sm lg:text-sm">
+                        {section.description}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            {/* Main Carousel */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+            >
+                <div className="bg-gray-100 sm:p-0 md:p-[1px]">
+                    {/* Desktop Version */}
+                    <div className="overflow-hidden hidden md:block shadow-xl xl:h-[100vh] w-[100%] aspect-[2/1] relative">
+                        {/* Image container */}
+                        <div className="absolute inset-0">
+                            {images.desktop.map((src, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: hoveredIndex !== null ? (hoveredIndex === index ? 1 : 0) : currentIndex === index ? 1 : 0 }}
+                                    transition={{ duration: 0.6 }}
+                                    className="absolute inset-0 w-full h-full"
+                                >
+                                    <Image
+                                        src={src}
+                                        alt={`Slide ${index + 1}`}
+                                        width={CAROUSEL_CONFIG.dimensions.desktop.width}
+                                        height={CAROUSEL_CONFIG.dimensions.desktop.height}
+                                        className="w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
+                                </motion.div>
+                            ))}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                        </div>
+
+                        {/* Vertical dividing lines */}
+                        <div className="absolute inset-0 flex pointer-events-none">
+                            <div className="flex-1 border-r border-white"></div>
+                            <div className="flex-1 border-r border-white"></div>
+                            <div className="flex-1"></div>
+                        </div>
+                        {/* Sections with titles and hover descriptions */}
+                        <div className="absolute inset-0 flex">{content.desktop[currentIndex].map((section, index) => renderDesktopSection(section, index))}</div>
+                    </div>
+
+                    {/* Mobile Version */}
+                    <div className="block md:hidden relative overflow-hidden shadow-xl">
+                        <Image
+                            src={images.mobile[currentIndex]}
+                            alt={`Slide ${currentIndex + 1}`}
+                            width={CAROUSEL_CONFIG.dimensions.mobile.width}
+                            height={CAROUSEL_CONFIG.dimensions.mobile.height}
+                            className="w-full h-[679px] transition-all object-cover duration-500"
+                        // loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 flex flex-col justify-end items-center text-center p-6">
+                            <h2
+                                className="font-freightNeoMedium text-white text-2xl"
+                                aria-label={`Mobile Title: ${content.mobile[currentIndex].title}`}
+                            >
+                                {content.mobile[currentIndex].title}
+                            </h2>
+                            <div className={`overflow-hidden transition-all duration-300 ${"h-16"}`}>
+                                <h3 className="font-FreightNeoProNormal font-normal mt-[0px] text-white">
+                                    {content.mobile[currentIndex].description}
+                                </h3>
+                            </div>
+                            <div className="flex space-x-8 rounded-[32px] py-4 px-6">
+                                {content.mobile.map((_, dotIndex) => (
+                                    <button
+                                        key={dotIndex}
+                                        disabled={isAnimating}
+                                        onClick={() => {
+                                            if (dotIndex !== currentIndex) {
+                                                handleTransition(dotIndex > currentIndex ? "right" : "left");
+                                            }
+                                        }}
+                                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${dotIndex === currentIndex ? "bg-white" : "bg-[#FFFFFF99]"
+                                            } ${isAnimating ? "cursor-not-allowed" : "cursor-pointer"}`}
+                                        aria-label={`Go to slide ${dotIndex + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </>
+    );
+}
