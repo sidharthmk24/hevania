@@ -45,13 +45,13 @@ export default function FaqSection() {
     };
 
     return (
-        <section className="w-full max-w-full mx-auto px-6 md:px-12 lg:px-20 pb-30 flex flex-col md:flex-row gap-12 md:gap-24 font-sans">
+        <section className="w-full max-w-full mx-auto px-6 md:px-12 lg:px-20 md:pb-30 pb-20 flex flex-col md:flex-row gap-12 md:gap-24 font-sans">
             {/* Left Column */}
             <div className="md:w-[40%] flex flex-col gap-6 pt-4">
-                <h2 className="text-4xl md:text-5xl font-light text-[#2F3E2F] leading-[1.1] tracking-tight">
+                <h2 className="text-2xl md:text-5xl font-light text-[#2F3E2F] leading-[1.1] tracking-tight">
                     Frequently Asked<br />Questions
                 </h2>
-                <p className="text-[#888] text-[1.05rem] leading-relaxed max-w-lg">
+                <p className="text-[#888] text-md md:text-[1.05rem] leading-relaxed max-w-lg">
                     Got questions? We&apos;ve got answers no jargon,<br />just direct clarity
                 </p>
             </div>

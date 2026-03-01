@@ -43,9 +43,9 @@ export default function ExperienceSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="pt-24 pb-12 md:pb-0 md:pt-32 w-full overflow-hidden ">
+        <section ref={sectionRef} className="pt-24 md:pb-12 md:pb-0 md:pt-32 w-full overflow-hidden ">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-wide text-[#2F3E2F]/90 text-left mb-16 lg:mb-24 font-normal md:max-w-[80%] leading-[1.1]">
+                <h2 className="text-2xl md:text-5xl lg:text-6xl tracking-wide text-[#2F3E2F]/90 text-left mb-6 lg:mb-24 font-normal md:max-w-[80%] leading-[1.1]">
                     <span className="font-thin">Where Exceptional</span> Experiences Take Shape
                 </h2>
 
@@ -53,7 +53,7 @@ export default function ExperienceSection() {
 
                     {/* Left Text Content */}
                     <div className="lg:w-[40%] flex flex-col justify-start z-20 xl:pl-10 mb-16 lg:mb-0 relative lg:top-12">
-                        <div className="text-[#2F3E2F] space-y-8 text-lg md:text-xl lg:text-[1.35rem] leading-relaxed tracking-wide font-light max-w-md">
+                        <div className="text-[#2F3E2F] space-y-8 text-md md:text-xl lg:text-[1.35rem] leading-relaxed tracking-wide font-light max-w-md">
                             <p>
                                 They unfold seamlessly<br />
                                 & take your breath away.
@@ -66,7 +66,7 @@ export default function ExperienceSection() {
                     </div>
 
                     {/* Right Images */}
-                    <div className="lg:w-[60%] relative min-h-[100vh] w-full">
+                    <div className="lg:w-[60%] relative min-h-[50vh] md:min-h-[100vh] w-full">
                         {/* Back Image (Top Right) */}
                         <div ref={img1Ref} className="absolute top-[-10%] sm:top-[-15%] md:top-[-10%] right-0 w-[75%] sm:w-[70%] h-[70%] sm:h-[65%] z-0 select-none">
                             <Image

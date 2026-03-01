@@ -24,7 +24,7 @@ export default function Home() {
     { icon: "ChildrenPlay", label: "Children's Play Area" },
     { icon: "JacuzziSauna", label: "Heated Jacuzzi & Timber Sauna" },
 
-];
+  ];
 
   const images = {
     desktop: [
@@ -103,23 +103,23 @@ export default function Home() {
       {/* <SvgOutline button="Explore" /> */}
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0  ">
-        <h2 className="text-3xl md:text-4xl lg:text-6xl  tracking-wide text-[#425042] md:text-center mb-16 lg:mb-24 font-normal w-full leading-[1.1]">
+        <h2 className="text-2xl md:text-4xl lg:text-6xl  tracking-wide text-[#425042] md:text-center mb-16 lg:mb-24 font-normal w-full leading-[1.1]">
 
           <span className="font-thin">Curated Decor</span>  & Modern  <br className="hidden md:block" />Rental Solutions
         </h2>
       </div>
       <FtCarouselSection images={images} content={content} />
 
-                  <FeaturesSection features={FEATURES} heading={<><span className="font-thin">Everything</span> You’re Looking For</>} completed={false}  />
+      <FeaturesSection features={FEATURES} heading={<><span className="font-thin">Everything</span> You’re Looking For</>} completed={false} />
 
 
       <NumberCounter2ELite data={data} />
       <Testimonials />
 
-      <FaqSection/>
-      
+      <FaqSection />
 
- 
+
+
     </>
   );
 }

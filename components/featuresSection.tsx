@@ -27,11 +27,11 @@ export default function FeaturesSection({ features, heading, variant = "center",
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <section className="py-20 lg:pt-32 font-host">
+        <section className="py-10 lg:pt-32 font-host">
             <div className=" mx-auto px-6 lg:px-20 xl:px-54 ">
                 {/* Header */}
                 {variant === "center" ? (
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-28 tracking-tight leading-tight">
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-28 tracking-tight leading-tight">
                         {heading}
                     </h2>
                 ) : (
@@ -61,11 +61,11 @@ export default function FeaturesSection({ features, heading, variant = "center",
                                     }`}
                             >
                                 {/* Icon Wrapper */}
-                                <div className="w-10 h-10 flex items-center justify-center text-[#425042] group-hover:text-[#425042]/30  transition-all duration-300 transform group-hover:scale-110 shrink-0">
+                                <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-[#425042] group-hover:text-[#425042]/30  transition-all duration-300 transform group-hover:scale-110 shrink-0">
                                     <Icon />
                                 </div>
                                 {/* Text Label */}
-                                <span className="text-[#425042] text-[15px] lg:text-[16px] leading-snug font-normal tracking-wide transition-colors duration-300 group-hover:text-[#425042]">
+                                <span className="text-[#425042] text-[12px] lg:text-[16px] leading-snug font-normal tracking-wide transition-colors duration-300 group-hover:text-[#425042]">
                                     {item.label}
                                 </span>
                             </div>

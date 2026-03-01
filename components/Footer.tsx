@@ -40,7 +40,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-[#F5F5F0] pt-32 pb-12 w-full z-10 border-t border-[#2F3E2F]/5">
+        <footer className="relative bg-[#F5F5F0] pt-20 md:pt-32 md:pb-12 w-full z-10 border-t border-[#2F3E2F]/20">
             <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24 w-full">
 
                 {/* Top Section: Three Column Grid */}
