@@ -2,17 +2,40 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 
 export default function Loader() {
     const [isLoading, setIsLoading] = useState(true);
+    const lenis = useLenis();
 
     useEffect(() => {
+        // Prevent scrolling
+        document.body.style.overflow = "hidden";
+        if (lenis) {
+            lenis.stop();
+        }
+
         const timer = setTimeout(() => {
             setIsLoading(false);
         }, 2000);
 
-        return () => clearTimeout(timer);
-    }, []);
+        // Allow scrolling after exit animation finishes
+        const overflowTimer = setTimeout(() => {
+            document.body.style.overflow = "";
+            if (lenis) {
+                lenis.start();
+            }
+        }, 3500);
+
+        return () => {
+            clearTimeout(timer);
+            clearTimeout(overflowTimer);
+            document.body.style.overflow = "";
+            if (lenis) {
+                lenis.start();
+            }
+        };
+    }, [lenis]);
 
     return (
         <AnimatePresence>

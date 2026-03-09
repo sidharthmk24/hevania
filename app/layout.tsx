@@ -29,8 +29,9 @@ export default function RootLayout({
         className={`${aboreto.variable} antialiased bg-cream text-dark-forest font-sans`}
       >
         <ReactLenis root>
-          <Loader />
+          
           <Navbar />
+          <Loader />
           <main className="min-h-screen">
             {children}
           </main>

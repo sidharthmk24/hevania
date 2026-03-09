@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ChevronRight } from 'lucide-react';
 
 const cardsData = [
     {
@@ -24,19 +26,22 @@ const cardsData = [
 ];
 
 const SustainabilitySection = () => {
-    // Track which mobile swiper card is currently expanded
-    const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(null);
+    const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
 
-    const toggleCard = (index: number) => {
-        if (expandedCardIndex === index) {
-            setExpandedCardIndex(null); // Collapse if already open
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedCardIndex !== null) {
+            document.body.style.overflow = 'hidden';
         } else {
-            setExpandedCardIndex(index); // Expand this one
+            document.body.style.overflow = '';
         }
-    };
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [selectedCardIndex]);
 
     return (
-        <section className="bg-none mx-auto -16 md:py-24 overflow-hidden">
+        <section className="bg-none mx-auto -16 md:py-12 overflow-hidden">
             {/* Desktop Layout - keep existing grid but hidden on mobile */}
             <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 lg:gap-16 px-6 md:px-12 lg:px-20">
                 {/* Left Column */}
@@ -50,7 +55,10 @@ const SustainabilitySection = () => {
                         </p>
                     </div>
 
-                    <div className="relative w-full h-[70vh] md:h-[90vh] lg:h-[100vh] rounded-[24px] overflow-hidden mt-12 md:mt-20 group">
+                    <div
+                        className="relative w-full h-[70vh] md:h-[90vh] lg:h-[100vh] rounded-[24px] overflow-hidden mt-12 md:mt-20 group cursor-pointer"
+                        onClick={() => setSelectedCardIndex(0)}
+                    >
                         <Image
                             src={cardsData[0].image}
                             alt={cardsData[0].title}
@@ -74,7 +82,10 @@ const SustainabilitySection = () => {
 
                 {/* Right Column */}
                 <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
-                    <div className="relative w-full h-[70vh] md:h-[80vh] lg:h-[70vh] rounded-[24px] overflow-hidden group">
+                    <div
+                        className="relative w-full h-[70vh] md:h-[80vh] lg:h-[70vh] rounded-[24px] overflow-hidden group cursor-pointer"
+                        onClick={() => setSelectedCardIndex(1)}
+                    >
                         <Image
                             src={cardsData[1].image}
                             alt={cardsData[1].title}
@@ -95,7 +106,10 @@ const SustainabilitySection = () => {
                         </div>
                     </div>
 
-                    <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-[24px] overflow-hidden group">
+                    <div
+                        className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-[24px] overflow-hidden group cursor-pointer"
+                        onClick={() => setSelectedCardIndex(2)}
+                    >
                         <Image
                             src={cardsData[2].image}
                             alt={cardsData[2].title}
@@ -142,7 +156,7 @@ const SustainabilitySection = () => {
                             <SwiperSlide
                                 key={idx}
                                 className="relative aspect-[4/5] sm:aspect-[3/4] w-full bg-neutral-200 cursor-pointer"
-                                onClick={() => toggleCard(idx)}
+                                onClick={() => setSelectedCardIndex(idx)}
                             >
                                 <Image
                                     src={card.image}
@@ -158,20 +172,84 @@ const SustainabilitySection = () => {
                                     <h3 className="text-xl sm:text-[22px] font-medium leading-snug mb-2 drop-shadow-md">
                                         {card.title}
                                     </h3>
-                                    <div
-                                        className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedCardIndex === idx ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
-                                            }`}
-                                    >
-                                        <p className="text-white/80 text-sm leading-relaxed drop-shadow-md">
-                                            {card.description}
-                                        </p>
-                                    </div>
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </div>
             </div>
+
+            {/* Modal */}
+            <AnimatePresence>
+                {selectedCardIndex !== null && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setSelectedCardIndex(null)}
+                    >
+                        <motion.div
+                            initial={{ y: 50, opacity: 0, scale: 0.95 }}
+                            animate={{ y: 0, opacity: 1, scale: 1 }}
+                            exit={{ y: 20, opacity: 0, scale: 0.95 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-2xl bg-[#FDFBF9] rounded-[24px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setSelectedCardIndex(null)}
+                                className="absolute top-4 right-4 z-10 p-2 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full text-white transition-colors"
+                                aria-label="Close modal"
+                            >
+                                <X size={24} />
+                            </button>
+
+                            {/* Top Half: Image */}
+                            <div className="relative w-full h-64 sm:h-80 md:h-96 shrink-0">
+                                <Image
+                                    src={cardsData[selectedCardIndex].image}
+                                    alt={cardsData[selectedCardIndex].title}
+                                    fill
+                                    className="object-cover"
+                                    unoptimized
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-0"></div>
+                            </div>
+
+                            {/* Bottom Half: Content */}
+                            <div className="p-6 sm:p-8 md:p-10 bg-white  -mt-6 relative z-10 flex flex-col min-h-[50%] flex-1 overflow-hidden">
+                                <div className="flex-grow overflow-y-auto pr-2">
+                                    <h3 className="text-3xl sm:text-4xl font-normal text-[#425042] mb-4">
+                                        {cardsData[selectedCardIndex].title}
+                                    </h3>
+                                    <p className="text-[#425042] text-base md:text-md leading-relaxed font-light">
+                                        {cardsData[selectedCardIndex].description}
+                                    </p>
+                                </div>
+
+                                {/* Next Story Footer inside Modal */}
+                                <div
+                                    className="pt-6 mt-6 border-t border-[#8D827C]/20 flex items-center justify-end group cursor-pointer w-full shrink-0"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const nextIndex = (selectedCardIndex + 1) % cardsData.length;
+                                        setSelectedCardIndex(nextIndex);
+                                    }}
+                                >
+                                    <span className="text-[#425042] text-sm md:text-base font-medium mr-2 transition-colors group-hover:text-black">
+                                         {cardsData[(selectedCardIndex + 1) % cardsData.length].title}
+                                    </span>
+                                    <div className="w-8 h-8 rounded-full bg-[#425042]/20 border border-[#425042]/30 flex items-center justify-center transition-all duration-300 group-hover:bg-[#425042] group-hover:text-white group-hover:border-[#4B3D37]">
+                                        <ChevronRight size={16} />
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };

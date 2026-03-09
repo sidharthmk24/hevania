@@ -32,7 +32,7 @@ const desktopDataRight = testimonialData.slice(midIndex);
 export default function Testimonial(): React.ReactElement {
   return (
     <>
-      <section className="xl:mt-[166px] lg:mt-[206px] mt-12">
+      <section className="xl:mt-32 lg:mt-22 mt-12">
         {/* Testimonial Header Section */}
         <header className="flex items-center justify-center flex-col lg:mb-[90px] mb-9 px-4 md:px-0 text-center">
           <h2 className="sr-only">Client Testimonials</h2>
@@ -69,7 +69,7 @@ export default function Testimonial(): React.ReactElement {
         </div>
 
         {/* Read More Section */}
-        <div className="flex items-center justify-center flex-col mt-6 md:mt-[66px] mb-11 md:mb-[145px]">
+        <div className="flex items-center justify-center flex-col mt-6 md:mt-12 mb-11 md:mb-16">
           {/* hide for now bacause we dont have more  */}
           {/* <Link href="/about">
             <Typography

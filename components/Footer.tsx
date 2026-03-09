@@ -56,11 +56,11 @@ export default function Footer() {
                         <h2 className="text-[24px] font-aboreto text-[#2F3E2F] mb-8 tracking-widest uppercase">
                             HEVANIA
                         </h2>
-                        <p className="text-[14px] font-light text-[#2F3E2F]/60 leading-relaxed max-w-sm mb-10">
+                        <p className="text-[14px] font-light text-[#425042] leading-relaxed max-w-sm mb-10">
                             Curating extraordinary experiences in the world's most exquisite settings. Every detail, a testament to elegance.
                         </p>
 
-                        <div className="flex gap-6 items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+                        <div className="flex gap-6 items-center hover:opacity-100 transition-opacity duration-500">
                             {[
                                 { icon: Instagram, href: "#" },
                                 { icon: Facebook, href: "#" },
@@ -80,7 +80,7 @@ export default function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.2 }}
                     >
-                        <h4 className="text-md uppercase text-[#2F3E2F] tracking-widest mb-8 font-semibold">Discovery</h4>
+                        <h4 className="text-md uppercase text-[#425042] tracking-widest mb-8 font-semibold">Discovery</h4>
                         <ul className="space-y-4">
                             {[
                                 { name: "The Atelier", href: "/about" },
@@ -89,7 +89,7 @@ export default function Footer() {
                                 { name: "Private Viewings", href: "/contact" }
                             ].map((link) => (
                                 <li key={link.name}>
-                                    <Link href={link.href} className="text-[14px] font-light text-[#2F3E2F]/70 hover:text-[#2F3E2F] transition-colors relative group block w-fit">
+                                    <Link href={link.href} className="text-[14px] font-light text-[#425042] hover:text-[#2F3E2F] transition-colors relative group block w-fit">
                                         {link.name}
                                         <span className="absolute bottom-0 left-0 w-0 h-[0.5px] bg-[#2F3E2F] transition-all duration-500 group-hover:w-full"></span>
                                     </Link>
@@ -106,7 +106,7 @@ export default function Footer() {
                         transition={{ duration: 1, delay: 0.3 }}
                     >
                         <h4 className="text-md uppercase text-[#2F3E2F] tracking-widest mb-8 font-semibold">Concierge</h4>
-                        <ul className="space-y-5 text-[14px] font-light text-[#2F3E2F]/60">
+                        <ul className="space-y-5 text-[14px] font-light text-[#425042]">
                             <li className="flex flex-col gap-1">
                                 <span className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E]">Localisation</span>
                                 123 Luxury Lane, Mumbai, MH 400001
@@ -161,7 +161,7 @@ export default function Footer() {
                             <button
                                 type="submit"
                                 disabled={status === "submitting"}
-                                className="text-[11px] uppercase tracking-[0.4em] text-[#2F3E2F] border border-[#2F3E2F]/20 px-12 py-5 hover:bg-[#2F3E2F] hover:text-white transition-all duration-700 disabled:opacity-30"
+                                className="text-[11px] uppercase tracking-[0.4em] font-semibold text-[#2F3E2F] border border-[#2F3E2F]/20 px-12 py-5 hover:bg-[#2F3E2F] hover:text-white transition-all duration-700 disabled:opacity-30"
                             >
                                 {status === "submitting" ? "Processing..." : "Submit Enquiry"}
                             </button>
