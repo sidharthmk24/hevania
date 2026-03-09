@@ -11,6 +11,7 @@ import NumberCounter2ELite from "@/components/NumberCount";
 import FeaturesSection from "@/components/featuresSection";
 import { FeatureItem } from "@/components/featuresSection";
 import FaqSection from "@/components/FaqSection";
+import SustainabilitySection from "@/components/SustainabilitySection";
 
 export default function Home() {
 
@@ -111,9 +112,10 @@ export default function Home() {
       <FtCarouselSection images={images} content={content} />
 
       <FeaturesSection features={FEATURES} heading={<><span className="font-thin">Everything</span> You’re Looking For</>} completed={false} />
+      <SustainabilitySection />
 
 
-      <NumberCounter2ELite data={data} />
+      {/* <NumberCounter2ELite data={data} /> */}
       <Testimonials />
 
       <FaqSection />
