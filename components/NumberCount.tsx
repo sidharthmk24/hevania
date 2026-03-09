@@ -1,10 +1,10 @@
 
 
-export default function ImageContentSection{
-    return(
+export default function ImageContentSection() {
+    return (
 
         <>
-        
+
         </>
     )
 }
