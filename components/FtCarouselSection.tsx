@@ -13,6 +13,7 @@ type Direction = "left" | "right";
 type ContentItem = {
     title: string;
     description: string;
+    img?: string;
 };
 
 interface Images {
@@ -46,20 +47,24 @@ export default function FtCarous({ images, content }: Props) {
     const [direction, setDirection] = useState<Direction>("right");
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+    const totalSlides = content.mobile.length;
+    const desktopSlides = content.desktop.length;
+
     // ============= Handlers =============
     const handleTransition = useCallback(
         (newDirection: Direction) => {
             if (isAnimating) return;
             setIsAnimating(true);
             setDirection(newDirection);
+            
             const nextIndex =
                 newDirection === "right"
-                    ? (currentIndex + 1) % CAROUSEL_CONFIG.totalSlides
-                    : (currentIndex - 1 + CAROUSEL_CONFIG.totalSlides) % CAROUSEL_CONFIG.totalSlides;
+                    ? (currentIndex + 1) % totalSlides
+                    : (currentIndex - 1 + totalSlides) % totalSlides;
             setCurrentIndex(nextIndex);
             setTimeout(() => setIsAnimating(false), CAROUSEL_CONFIG.transitionDuration);
         },
-        [currentIndex, isAnimating]
+        [currentIndex, isAnimating, totalSlides]
     );
 
     // ============= Effects =============
@@ -126,11 +131,12 @@ export default function FtCarous({ images, content }: Props) {
                     <div className="overflow-hidden hidden md:block shadow-2xl xl:h-[100vh] w-[100%] aspect-[2/1] relative">
                         {/* Image container */}
                         <div className="absolute inset-0">
+                            {/* Base Slide Images */}
                             <AnimatePresence mode="popLayout">
                                 {images.desktop.map((src, index) => (
                                     currentIndex === index && (
                                         <motion.div
-                                            key={index}
+                                            key={`slide-${index}`}
                                             initial={{ opacity: 0, scale: 1.05 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0 }}
@@ -140,16 +146,37 @@ export default function FtCarous({ images, content }: Props) {
                                             <Image
                                                 src={src}
                                                 alt={`Slide ${index + 1}`}
-                                                width={CAROUSEL_CONFIG.dimensions.desktop.width}
-                                                height={CAROUSEL_CONFIG.dimensions.desktop.height}
-                                                className="w-full h-full object-cover"
+                                                fill
+                                                className="object-cover"
                                                 loading="lazy"
                                             />
                                         </motion.div>
                                     )
                                 ))}
                             </AnimatePresence>
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+
+                            {/* Section Specific Hover Images */}
+                            <AnimatePresence>
+                                {hoveredIndex !== null && content.desktop[currentIndex][hoveredIndex]?.img && (
+                                    <motion.div
+                                        key={`hover-${currentIndex}-${hoveredIndex}`}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                                        className="absolute inset-0 w-full h-full z-[5]"
+                                    >
+                                        <Image
+                                            src={content.desktop[currentIndex][hoveredIndex].img!}
+                                            alt={content.desktop[currentIndex][hoveredIndex].title}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                            
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 z-10 pointer-events-none" />
                         </div>
 
                         {/* Vertical dividing lines */}
@@ -177,7 +204,7 @@ export default function FtCarous({ images, content }: Props) {
                                 className="relative w-full h-[70vh]"
                             >
                                 <Image
-                                    src={images.mobile[currentIndex]}
+                                    src={images.mobile[currentIndex] || content.mobile[currentIndex]?.img || ""}
                                     alt={`Slide ${currentIndex + 1}`}
                                     fill
                                     className="object-cover"

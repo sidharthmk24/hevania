@@ -54,6 +54,8 @@ export default function HeroSection() {
         return () => clearTimeout(timeout);
     };
 
+    const [hoveredButton, setHoveredButton] = useState<'left' | 'right' | null>(null);
+
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
             {/* Background Image Carousel with Parallax */}
@@ -97,18 +99,41 @@ export default function HeroSection() {
                 >
                     HEVANIA
                 </motion.h1>
-
-                <motion.button
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.5, delay: 1.2 }}
-                    onClick={() => setIsModalOpen(true)}
-                    className="px-8 py-4 bg-muted-gold text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none hover:bg-cream transition-colors shadow-lg"
-                >
-                    Book Your Date
-                </motion.button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.5, delay: 1.2 }}
+                        onMouseEnter={() => setHoveredButton('left')}
+                        onMouseLeave={() => setHoveredButton(null)}
+                        onClick={() => setIsModalOpen(true)}
+                        className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg ${
+                            hoveredButton === 'right' ? 'bg-white' : 
+                            hoveredButton === 'left' ? 'bg-cream' : 'bg-muted-gold'
+                        }`}
+                    >
+                        Schedule a Tour
+                    </motion.button>
+                    
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.5, delay: 1.2 }}
+                        onMouseEnter={() => setHoveredButton('right')}
+                        onMouseLeave={() => setHoveredButton(null)}
+                        onClick={() => setIsModalOpen(true)}
+                        className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg ${
+                            hoveredButton === 'left' ? 'bg-muted-gold' : 
+                            hoveredButton === 'right' ? 'bg-muted-gold' : 'bg-cream'
+                        }`}
+                    >
+                        Submit Inquiry
+                    </motion.button>
+                </div>
             </div>
 
             {/* Navigation Arrows */}

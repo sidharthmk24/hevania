@@ -17,51 +17,58 @@ export default function Home() {
 
 
   const FEATURES: FeatureItem[] = [
-    { icon: "SwimmingPool", label: "Infinity Rooftop Swimming Pool" },
-    { icon: "GamesArea", label: "Indoor & Outdoor Games Area" },
-    { icon: "Gymnasium", label: "Air Conditioned Gymnasium" },
-    { icon: "Reflexology", label: "Walking Path with Reflexology" },
-    { icon: "LeisureAreas", label: "Landscaped Leisure Areas" },
-    { icon: "ChildrenPlay", label: "Children's Play Area" },
-    { icon: "JacuzziSauna", label: "Heated Jacuzzi & Timber Sauna" },
+    { icon: "SwimmingPool", label: "Scenic Open-Air Ambience" },
+    { icon: "GamesArea", label: "Designer Lighting Setup" },
+    { icon: "Gymnasium", label: "Built-in Sound & Music System" },
+    { icon: "Reflexology", label: "Dedicated Catering Zone" },
+    { icon: "LeisureAreas", label: "Ample Parking Space" },
+    { icon: "ChildrenPlay", label: "Custom Decor Flexibility" },
+    { icon: "JacuzziSauna", label: "Dedicated Catering Zone" },
 
   ];
-
-  const images = {
-    desktop: [
-      '/images/heroImages/carousel2.jpg',
-      '/images/heroImages/carousel4.webp',
-      '/images/heroImages/carousel3.avif'
-    ],
-    mobile: [
-      "/images/heroImages/carousel2.jpg",
-      "/images/heroImages/carousel4.webp",
-      "/images/heroImages/carousel3.avif",
-    ],
-  };
 
   const rawContent = [
     {
-      title: "Spacious Open Area",
-      description: "Experience the majestic beauty of the Swiss Alps with our exclusive luxury packages. From breathtaking views to world-class amenities, we bring you the best of Switzerland.",
+      title: "Weddings",
+      description: "Elegant ceremony spaces and reception areas for your special day",
+      img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
     },
     {
-      title: "The Serenity of the Maldives",
-      description: "Discover the turquoise waters and pristine beaches of the Maldives. Our luxury villas offer the perfect blend of relaxation and adventure.",
+      title: "Corporate Events",
+      description: "Conferences, retreats, and gatherings that energize teams",
+      img: "https://images.unsplash.com/photo-1505373633572-2342c3004d3e?auto=format&fit=crop&q=80"
     },
     {
-      title: "The Magic of Santorini",
-      description: "Explore the iconic white-washed villages and stunning sunsets of Santorini. A romantic getaway like no other.",
+      title: "Private Parties",
+      description: "Birthday celebrations, anniversaries, and milestone events",
+      img: "https://images.unsplash.com/photo-1530103043960-ef38714abb15?auto=format&fit=crop&q=80"
     },
     {
-      title: "The Adventure of Costa Rica",
-      description: "Immerse yourself in the lush rainforests and vibrant wildlife of Costa Rica. An eco-luxury experience you won't forget.",
+      title: "Community Events",
+      description: "Gala celebrations and charitable fundraisers that bring people together",
+      img: "https://images.unsplash.com/photo-1540575861501-7ce058a877c3?auto=format&fit=crop&q=80"
     },
     {
-      title: "The Elegance of Paris",
-      description: "Indulge in the timeless charm of Paris. From iconic landmarks to gourmet dining, experience the city of love in style.",
+      title: "Weekday Advantage",
+      description: "Schedule your event for a weekday and receive special pricing—up to 15% off standard weekend rates",
+      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+    },
+    {
+      title: "All-Inclusive Options",
+      description: "Add catering coordination, decor assistance, and event coordination services",
+      img: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80"
+    },
+    {
+      title: "Flexible Rental",
+      description: "Half-day and full-day rental options available. Additional hours available at an hourly rate",
+      img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80"
     },
   ];
+
+  const images = {
+    desktop: rawContent.map(item => item.img!),
+    mobile: rawContent.map(item => item.img!)
+  };
   const data = [
     {
       description: "Total Project Area ",
@@ -88,13 +95,21 @@ export default function Home() {
   const content = {
     desktop: [
       [rawContent[0], rawContent[1], rawContent[2]],
-      [rawContent[3], rawContent[4], rawContent[0]],
       [rawContent[1], rawContent[2], rawContent[3]],
+      [rawContent[2], rawContent[3], rawContent[4]],
+      [rawContent[3], rawContent[4], rawContent[5]],
+      [rawContent[4], rawContent[5], rawContent[6]],
+      [rawContent[5], rawContent[6], rawContent[0]],
+      [rawContent[6], rawContent[0], rawContent[1]],
     ],
     mobile: [
       rawContent[0],
       rawContent[1],
       rawContent[2],
+      rawContent[3],
+      rawContent[4],
+      rawContent[5],
+      rawContent[6],
     ],
   };
   return (
@@ -106,12 +121,13 @@ export default function Home() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0  ">
         <h2 className="text-2xl md:text-4xl lg:text-6xl  tracking-wide text-[#425042] md:text-center mb-16 lg:mb-24 font-normal w-full leading-[1.1]">
 
-          <span className="font-thin">Curated Decor</span>  & Modern  <br className="hidden md:block" />Rental Solutions
+          <span className="font-thin">Begin Your Journey</span>
+          <p className="text-base md:text-md leading-relaxed font-light mt-6 sm:mt-8">Ready to see if Hevaniya is right for your celebration? We&apos;d love to meet you and show you what we&apos;ve created.</p>
         </h2>
       </div>
       <FtCarouselSection images={images} content={content} />
 
-      <FeaturesSection features={FEATURES} heading={<><span className="font-thin">Everything</span> You’re Looking For</>} completed={false} />
+      <FeaturesSection features={FEATURES} heading={<><span className="font-thin">Everything Your Looking For</span></>} completed={false} />
       <SustainabilitySection />
 
 
