@@ -40,11 +40,11 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-[#F5F5F0] pt-20 md:pt-32 md:pb-12 w-full z-10 border-t border-[#2F3E2F]/20">
+        <footer className="relative bg-[#F5F5F0] pt-20 md:pt-20 md:pb-12 w-full z-10 border-t border-[#2F3E2F]/20">
             <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24 w-full">
 
                 {/* Top Section: Three Column Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24 md:mb-10 mb-5">
 
                     {/* Brand Info */}
                     <motion.div
@@ -128,7 +128,7 @@ export default function Footer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.4 }}
-                    className="w-full max-w-2xl pt-16 border-t border-[#2F3E2F]/5"
+                    className="w-full max-w-2xl pt-10 border-t border-[#2F3E2F]/5"
                 >
                     <h4 className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E] mb-10">Inquiries</h4>
 
@@ -170,7 +170,7 @@ export default function Footer() {
                 </motion.div>
 
                 {/* Bottom Section: Original Giant Text & Legal */}
-                <div className="w-full mt-32 md:mt-48 relative flex flex-col items-center">
+                <div className="w-full mt-32 md:mt-30 relative flex flex-col items-center">
                     {/* The giant text matching original specifications */}
                     <div className="w-full flex items-center justify-center overflow-hidden mb-8 lg:mb-12">
                         <span className="text-[20vw] lg:text-[18vw] font-light tracking-tighter text-[#425042] leading-[0.75] select-none">

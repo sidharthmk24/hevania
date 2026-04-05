@@ -41,7 +41,7 @@ const SustainabilitySection = () => {
     }, [selectedCardIndex]);
 
     return (
-        <section className="bg-none mx-auto -16 md:py-12 overflow-hidden">
+        <section className="bg-none mx-auto -16 md:py-20 overflow-hidden">
             {/* Desktop Layout - keep existing grid but hidden on mobile */}
             <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 lg:gap-16 px-6 md:px-12 lg:px-20">
                 {/* Left Column */}

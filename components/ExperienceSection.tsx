@@ -43,7 +43,7 @@ export default function ExperienceSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="pt-24 md:pb-12 md:pb-0 md:pt-32 w-full overflow-hidden ">
+        <section ref={sectionRef} className="pt-24 md:pb-12 md:pb-0 md:pt-20 w-full overflow-hidden ">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
                 <h2 className="text-2xl md:text-5xl lg:text-6xl tracking-wide text-[#2F3E2F]/90 text-left mb-6 lg:mb-24 font-normal md:max-w-[80%] leading-[1.1]">
                     <span className="font-thin">Where Exceptional</span> Experiences Take Shape

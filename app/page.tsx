@@ -12,6 +12,7 @@ import FeaturesSection from "@/components/featuresSection";
 import { FeatureItem } from "@/components/featuresSection";
 import FaqSection from "@/components/FaqSection";
 import SustainabilitySection from "@/components/SustainabilitySection";
+import ScrollFtSection from "@/components/ScrollFtSection";
 
 export default function Home() {
 
@@ -69,25 +70,38 @@ export default function Home() {
     desktop: rawContent.map(item => item.img!),
     mobile: rawContent.map(item => item.img!)
   };
-  const data = [
-    {
-      description: "Total Project Area ",
-      title: "1 Acre ",
-      subtitle: "",
-    },
-    {
-      description: "Parks & Open Spaces",
-      title: "38.3%",
-    },
-    {
-      description: "Blooming Trees",
-      title: "25+",
-    },
-    {
-      description: "Available Plot Size (in sqft)",
-      title: "1,600 - 2,600",
-    },
-  ];
+
+
+  const SECTION_DATA = [
+  {
+    id: "high-living",
+    label: "Prime Location",
+    description:
+"Conveniently located with smooth road access, making it easy for guests, vendors, and parking.",
+    imageSrc: "/images/scrollprime.avif",
+  },
+  {
+    id: "kitchen",
+    label: "Ready-to-Use Event Space",
+    description:
+"Flat, well-maintained land with essential facilities like electricity, water, and setup-friendly layout.",
+    imageSrc: "/images/scroll2.webp",
+  },
+  {
+    id: "rooftop",
+    label: "Flexible Setup",
+    description:
+"Design your event your way—whether it’s a grand wedding stage, food stalls, or a cozy outdoor celebration." ,
+   imageSrc: "/images/scroll1.webp",
+  },
+  {
+    id: "location",
+    label: "Secure & Private Event Space",
+    description:
+"Enjoy complete privacy with a safe, enclosed area perfect for exclusive celebrations.",
+    imageSrc: "/images/scrollsecure.webp",
+  },
+];
 
   // Reformat content to match the structure expected by FtCarouselSection
   // Destkop format requires 3 arrays (slides) of 3 items (columns)
@@ -115,11 +129,14 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <ExperienceSection />
+      <div className="pb-20">
+        <ScrollFtSection data={SECTION_DATA} />
+        </div>
+      {/* <ExperienceSection /> */}
       {/* <SvgOutline button="Explore" /> */}
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0  ">
-        <h2 className="text-2xl md:text-4xl lg:text-6xl  tracking-wide text-[#425042] md:text-center mb-16 lg:mb-24 font-normal w-full leading-[1.1]">
+        <h2 className="text-2xl md:text-4xl lg:text-6xl  tracking-wide text-[#425042] md:text-center mb-10 lg:mb-10 font-normal w-full leading-[1.1]">
 
           <span className="font-thin">Begin Your Journey</span>
           <p className="text-base md:text-md leading-relaxed font-light mt-6 sm:mt-8">Ready to see if Hevaniya is right for your celebration? We&apos;d love to meet you and show you what we&apos;ve created.</p>
@@ -127,7 +144,7 @@ export default function Home() {
       </div>
       <FtCarouselSection images={images} content={content} />
 
-      <FeaturesSection features={FEATURES} heading={<><span className="font-thin">Everything Your Looking For</span></>} completed={false} />
+      <FeaturesSection variant="left" features={FEATURES} heading={<><span className="font-thin">Everything Your Looking For</span></>} completed={false} />
       <SustainabilitySection />
 
 

@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { ArrowUpRight } from "lucide-react";
 import { Icons } from "./FeaturesIcons";
+import Link from "next/link";
 
 // import { Icons } from "./FeatureIcons";
 
@@ -27,11 +28,11 @@ export default function FeaturesSection({ features, heading, variant = "center",
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <section className="py-10 lg:pt-32 font-host">
-            <div className=" mx-auto px-6 lg:px-20 xl:px-54 ">
+        <section className="py-10 lg:pt-20 font-host">
+            <div className=" mx-auto px-6 lg:px-20  ">
                 {/* Header */}
                 {variant === "center" ? (
-                    <h2 className="text-2xl md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-28 tracking-tight leading-tight">
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-10 tracking-tight leading-tight">
                         {heading}
                     </h2>
                 ) : (
@@ -39,15 +40,15 @@ export default function FeaturesSection({ features, heading, variant = "center",
                         <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight">
                             {heading}
                         </h2>
-                        <button className="flex items-center gap-2 px-4 py-5 border border-[#0097DC] text-[#0097DC] hover:bg-[#0097DC]/10 transition-colors uppercase tracking-widest text-sm font-medium shrink-0">
+                        <Link href="/contact" className="flex items-center gap-2 px-4 py-5 border border-[#425042] text-[#425042] hover:bg-[#425042]/10 transition-colors uppercase tracking-widest text-sm font-medium shrink-0">
                             <ArrowUpRight className="w-5 h-5 hover:rotate-45 transition-all duration-300" />
-                            Explore Now
-                        </button>
+                            Contact Us
+                        </Link>
                     </div>
                 )}
 
                 {/* Features Grid */}
-                <div className="grid grid-cols-1  md:grid-cols-4  gap-x-6 gap-y-10 lg:gap-x-12 xl:gap-x-20 lg:gap-y-16 mb-12 lg:mb-28">
+                <div className="grid grid-cols-1  md:grid-cols-4  gap-x-6 gap-y-10 lg:gap-x-12 xl:gap-x-20 lg:gap-y-16 mb-8 lg:mb-0">
                     {features.map((item, index) => {
                         const Icon = Icons[item.icon];
                         // Show all items on medium/large screens (md+).

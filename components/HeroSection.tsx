@@ -6,12 +6,34 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import EnquiryModal from "./EnquiryModal";
 
-const HERO_IMAGES = [
-    // '/images/heroImages/carousel1.jpeg',
-    '/images/heroImages/carousel2.jpg',
-    '/images/heroImages/carousel4.webp',
-    '/images/heroImages/carousel3.avif'
-
+const HERO_SLIDES = [
+    {
+        image: '/images/heroImages/carousel2.jpg',
+        subtitle: "Where Refined Celebrations Find Their Perfect Space",
+        title: "HEVANIA",
+        buttons: [
+            { text: "Schedule a Tour", primary: true },
+            { text: "Submit Inquiry", primary: false }
+        ]
+    },
+    {
+        image: '/images/heroImages/carousel4.webp',
+        subtitle: "Experience Unparalleled Luxury and Elegance",
+        title: "EXQUISITE",
+        buttons: [
+            { text: "Explore Spaces", primary: true },
+            { text: "Book an Event", primary: false }
+        ]
+    },
+    {
+        image: '/images/heroImages/carousel3.avif',
+        subtitle: "Crafting Timeless Memories in Every Detail",
+        title: "MEGISTUS",
+        buttons: [
+            { text: "View Gallery", primary: true },
+            { text: "Get in Touch", primary: false }
+        ]
+    }
 ];
 
 export default function HeroSection() {
@@ -25,22 +47,22 @@ export default function HeroSection() {
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
     const nextSlide = useCallback(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, []);
 
     const prevSlide = useCallback(() => {
-        setCurrentImageIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
+        setCurrentSlideIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
     }, []);
 
     useEffect(() => {
         if (!isAutoPlaying) return;
         const interval = setInterval(() => {
             nextSlide();
-        }, 5000); // Change image every 5 seconds
+        }, 5000); // Change slide every 5 seconds
         return () => clearInterval(interval);
     }, [isAutoPlaying, nextSlide]);
 
@@ -54,7 +76,9 @@ export default function HeroSection() {
         return () => clearTimeout(timeout);
     };
 
-    const [hoveredButton, setHoveredButton] = useState<'left' | 'right' | null>(null);
+    const [hoveredButton, setHoveredButton] = useState<number | null>(null);
+
+    const currentSlide = HERO_SLIDES[currentSlideIndex];
 
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
@@ -62,7 +86,7 @@ export default function HeroSection() {
             <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
                 <AnimatePresence mode="popLayout">
                     <motion.div
-                        key={currentImageIndex}
+                        key={currentSlideIndex}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -70,8 +94,8 @@ export default function HeroSection() {
                         className="absolute inset-0"
                     >
                         <Image
-                            src={HERO_IMAGES[currentImageIndex]}
-                            alt={`Luxury Interior ${currentImageIndex + 1}`}
+                            src={currentSlide.image}
+                            alt={`Luxury Interior ${currentSlideIndex + 1}`}
                             fill
                             priority
                             className="object-cover"
@@ -82,58 +106,54 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-cream/90 text-sm md:text-2xl uppercase  mb-4 font-light"
-                >
-                    Where Refined Celebrations Find Their Perfect Space
-                </motion.p>
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream mb-8 leading-tight"
-                >
-                    HEVANIA
-                </motion.h1>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <motion.button
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ duration: 0.5, delay: 1.2 }}
-                        onMouseEnter={() => setHoveredButton('left')}
-                        onMouseLeave={() => setHoveredButton(null)}
-                        onClick={() => setIsModalOpen(true)}
-                        className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg ${
-                            hoveredButton === 'right' ? 'bg-white' : 
-                            hoveredButton === 'left' ? 'bg-cream' : 'bg-muted-gold'
-                        }`}
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto w-full">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentSlideIndex}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        Schedule a Tour
-                    </motion.button>
-                    
-                    <motion.button
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ duration: 0.5, delay: 1.2 }}
-                        onMouseEnter={() => setHoveredButton('right')}
-                        onMouseLeave={() => setHoveredButton(null)}
-                        onClick={() => setIsModalOpen(true)}
-                        className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg ${
-                            hoveredButton === 'left' ? 'bg-muted-gold' : 
-                            hoveredButton === 'right' ? 'bg-muted-gold' : 'bg-cream'
-                        }`}
-                    >
-                        Submit Inquiry
-                    </motion.button>
-                </div>
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="text-cream/90 text-sm md:text-2xl uppercase mb-4 font-light tracking-[0.2em]"
+                        >
+                            {currentSlide.subtitle}
+                        </motion.p>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream mb-8 leading-tight tracking-wider"
+                        >
+                            {currentSlide.title}
+                        </motion.h1>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            {currentSlide.buttons.map((button, idx) => (
+                                <motion.button
+                                    key={idx}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    transition={{ duration: 0.5, delay: 0.6 + (idx * 0.1) }}
+                                    onMouseEnter={() => setHoveredButton(idx)}
+                                    onMouseLeave={() => setHoveredButton(null)}
+                                    onClick={() => setIsModalOpen(true)}
+                                    className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${button.primary
+                                        ? (hoveredButton === idx ? 'bg-cream' : 'bg-muted-gold')
+                                        : (hoveredButton === idx ? 'bg-muted-gold' : 'bg-cream')
+                                        }`}
+                                >
+                                    {button.text}
+                                </motion.button>
+                            ))}
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
 
             {/* Navigation Arrows */}
@@ -211,7 +231,7 @@ export default function HeroSection() {
             <EnquiryModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                propertyName="General Interest"
+                propertyName={currentSlide.title}
             />
         </section>
     );
