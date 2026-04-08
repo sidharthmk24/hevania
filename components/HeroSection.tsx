@@ -36,7 +36,7 @@ const HERO_SLIDES = [
     }
 ];
 
-export default function HeroSection() {
+export default function HeroSection({ dynamicImages }: { dynamicImages?: string[] }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -50,13 +50,18 @@ export default function HeroSection() {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+    const slides = HERO_SLIDES.map((slide, idx) => ({
+        ...slide,
+        image: dynamicImages?.[idx] || slide.image
+    }));
+
     const nextSlide = useCallback(() => {
-        setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, []);
+        setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
+    }, [slides.length]);
 
     const prevSlide = useCallback(() => {
-        setCurrentSlideIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-    }, []);
+        setCurrentSlideIndex((prev) => (prev - 1 + slides.length) % slides.length);
+    }, [slides.length]);
 
     useEffect(() => {
         if (!isAutoPlaying) return;
@@ -78,7 +83,7 @@ export default function HeroSection() {
 
     const [hoveredButton, setHoveredButton] = useState<number | null>(null);
 
-    const currentSlide = HERO_SLIDES[currentSlideIndex];
+    const currentSlide = slides[currentSlideIndex];
 
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">

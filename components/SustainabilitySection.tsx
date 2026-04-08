@@ -25,7 +25,13 @@ const cardsData = [
     }
 ];
 
-const SustainabilitySection = () => {
+const SustainabilitySection = ({ dynamicImages }: { dynamicImages?: string[] }) => {
+    const defaultCardsData = cardsData;
+    const currentCardsData = defaultCardsData.map((card, idx) => ({
+        ...card,
+        image: dynamicImages?.[idx] || card.image
+    }));
+
     const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
 
     // Lock body scroll when modal is open
@@ -60,8 +66,8 @@ const SustainabilitySection = () => {
                         onClick={() => setSelectedCardIndex(0)}
                     >
                         <Image
-                            src={cardsData[0].image}
-                            alt={cardsData[0].title}
+                            src={currentCardsData[0].image}
+                            alt={currentCardsData[0].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                             unoptimized
@@ -73,8 +79,8 @@ const SustainabilitySection = () => {
 
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
-                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{cardsData[0].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{cardsData[0].description}</p>
+                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{currentCardsData[0].title}</h3>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{currentCardsData[0].description}</p>
                             </div>
                         </div>
                     </div>
@@ -87,8 +93,8 @@ const SustainabilitySection = () => {
                         onClick={() => setSelectedCardIndex(1)}
                     >
                         <Image
-                            src={cardsData[1].image}
-                            alt={cardsData[1].title}
+                            src={currentCardsData[1].image}
+                            alt={currentCardsData[1].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                             unoptimized
@@ -100,8 +106,8 @@ const SustainabilitySection = () => {
 
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
-                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{cardsData[1].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{cardsData[1].description}</p>
+                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{currentCardsData[1].title}</h3>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{currentCardsData[1].description}</p>
                             </div>
                         </div>
                     </div>
@@ -111,8 +117,8 @@ const SustainabilitySection = () => {
                         onClick={() => setSelectedCardIndex(2)}
                     >
                         <Image
-                            src={cardsData[2].image}
-                            alt={cardsData[2].title}
+                            src={currentCardsData[2].image}
+                            alt={currentCardsData[2].title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                             unoptimized
@@ -124,8 +130,8 @@ const SustainabilitySection = () => {
 
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
-                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{cardsData[2].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{cardsData[2].description}</p>
+                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{currentCardsData[2].title}</h3>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{currentCardsData[2].description}</p>
                             </div>
                         </div>
                     </div>
@@ -152,7 +158,7 @@ const SustainabilitySection = () => {
                         className="w-full"
                         style={{ padding: '20px 0' }}
                     >
-                        {cardsData.map((card, idx) => (
+                        {currentCardsData.map((card, idx) => (
                             <SwiperSlide
                                 key={idx}
                                 className="relative aspect-[4/5] sm:aspect-[3/4] w-full bg-neutral-200 cursor-pointer"
@@ -209,8 +215,8 @@ const SustainabilitySection = () => {
                             {/* Top Half: Image */}
                             <div className="relative w-full h-64 sm:h-80 md:h-96 shrink-0">
                                 <Image
-                                    src={cardsData[selectedCardIndex].image}
-                                    alt={cardsData[selectedCardIndex].title}
+                                    src={currentCardsData[selectedCardIndex].image}
+                                    alt={currentCardsData[selectedCardIndex].title}
                                     fill
                                     className="object-cover"
                                     unoptimized
@@ -222,10 +228,10 @@ const SustainabilitySection = () => {
                             <div className="p-6 sm:p-8 md:p-10 bg-white  -mt-6 relative z-10 flex flex-col min-h-[50%] flex-1 overflow-hidden">
                                 <div className="flex-grow overflow-y-auto pr-2">
                                     <h3 className="text-3xl sm:text-4xl font-normal text-[#425042] mb-4">
-                                        {cardsData[selectedCardIndex].title}
+                                        {currentCardsData[selectedCardIndex].title}
                                     </h3>
                                     <p className="text-[#425042] text-base md:text-md leading-relaxed font-light">
-                                        {cardsData[selectedCardIndex].description}
+                                        {currentCardsData[selectedCardIndex].description}
                                     </p>
                                 </div>
 
@@ -234,12 +240,12 @@ const SustainabilitySection = () => {
                                     className="pt-6 mt-6 border-t border-[#8D827C]/20 flex items-center justify-end group cursor-pointer w-full shrink-0"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        const nextIndex = (selectedCardIndex + 1) % cardsData.length;
+                                        const nextIndex = (selectedCardIndex + 1) % currentCardsData.length;
                                         setSelectedCardIndex(nextIndex);
                                     }}
                                 >
                                     <span className="text-[#425042] text-sm md:text-base font-medium mr-2 transition-colors group-hover:text-black">
-                                         {cardsData[(selectedCardIndex + 1) % cardsData.length].title}
+                                         {currentCardsData[(selectedCardIndex + 1) % currentCardsData.length].title}
                                     </span>
                                     <div className="w-8 h-8 rounded-full bg-[#425042]/20 border border-[#425042]/30 flex items-center justify-center transition-all duration-300 group-hover:bg-[#425042] group-hover:text-white group-hover:border-[#4B3D37]">
                                         <ChevronRight size={16} />
