@@ -191,6 +191,7 @@ export default function ScrollFtSection({ data }: ProjectHighLivingProps) {
                                 sizes="50vw"
                                 className="object-cover"
                                 priority={index === 0}
+                                unoptimized
                             />
                         </div>
                     ))}

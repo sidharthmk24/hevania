@@ -43,8 +43,6 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                 <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-wider text-gray-500 mb-8 border-y border-gray-200 py-4">
                     <span>{POST.date}</span>
                     <span className="w-1 h-1 bg-muted-gold rounded-full" />
-                    <span>Mukund Realty</span>
-                    <span className="w-1 h-1 bg-muted-gold rounded-full" />
                     <span>5 Min Read</span>
                 </div>
 

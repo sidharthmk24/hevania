@@ -38,7 +38,7 @@ export const InfiniteMovingCards = ({
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
                 style={{
-                    "--animation-duration": speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s",
+                    "--animation-duration": speed === "fast" ? "8s" : speed === "normal" ? "15s" : "30s",
                 } as React.CSSProperties}
             >
                 {[...items, ...items].map((item, idx) => (

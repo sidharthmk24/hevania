@@ -70,7 +70,7 @@ export default function FaqSection() {
                                     <span className={`text-[1.05rem] font-medium transition-colors ${isOpen ? 'text-[#2F3E2F]' : 'text-[#2F3E2F] group-hover:text-[#2F3E2F]'}`}>
                                         {faq.question}
                                     </span>
-                                    <span className="ml-6 transition-transform duration-300 grid place-items-center">
+                                    <span className="ml-6 transition-transform duration-200 grid place-items-center">
                                         {isOpen ? (
                                             <ChevronUp strokeWidth={1.5} size={20} className="text-[#2F3E2F]" />
                                         ) : (
@@ -80,7 +80,7 @@ export default function FaqSection() {
                                 </button>
                                 {/* Expandable answer */}
                                 <div
-                                    className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[200px] opacity-100 pb-6" : "max-h-0 opacity-0"
+                                    className={`overflow-hidden transition-all duration-200 ease-in-out ${isOpen ? "max-h-[200px] opacity-100 pb-6" : "max-h-0 opacity-0"
                                         }`}
                                 >
                                     <p className="text-[#888] pr-12 text-[1rem] leading-relaxed">
@@ -92,7 +92,7 @@ export default function FaqSection() {
                     })}
 
                     {/* Additional FAQs with smooth animation */}
-                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${showMore ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showMore ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
                         {faqs.slice(4).map((faq, index) => {
                             const actualIndex = index + 4;
                             const isOpen = openIndex === actualIndex;

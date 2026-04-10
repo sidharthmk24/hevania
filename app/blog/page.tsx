@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,6 +39,9 @@ const BLOG_POSTS = [
 
 export default function BlogPage() {
     return (
+         <>
+          <Navbar theme="dark" />
+        
         <div className="bg-cream min-h-screen text-dark-forest pt-32 pb-24 px-6">
             <div className="max-w-7xl mx-auto">
                 <motion.div
@@ -84,5 +88,6 @@ export default function BlogPage() {
                 </div>
             </div>
         </div>
+         </>
     );
 }

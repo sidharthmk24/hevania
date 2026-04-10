@@ -30,7 +30,6 @@ export default function RootLayout({
       >
         <ReactLenis root>
           
-          <Navbar />
           <Loader />
           <main className="min-h-screen">
             {children}

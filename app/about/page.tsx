@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -29,6 +30,8 @@ const STATS = [
 
 export default function AboutPage() {
     return (
+  <>
+  <Navbar />
         <div className="bg-cream text-dark-forest">
             {/* Hero */}
             <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden flex items-center justify-center">
@@ -115,5 +118,6 @@ export default function AboutPage() {
                 </div>
             </section>
         </div>
+  </>
     );
 }

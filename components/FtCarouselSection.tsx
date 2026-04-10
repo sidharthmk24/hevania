@@ -30,8 +30,8 @@ interface Props {
 // ============= Constants =============
 const CAROUSEL_CONFIG = {
     totalSlides: 3,
-    transitionDuration: 800,
-    autoplayInterval: 6000,
+    transitionDuration: 500,
+    autoplayInterval: 4000,
     dimensions: {
         desktop: { width: 1932, height: 1088 },
         mobile: { width: 326, height: 568 },
@@ -146,7 +146,7 @@ export default function FtCarous({ images, content }: Props) {
                                             initial={{ opacity: 0, scale: 1.05 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0 }}
-                                            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                                            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                                             className="absolute inset-0 w-full h-full"
                                         >
                                             <Image
@@ -155,6 +155,7 @@ export default function FtCarous({ images, content }: Props) {
                                                 fill
                                                 className="object-cover"
                                                 loading="lazy"
+                                                unoptimized
                                             />
                                         </motion.div>
                                     )
@@ -177,6 +178,7 @@ export default function FtCarous({ images, content }: Props) {
                                             alt={content.desktop[currentIndex][hoveredIndex].title}
                                             fill
                                             className="object-cover"
+                                            unoptimized
                                         />
                                     </motion.div>
                                 )}

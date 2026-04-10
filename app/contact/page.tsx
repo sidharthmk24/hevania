@@ -4,9 +4,12 @@ import React from "react";
 import ContactForm from "@/components/ContactForm";
 import ContactMap from "@/components/ContactMap";
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
 
 export default function ContactPage() {
     return (
+        <>
+        <Navbar theme="dark"/>
         <section className=" min-h-screen pt-32 pb-16">
             <div className=" mx-auto px-6  md:px-20">
                 <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-16 md:gap-24 lg:gap-32 mb-20">
@@ -65,5 +68,6 @@ export default function ContactPage() {
                 </motion.div>
             </div>
         </section>
+        </>
     );
 }

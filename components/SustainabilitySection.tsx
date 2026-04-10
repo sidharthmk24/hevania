@@ -7,7 +7,13 @@ import "swiper/css";
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight } from 'lucide-react';
 
-const cardsData = [
+type CardData = {
+    image: string;
+    title: string;
+    description: string;
+};
+
+const DEFAULT_CARDS: CardData[] = [
     {
         image: "/images/heroImages/carousel1.jpeg",
         title: "Water Conservation",
@@ -25,11 +31,18 @@ const cardsData = [
     }
 ];
 
-const SustainabilitySection = ({ dynamicImages }: { dynamicImages?: string[] }) => {
-    const defaultCardsData = cardsData;
-    const currentCardsData = defaultCardsData.map((card, idx) => ({
-        ...card,
-        image: dynamicImages?.[idx] || card.image
+interface SustainabilitySectionProps {
+    /** Full structured cards from CMS (preferred) */
+    dynamicCards?: CardData[];
+    /** Legacy: just image URLs */
+    dynamicImages?: string[];
+}
+
+const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySectionProps) => {
+    const currentCardsData = DEFAULT_CARDS.map((card, idx) => ({
+        image: dynamicCards?.[idx]?.image || dynamicImages?.[idx] || card.image,
+        title: dynamicCards?.[idx]?.title || card.title,
+        description: dynamicCards?.[idx]?.description || card.description,
     }));
 
     const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
@@ -69,18 +82,18 @@ const SustainabilitySection = ({ dynamicImages }: { dynamicImages?: string[] }) 
                             src={currentCardsData[0].image}
                             alt={currentCardsData[0].title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                             unoptimized
                         />
 
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
                             {/* Gradient overlay for text readability appearing on hover */}
                             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none z-0"></div>
 
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
-                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{currentCardsData[0].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{currentCardsData[0].description}</p>
+                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-200">{currentCardsData[0].title}</h3>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75">{currentCardsData[0].description}</p>
                             </div>
                         </div>
                     </div>
@@ -96,18 +109,18 @@ const SustainabilitySection = ({ dynamicImages }: { dynamicImages?: string[] }) 
                             src={currentCardsData[1].image}
                             alt={currentCardsData[1].title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                             unoptimized
                         />
 
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
                             {/* Gradient overlay for text readability appearing on hover */}
                             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none z-0"></div>
 
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
-                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{currentCardsData[1].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{currentCardsData[1].description}</p>
+                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-200">{currentCardsData[1].title}</h3>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75">{currentCardsData[1].description}</p>
                             </div>
                         </div>
                     </div>
@@ -120,18 +133,18 @@ const SustainabilitySection = ({ dynamicImages }: { dynamicImages?: string[] }) 
                             src={currentCardsData[2].image}
                             alt={currentCardsData[2].title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                             unoptimized
                         />
 
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
                             {/* Gradient overlay for text readability appearing on hover */}
                             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none z-0"></div>
 
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
-                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{currentCardsData[2].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{currentCardsData[2].description}</p>
+                                <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-200">{currentCardsData[2].title}</h3>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75">{currentCardsData[2].description}</p>
                             </div>
                         </div>
                     </div>
@@ -149,7 +162,7 @@ const SustainabilitySection = ({ dynamicImages }: { dynamicImages?: string[] }) 
                     </p>
                 </div>
 
-                <div className="relative w-full overflow-visible [&_.swiper]:overflow-visible [&_.swiper-slide]:transition-all [&_.swiper-slide]:duration-400 [&_.swiper-slide]:ease-out [&_.swiper-slide]:scale-[0.85] [&_.swiper-slide]:opacity-50 [&_.swiper-slide-active]:scale-100 [&_.swiper-slide-active]:opacity-100 [&_.swiper-slide]:rounded-[20px] [&_.swiper-slide]:overflow-hidden [&_.swiper-slide]:h-auto">
+                <div className="relative w-full overflow-visible [&_.swiper]:overflow-visible [&_.swiper-slide]:transition-all [&_.swiper-slide]:duration-300 [&_.swiper-slide]:ease-out [&_.swiper-slide]:scale-[0.85] [&_.swiper-slide]:opacity-50 [&_.swiper-slide-active]:scale-100 [&_.swiper-slide-active]:opacity-100 [&_.swiper-slide]:rounded-[20px] [&_.swiper-slide]:overflow-hidden [&_.swiper-slide]:h-auto">
                     <Swiper
                         slidesPerView={1.3}
                         centeredSlides={true}
