@@ -179,6 +179,7 @@ export default async function Home() {
       <HeroSection heroSlides={heroSlides} />
       <div className="pb-20">
         <ScrollFtSection data={scrollData} />
+
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0">
