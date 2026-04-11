@@ -42,7 +42,7 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
     }, [mobileMenuOpen]);
 
     const links = [
-        // { name: "Home", href: "/" },
+        { name: "Home", href: "/" },
         { name: "Contact", href: "/contact" },
         { name: "About", href: "/about" },
         { name: "Blog", href: "/blog" },
@@ -104,13 +104,13 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className={`fixed top-0 w-full z-50 transition-colors duration-300 ${navBg}`}
             >
-                <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-50">
+                <div className=" mx-auto px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center relative z-50">
                     <Link
                         href="/"
                         className={`text-2xl tracking-widest transition-colors ${textColor}`}
                         onClick={() => setMobileMenuOpen(false)}
                     >
-                        HEVANIA
+                        HEVANIYA
                     </Link>
 
                     {/* Desktop Menu */}

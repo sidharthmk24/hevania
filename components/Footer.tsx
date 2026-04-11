@@ -41,7 +41,7 @@ export default function Footer() {
 
     return (
         <footer className="relative bg-[#F5F5F0] pt-20 md:pt-20 md:pb-12 w-full z-10 border-t border-[#2F3E2F]/20">
-            <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24 w-full">
+            <div className=" mx-auto px-8 md:px-16 lg:px-24 w-full">
 
                 {/* Top Section: Three Column Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24 md:mb-10 mb-5">
@@ -54,7 +54,7 @@ export default function Footer() {
                         transition={{ duration: 1 }}
                     >
                         <h2 className="text-[24px] font-aboreto text-[#2F3E2F] mb-8 tracking-widest uppercase">
-                            HEVANIA
+                            HEVANIYA
                         </h2>
                         <p className="text-[14px] font-light text-[#425042] leading-relaxed max-w-sm mb-10">
                             Curating extraordinary experiences in the world's most exquisite settings. Every detail, a testament to elegance.
@@ -64,7 +64,7 @@ export default function Footer() {
                             {[
                                 { icon: Instagram, href: "#" },
                                 { icon: Facebook, href: "#" },
-                                { icon: Mail, href: "mailto:inquiry@hevania.com" }
+                                { icon: Mail, href: "mailto:inquiry@HEVANIYA.com" }
                             ].map((social, i) => (
                                 <a key={i} href={social.href} className="text-[#2F3E2F] hover:text-[#C6A75E] transition-colors">
                                     <social.icon size={16} strokeWidth={1} />
@@ -116,7 +116,7 @@ export default function Footer() {
                                 +91 98765 43210
                             </li>
                             <li>
-                                <a href="mailto:inquiry@hevania.com" className="hover:text-[#2F3E2F] transition-colors">inquiry@hevania.com</a>
+                                <a href="mailto:inquiry@HEVANIYA.com" className="hover:text-[#2F3E2F] transition-colors">inquiry@HEVANIYA.com</a>
                             </li>
                         </ul>
                     </motion.div>
@@ -174,14 +174,14 @@ export default function Footer() {
                     {/* The giant text matching original specifications */}
                     <div className="w-full flex items-center justify-center overflow-hidden mb-8 lg:mb-12">
                         <span className="text-[20vw] lg:text-[18vw] font-light tracking-tighter text-[#425042] leading-[0.75] select-none">
-                            HEVANIA
+                            HEVANIYA
                         </span>
                     </div>
 
                     {/* Footer Bottom Line */}
                     <div className="w-full border-t border-[#425042]/10 pt-6 pb-4 flex flex-col justify-center items-center">
                         <p className="text-[10px] md:text-sm text-[#425042] font-light text-center">
-                            A Product of HEVANIA | All Rights Reserved HEVANIA ©{new Date().getFullYear()}
+                            A Product of HEVANIYA | All Rights Reserved HEVANIYA ©{new Date().getFullYear()}
                         </p>
                     </div>
                 </div>

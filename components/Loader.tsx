@@ -55,7 +55,7 @@ export default function Loader() {
                             ease: "easeOut",
                         }}
                     >
-                        HEVANIA
+                        HEVANIYA
                     </motion.h1>
 
 

@@ -17,7 +17,7 @@ const DEFAULT_HERO_SLIDES: HeroSlide[] = [
     {
         image: "/images/heroImages/carousel2.jpg",
         subtitle: "Where Refined Celebrations Find Their Perfect Space",
-        title: "HEVANIA",
+        title: "HEVANIYA",
         buttons: [
             { text: "Schedule a Tour", primary: true },
             { text: "Submit Inquiry", primary: false },
@@ -161,11 +161,10 @@ export default function HeroSection({ heroSlides, dynamicImages }: HeroSectionPr
                                     onMouseEnter={() => setHoveredButton(idx)}
                                     onMouseLeave={() => setHoveredButton(null)}
                                     onClick={() => setIsModalOpen(true)}
-                                    className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${
-                                        button.primary
+                                    className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${button.primary
                                             ? hoveredButton === idx ? "bg-cream" : "bg-muted-gold"
                                             : hoveredButton === idx ? "bg-muted-gold" : "bg-cream"
-                                    }`}
+                                        }`}
                                 >
                                     {button.text}
                                 </motion.button>

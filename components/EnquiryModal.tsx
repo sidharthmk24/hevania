@@ -69,7 +69,7 @@ export default function EnquiryModal({ isOpen, onClose, propertyName = "General 
                             <div className="absolute top-0 right-0 w-64 h-64 bg-[#cda776] opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
                             <div className="relative z-10">
-                                <h3 className="text-[10px] uppercase tracking-[0.3em] text-[#cda776] mb-6">Hevania Estates</h3>
+                                <h3 className="text-[10px] uppercase tracking-[0.3em] text-[#cda776] mb-6">HEVANIYA Estates</h3>
                                 <h2 className="text-3xl md:text-5xl font-freightNeoMedium leading-tight">
                                     Begin Your <br />
                                     <span className="text-[#cda776] italic font-light">Preparation</span>
@@ -83,7 +83,7 @@ export default function EnquiryModal({ isOpen, onClose, propertyName = "General 
                                 <div className="space-y-4">
                                     <div>
                                         <p className="text-[10px] uppercase tracking-widest text-white/40 mb-1">Direct Contact</p>
-                                        <p className="font-light text-sm text-[#F5F5F0]">concierge@hevania.com</p>
+                                        <p className="font-light text-sm text-[#F5F5F0]">concierge@HEVANIYA.com</p>
                                     </div>
                                     <div>
                                         <p className="text-[10px] uppercase tracking-widest text-white/40 mb-1">Telephone</p>

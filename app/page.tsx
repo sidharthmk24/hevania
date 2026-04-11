@@ -8,6 +8,8 @@ import SustainabilitySection from "@/components/SustainabilitySection";
 import ScrollFtSection from "@/components/ScrollFtSection";
 import { supabaseServer } from "@/lib/supabaseServer";
 import Navbar from "@/components/Navbar";
+import ExperienceSection from "@/components/ExperienceSection";
+import GalleryLoopSection from "@/components/GalleryLoopSection";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +18,7 @@ const DEFAULT_HERO_SLIDES = [
   {
     image: "/images/heroImages/carousel2.jpg",
     subtitle: "Where Refined Celebrations Find Their Perfect Space",
-    title: "HEVANIA",
+    title: "HEVANIYA",
     buttons: [
       { text: "Schedule a Tour", primary: true },
       { text: "Submit Inquiry", primary: false },
@@ -131,7 +133,7 @@ export default async function Home() {
       description: (cmsCard?.description as string) || item.description,
       img: (cmsCard?.image_url as string) || imagesBySection["carousel"]?.[i] || item.img,
     };
-  });
+  }).slice(0, 6);
 
   const images = {
     desktop: rawContent.map(item => item.img!),
@@ -140,13 +142,13 @@ export default async function Home() {
 
   const content = {
     desktop: [
-      [rawContent[0], rawContent[1], rawContent[2]],
-      [rawContent[1], rawContent[2], rawContent[3]],
-      [rawContent[2], rawContent[3], rawContent[4]],
-      [rawContent[3], rawContent[4], rawContent[5]],
-      [rawContent[4], rawContent[5], rawContent[6]],
-      [rawContent[5], rawContent[6], rawContent[0]],
-      [rawContent[6], rawContent[0], rawContent[1]],
+      [rawContent[0], rawContent[1], rawContent[2], rawContent[3], rawContent[4], rawContent[5]],
+      [rawContent[1], rawContent[2], rawContent[3], rawContent[4], rawContent[5], rawContent[0]],
+      [rawContent[2], rawContent[3], rawContent[4], rawContent[5], rawContent[0], rawContent[1]],
+      [rawContent[3], rawContent[4], rawContent[5], rawContent[0], rawContent[1], rawContent[2]],
+      [rawContent[4], rawContent[5], rawContent[0], rawContent[1], rawContent[2], rawContent[3]],
+      [rawContent[5], rawContent[0], rawContent[1], rawContent[2], rawContent[3], rawContent[4]],
+      [rawContent[0], rawContent[1], rawContent[2], rawContent[3], rawContent[4], rawContent[5]],
     ],
     mobile: rawContent,
   };
@@ -161,6 +163,24 @@ export default async function Home() {
       description: (cmsCard?.description as string) || card.description,
     };
   });
+
+  // ——— Build Experience Images ———
+  const experienceContent = sectionContent["experience"] || {};
+  const experienceImages = [
+    (experienceContent["image_1"] as Record<string, unknown>)?.image_url as string,
+    (experienceContent["image_2"] as Record<string, unknown>)?.image_url as string,
+  ];
+
+  // ——— Build LogoLoop Images ———
+  const logoLoopContent = sectionContent["logoloop"] || {};
+  const logoLoopImages = Object.keys(logoLoopContent)
+    .sort((a, b) => {
+      const numA = parseInt(a.split("_")[1] || "0");
+      const numB = parseInt(b.split("_")[1] || "0");
+      return numA - numB;
+    })
+    .map((key) => (logoLoopContent[key] as Record<string, unknown>)?.image_url as string)
+    .filter(Boolean);
 
   // ——— Features ———
   const FEATURES: FeatureItem[] = [
@@ -177,12 +197,20 @@ export default async function Home() {
     <>
       <Navbar />
       <HeroSection heroSlides={heroSlides} />
-      <div className="pb-20">
+      {/* <div className="pb-20">
         <ScrollFtSection data={scrollData} />
 
-      </div>
+      </div> */}
+      <ExperienceSection image1={experienceImages[0]} image2={experienceImages[1]} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0">
+      <GalleryLoopSection images={logoLoopImages.length > 0 ? logoLoopImages : undefined} />
+
+
+
+
+
+
+      <div className=" mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0">
         <h2 className="text-2xl md:text-4xl lg:text-6xl tracking-wide text-[#425042] md:text-center mb-10 lg:mb-10 font-normal w-full leading-[1.1]">
           <span className="font-thin">Begin Your Journey</span>
           <p className="text-base md:text-md leading-relaxed font-light mt-6 sm:mt-8">

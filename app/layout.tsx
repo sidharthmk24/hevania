@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Aboreto } from "next/font/google";
+import { Aboreto, Geist } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "lenis/react";
 import Navbar from "@/components/Navbar";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const aboreto = Aboreto({
   variable: "--font-aboreto",
@@ -14,7 +17,7 @@ const aboreto = Aboreto({
 });
 
 export const metadata: Metadata = {
-  title: "Hevania | Luxury Event Venues",
+  title: "HEVANIYA | Luxury Event Venues",
   description: "Exquisite plots and venues for weddings, parties, and corporate events.",
 };
 
@@ -24,12 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body
         className={`${aboreto.variable} antialiased bg-cream text-dark-forest font-sans`}
       >
         <ReactLenis root>
-          
+
           <Loader />
           <main className="min-h-screen">
             {children}

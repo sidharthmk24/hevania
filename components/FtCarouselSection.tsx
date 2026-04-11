@@ -82,37 +82,32 @@ export default function FtCarous({ images, content }: Props) {
         return (
             <div
                 key={index}
-                className="flex-1 relative cursor-pointer"
+                className="relative cursor-pointer group h-full w-full"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
             >
-                {/* Hover overlay gradient */}
+                {/* Hover overlay */}
                 <div 
-                    className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-700 ${
-                        isHovered ? "opacity-100" : "opacity-0"
+                    className={`absolute inset-0 bg-black/40 transition-opacity duration-700 ${
+                        isHovered ? "opacity-0" : "opacity-100"
                     }`} 
                 />
 
-                {/* Section content - Remains still, only the hovered one expands its text */}
-                <div className="absolute inset-x-0 bottom-0 p-10 text-white z-[1]">
-                    <h2 className="font-serif text-white text-center text-xl md:text-2xl lg:text-2xl tracking-widest uppercase mb-4">
+                {/* Section content - Center aligned in the square */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-white z-[1] text-center">
+                    <h2 className="font-serif text-white text-center text-xl md:text-2xl tracking-widest uppercase transition-all duration-500 group-hover:scale-105">
                         {section.title}
                     </h2>
                     
-                    {/* Hover description expands, but parent stays in place */}
                     <div 
                         className={`overflow-hidden transition-all duration-700 ease-in-out ${
                             isHovered ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                         }`}
                     >
-                        <p className="font-light mt-4 text-cream/90 text-center text-sm md:text-base lg:text-sm leading-relaxed max-w-xs mx-auto">
+                        <p className="font-light mt-4 text-cream/90 text-center text-sm leading-relaxed max-w-[250px] mx-auto">
                             {section.description}
                         </p>
-                        <div 
-                            className={`w-12 h-[1px] bg-muted-gold mx-auto mt-6 transition-opacity duration-700 ${
-                                isHovered ? "opacity-100" : "opacity-0"
-                            }`} 
-                        />
+                        <div className="w-12 h-[1px] bg-muted-gold mx-auto mt-6" />
                     </div>
                 </div>
             </div>
@@ -135,9 +130,7 @@ export default function FtCarous({ images, content }: Props) {
                 <div className="bg-dark-forest sm:p-0">
                     {/* Desktop Version */}
                     <div className="overflow-hidden hidden md:block shadow-2xl xl:h-[100vh] w-[100%] aspect-[2/1] relative">
-                        {/* Image container */}
                         <div className="absolute inset-0">
-                            {/* Base Slide Images */}
                             <AnimatePresence mode="popLayout">
                                 {images.desktop.map((src, index) => (
                                     currentIndex === index && (
@@ -149,20 +142,12 @@ export default function FtCarous({ images, content }: Props) {
                                             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                                             className="absolute inset-0 w-full h-full"
                                         >
-                                            <Image
-                                                src={src}
-                                                alt={`Slide ${index + 1}`}
-                                                fill
-                                                className="object-cover"
-                                                loading="lazy"
-                                                unoptimized
-                                            />
+                                            <Image src={src} alt="Slide" fill className="object-cover" loading="lazy" unoptimized />
                                         </motion.div>
                                     )
                                 ))}
                             </AnimatePresence>
 
-                            {/* Section Specific Hover Images */}
                             <AnimatePresence>
                                 {hoveredIndex !== null && content.desktop[currentIndex][hoveredIndex]?.img && (
                                     <motion.div
@@ -170,12 +155,12 @@ export default function FtCarous({ images, content }: Props) {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                                        transition={{ duration: 0.6 }}
                                         className="absolute inset-0 w-full h-full z-[5]"
                                     >
                                         <Image
                                             src={content.desktop[currentIndex][hoveredIndex].img!}
-                                            alt={content.desktop[currentIndex][hoveredIndex].title}
+                                            alt="Hover"
                                             fill
                                             className="object-cover"
                                             unoptimized
@@ -183,19 +168,26 @@ export default function FtCarous({ images, content }: Props) {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 z-10 pointer-events-none" />
+                            <div className="absolute inset-0 bg-black/40 z-10" />
                         </div>
 
-                        {/* Vertical dividing lines */}
-                        <div className="absolute inset-0 flex pointer-events-none z-10 opacity-30">
-                            <div className="flex-1 border-r border-white/40"></div>
-                            <div className="flex-1 border-r border-white/40"></div>
-                            <div className="flex-1"></div>
+                        {/* 3x2 Grid with Center Horizontal Separation */}
+                        <div className="absolute inset-0 pointer-events-none z-30">
+                            {/* Vertical Dividers */}
+                            <div className="flex h-full">
+                                <div className="flex-1 border-r border-white/20"></div>
+                                <div className="flex-1 border-r border-white/20"></div>
+                                <div className="flex-1"></div>
+                            </div>
+                            {/* Horizontal Center Divider */}
+                            <div className="absolute inset-0 flex flex-col">
+                                <div className="flex-1 border-b border-white/60 shadow-[0_0_15px_rgba(255,255,255,0.1)]"></div>
+                                <div className="flex-1"></div>
+                            </div>
                         </div>
 
-                        {/* Sections with titles and hover descriptions */}
-                        <div className="absolute inset-0 flex z-20">
+                        {/* Sections in a 3x2 Grid */}
+                        <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 z-20">
                             {content.desktop[currentIndex].map((section, index) => renderDesktopSection(section, index))}
                         </div>
                     </div>
