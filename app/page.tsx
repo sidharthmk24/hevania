@@ -19,6 +19,7 @@ const DEFAULT_HERO_SLIDES = [
     image: "/images/heroImages/carousel2.jpg",
     subtitle: "Where Refined Celebrations Find Their Perfect Space",
     title: "HEVANIYA",
+    bottom_subtitle: "",
     buttons: [
       { text: "Schedule a Tour", primary: true },
       { text: "Submit Inquiry", primary: false },
@@ -28,6 +29,7 @@ const DEFAULT_HERO_SLIDES = [
     image: "/images/heroImages/carousel4.webp",
     subtitle: "Experience Unparalleled Luxury and Elegance",
     title: "EXQUISITE",
+    bottom_subtitle: "",
     buttons: [
       { text: "Explore Spaces", primary: true },
       { text: "Book an Event", primary: false },
@@ -37,6 +39,7 @@ const DEFAULT_HERO_SLIDES = [
     image: "/images/heroImages/carousel3.avif",
     subtitle: "Crafting Timeless Memories in Every Detail",
     title: "MEGISTUS",
+    bottom_subtitle: "",
     buttons: [
       { text: "View Gallery", primary: true },
       { text: "Get in Touch", primary: false },
