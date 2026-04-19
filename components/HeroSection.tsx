@@ -10,6 +10,7 @@ type HeroSlide = {
     image: string;
     subtitle: string;
     title: string;
+    bottom_subtitle?: string;
     buttons: { text: string; primary: boolean }[];
 };
 
@@ -18,6 +19,7 @@ const DEFAULT_HERO_SLIDES: HeroSlide[] = [
         image: "/images/heroImages/carousel2.jpg",
         subtitle: "Where Refined Celebrations Find Their Perfect Space",
         title: "HEVANIYA",
+        bottom_subtitle: "A breathtaking destination for premium events",
         buttons: [
             { text: "Schedule a Tour", primary: true },
             { text: "Submit Inquiry", primary: false },
@@ -27,6 +29,7 @@ const DEFAULT_HERO_SLIDES: HeroSlide[] = [
         image: "/images/heroImages/carousel4.webp",
         subtitle: "Experience Unparalleled Luxury and Elegance",
         title: "EXQUISITE",
+        bottom_subtitle: "Designed to host your grandest celebrations",
         buttons: [
             { text: "Explore Spaces", primary: true },
             { text: "Book an Event", primary: false },
@@ -36,6 +39,7 @@ const DEFAULT_HERO_SLIDES: HeroSlide[] = [
         image: "/images/heroImages/carousel3.avif",
         subtitle: "Crafting Timeless Memories in Every Detail",
         title: "MEGISTUS",
+        bottom_subtitle: "Versatile spaces customized to your needs",
         buttons: [
             { text: "View Gallery", primary: true },
             { text: "Get in Touch", primary: false },
@@ -50,7 +54,7 @@ interface HeroSectionProps {
     dynamicImages?: string[];
 }
 
-export default function HeroSection({ heroSlides, dynamicImages }: HeroSectionProps) {
+export default function     HeroSection({ heroSlides, dynamicImages }: HeroSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -120,11 +124,11 @@ export default function HeroSection({ heroSlides, dynamicImages }: HeroSectionPr
                         />
                     </motion.div>
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-black/40 z-10" />
+                <div className="absolute inset-0 bg-black/60 z-10" />
             </motion.div>
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto w-full">
+            <div className="relative z-10 text-center px-6 py-12 md:py-16 max-w-5xl mx-auto w-[95%] md:w-full">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlideIndex}
@@ -137,7 +141,7 @@ export default function HeroSection({ heroSlides, dynamicImages }: HeroSectionPr
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-cream/90 text-sm md:text-2xl uppercase mb-4 font-light tracking-[0.2em]"
+                            className="text-cream/90 text-sm md:text-2xl uppercase mb-4 font-semibold tracking-[0.2em]"
                         >
                             {currentSlide.subtitle}
                         </motion.p>
@@ -145,10 +149,20 @@ export default function HeroSection({ heroSlides, dynamicImages }: HeroSectionPr
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream mb-8 leading-tight tracking-wider"
+                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-bold ${currentSlide.bottom_subtitle ? "mb-4" : "mb-8"}`}
                         >
                             {currentSlide.title}
                         </motion.h1>
+                        {currentSlide.bottom_subtitle && (
+                            <motion.p
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                                className="text-cream/90 text-sm md:text-xl font-light mb-8 max-w-3xl mx-auto"
+                            >
+                                {currentSlide.bottom_subtitle}
+                            </motion.p>
+                        )}
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             {currentSlide.buttons.map((button, idx) => (
                                 <motion.button
@@ -161,10 +175,15 @@ export default function HeroSection({ heroSlides, dynamicImages }: HeroSectionPr
                                     onMouseEnter={() => setHoveredButton(idx)}
                                     onMouseLeave={() => setHoveredButton(null)}
                                     onClick={() => setIsModalOpen(true)}
-                                    className={`px-8 py-4 text-dark-forest font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${button.primary
-                                            ? hoveredButton === idx ? "bg-cream" : "bg-muted-gold"
-                                            : hoveredButton === idx ? "bg-muted-gold" : "bg-cream"
-                                        }`}
+                                    className={`px-8 py-4 font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${
+                                        button.primary
+                                            ? hoveredButton === idx 
+                                                ? "bg-[#425042]/80 text-white" 
+                                                : "bg-[#425042] text-white"
+                                            : hoveredButton === idx 
+                                                ? "bg-cream/80 text-[#425042]" 
+                                                : "bg-cream text-[#425042]"
+                                    }`}
                                 >
                                     {button.text}
                                 </motion.button>

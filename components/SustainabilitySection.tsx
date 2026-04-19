@@ -66,7 +66,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                 {/* Left Column */}
                 <div className="flex flex-col justify-start h-full min-h-[500px]">
                     <div className="max-w-xl w-full pt-2">
-                        <h2 className="text-3xl md:text-5xl lg:text-[52px] text-[#4B3D37] mb-6 font-normal leading-[1.1]">
+                        <h2 className="text-3xl md:text-5xl lg:text-[52px] text-[#425042] mb-6 font-normal leading-[1.1]">
                             Our Commitment to Sustainability
                         </h2>
                         <p className="text-[#8D827C] text-base md:text-lg leading-relaxed font-light mt-6 sm:mt-8">
@@ -93,7 +93,10 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
                                 <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-200">{currentCardsData[0].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75">{currentCardsData[0].description}</p>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75 line-clamp-3">{currentCardsData[0].description}</p>
+                                <button className="mt-4 text-left text-sm font-medium underline tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 w-max" onClick={(e) => { e.stopPropagation(); setSelectedCardIndex(0); }}>
+                                    Read More
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -120,7 +123,10 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
                                 <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-200">{currentCardsData[1].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75">{currentCardsData[1].description}</p>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75 line-clamp-3">{currentCardsData[1].description}</p>
+                                <button className="mt-4 text-left text-sm font-medium underline tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 w-max" onClick={(e) => { e.stopPropagation(); setSelectedCardIndex(1); }}>
+                                    Read More
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -144,7 +150,10 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                             {/* Text state visible on hover */}
                             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white z-10 flex flex-col justify-end">
                                 <h3 className="text-2xl md:text-3xl font-medium mb-2 md:mb-3 translate-y-3 group-hover:translate-y-0 transition-transform duration-200">{currentCardsData[2].title}</h3>
-                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75">{currentCardsData[2].description}</p>
+                                <p className="text-white/80 translate-y-3 group-hover:translate-y-0 transition-transform duration-200 delay-75 line-clamp-3">{currentCardsData[2].description}</p>
+                                <button className="mt-4 text-left text-sm font-medium underline tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 w-max" onClick={(e) => { e.stopPropagation(); setSelectedCardIndex(2); }}>
+                                    Read More
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -154,7 +163,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
             {/* Mobile Layout - Swiper */}
             <div className="md:hidden block">
                 <div className="px-6 mb-10">
-                    <h2 className="text-3xl text-[#4B3D37] mb-4 font-normal leading-[1.3]">
+                    <h2 className="text-3xl text-[#425042] mb-4 font-normal leading-[1.3]">
                         Our Commitment to Sustainability
                     </h2>
                     <p className="text-[#8D827C] text-sm leading-relaxed font-light">
@@ -213,7 +222,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                             animate={{ y: 0, opacity: 1, scale: 1 }}
                             exit={{ y: 20, opacity: 0, scale: 0.95 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-2xl bg-[#FDFBF9] rounded-[24px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+                            className="relative w-full max-w-4xl bg-[#FDFBF9] rounded-[24px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Close Button */}

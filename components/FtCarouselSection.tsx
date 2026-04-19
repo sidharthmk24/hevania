@@ -149,9 +149,9 @@ export default function FtCarous({ images, content }: Props) {
                             </AnimatePresence>
 
                             <AnimatePresence>
-                                {hoveredIndex !== null && content.desktop[currentIndex][hoveredIndex]?.img && (
+                                {hoveredIndex !== null && content.desktop[0][hoveredIndex]?.img && (
                                     <motion.div
-                                        key={`hover-${currentIndex}-${hoveredIndex}`}
+                                        key={`hover-${hoveredIndex}`}
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
@@ -159,7 +159,7 @@ export default function FtCarous({ images, content }: Props) {
                                         className="absolute inset-0 w-full h-full z-[5]"
                                     >
                                         <Image
-                                            src={content.desktop[currentIndex][hoveredIndex].img!}
+                                            src={content.desktop[0][hoveredIndex].img!}
                                             alt="Hover"
                                             fill
                                             className="object-cover"
@@ -188,7 +188,7 @@ export default function FtCarous({ images, content }: Props) {
 
                         {/* Sections in a 3x2 Grid */}
                         <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 z-20">
-                            {content.desktop[currentIndex].map((section, index) => renderDesktopSection(section, index))}
+                            {content.desktop[0].map((section, index) => renderDesktopSection(section, index))}
                         </div>
                     </div>
 

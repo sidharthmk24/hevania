@@ -105,6 +105,7 @@ export default async function Home() {
       image: (cmsSlide?.image_url as string) || imagesBySection["hero"]?.[i] || slide.image,
       subtitle: (cmsSlide?.top_desc as string) || slide.subtitle,
       title: (cmsSlide?.heading as string) || slide.title,
+      bottom_subtitle: (cmsSlide?.bottom_subtitle as string) || slide.bottom_subtitle,
       buttons: [
         { text: (cmsSlide?.button_primary as string) || slide.buttons[0].text, primary: true },
         { text: (cmsSlide?.button_secondary as string) || slide.buttons[1].text, primary: false },

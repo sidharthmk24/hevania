@@ -83,8 +83,8 @@ export default function Footer() {
                         <h4 className="text-md uppercase text-[#425042] tracking-widest mb-8 font-semibold">Discovery</h4>
                         <ul className="space-y-4">
                             {[
+                                { name: "Home", href: "/" },
                                 { name: "The Atelier", href: "/about" },
-                                { name: "Curated Venues", href: "/#properties" },
                                 { name: "Event Journal", href: "/blog" },
                                 { name: "Private Viewings", href: "/contact" }
                             ].map((link) => (

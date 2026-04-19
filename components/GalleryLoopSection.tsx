@@ -20,12 +20,12 @@ const DEFAULT_IMAGES = [
   "/images/heroImages/carousel4.webp",
 ];
 
-export default function GalleryLoopSection({ 
-  images = DEFAULT_IMAGES, 
+export default function GalleryLoopSection({
+  images = DEFAULT_IMAGES,
   title = "Glimpses of Hevaniya",
   subtitle = "Explore the elegance and charm of our premium event spaces."
 }: GalleryLoopSectionProps) {
-  
+
   const logoItems = (images.length > 0 ? images : DEFAULT_IMAGES).map((src) => ({
     src,
     alt: "Gallery Image",
@@ -34,7 +34,7 @@ export default function GalleryLoopSection({
   return (
     <section className="pb-16 md:pb-32 w-full overflow-hidden">
       <div className="relative">
-        <LogoLoop 
+        <LogoLoop
           logos={logoItems}
           speed={35}
           logoHeight={340}
