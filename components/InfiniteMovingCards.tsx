@@ -13,6 +13,7 @@ export const InfiniteMovingCards = ({
         comment: string;
         name: string;
         rating: number;
+        image_url?: string;
     }[];
     direction?: "left" | "right";
     speed?: "fast" | "normal" | "slow";
@@ -48,24 +49,35 @@ export const InfiniteMovingCards = ({
                     >
                         <blockquote>
                             <div>
-                                <div className="relative z-20 flex flex-row items-center">
-                                    <span className="flex flex-row gap-5">
-                                        <div className="flex flex-col leading-8">
-                                            <div className="text-lg sm:text-xl text-customBrown font-freightNeoSemibold">{item.name}</div>
-                                            <div className="text-sm text-[#2F3E2F] flex">
-                                                {Array.from({ length: item.rating }).map((_, index) => (
-                                                    <span key={index} className="text-yellow-500">
-                                                        ★
-                                                    </span>
-                                                ))}
-                                                {Array.from({ length: 5 - item.rating }).map((_, index) => (
-                                                    <span key={index} className="text-gray-300">
-                                                        ★
-                                                    </span>
-                                                ))}
-                                            </div>
+                                <div className="relative z-20 flex flex-row items-center gap-4">
+                                    <div className="h-14 w-14 rounded-full overflow-hidden border border-[#2F3E2F]/10 shadow-sm shrink-0 bg-stone-100 flex items-center justify-center">
+                                        {item.image_url ? (
+                                            <img 
+                                                src={item.image_url} 
+                                                alt={item.name} 
+                                                className="h-full w-full object-cover transition-transform duration-500 hover:scale-110" 
+                                            />
+                                        ) : (
+                                            <span className="text-[#2F3E2F]/30 text-xl font-freightNeoSemibold">
+                                                {item.name.charAt(0)}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col leading-tight">
+                                        <div className="text-lg sm:text-xl text-customBrown font-freightNeoSemibold tracking-tight">{item.name}</div>
+                                        <div className="text-xs sm:text-sm text-[#2F3E2F]/70 flex mt-1">
+                                            {Array.from({ length: item.rating }).map((_, index) => (
+                                                <span key={index} className="text-yellow-500/90 text-xs">
+                                                    ★
+                                                </span>
+                                            ))}
+                                            {Array.from({ length: 5 - item.rating }).map((_, index) => (
+                                                <span key={index} className="text-gray-300 text-xs">
+                                                    ★
+                                                </span>
+                                            ))}
                                         </div>
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
                             <div className="mt-4 sm:mt-5">

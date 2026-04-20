@@ -149,7 +149,7 @@ export default function     HeroSection({ heroSlides, dynamicImages }: HeroSecti
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-bold ${currentSlide.bottom_subtitle ? "mb-4" : "mb-8"}`}
+                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-normal ${currentSlide.bottom_subtitle ? "mb-4" : "mb-8"}`}
                         >
                             {currentSlide.title}
                         </motion.h1>

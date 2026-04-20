@@ -40,8 +40,8 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-[#F5F5F0] pt-20 md:pt-20 md:pb-12 w-full z-10 border-t border-[#2F3E2F]/20">
-            <div className=" mx-auto px-8 md:px-16 lg:px-24 w-full">
+        <footer className="relative bg-[#F5F5F0] pt-20 pb-12 w-full z-10 border-t border-[#2F3E2F]/20">
+            <div className=" mx-auto px-6 md:px-16 lg:px-24 w-full">
 
                 {/* Top Section: Three Column Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24 md:mb-10 mb-5">
@@ -113,10 +113,10 @@ export default function Footer() {
                             </li>
                             <li className="flex flex-col gap-1">
                                 <span className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E]">Direct Line</span>
-                                +91 98765 43210
+                                <span className="text-[14px] font-light text-[#425042] hover:text-[#C6A75E] transition-colors">+91 8907 252255</span>
                             </li>
                             <li>
-                                <a href="mailto:inquiry@HEVANIYA.com" className="hover:text-[#2F3E2F] transition-colors">inquiry@HEVANIYA.com</a>
+                                <a href="mailto:jaijoer@hotmail.com" className="hover:text-[#C6A75E] transition-colors">info@hevaniya.com</a>
                             </li>
                         </ul>
                     </motion.div>
@@ -172,8 +172,8 @@ export default function Footer() {
                 {/* Bottom Section: Original Giant Text & Legal */}
                 <div className="w-full mt-32 md:mt-30 relative flex flex-col items-center">
                     {/* The giant text matching original specifications */}
-                    <div className="w-full flex items-center justify-center overflow-hidden mb-8 lg:mb-12">
-                        <span className="text-[20vw] lg:text-[18vw] font-light tracking-tighter text-[#425042] leading-[0.75] select-none">
+                    <div className="w-full flex items-center justify-center mb-8 lg:mb-12">
+                        <span className="text-[17vw] md:text-[18vw] lg:text-[18vw] font-light tracking-tighter text-[#425042] leading-[0.75] select-none whitespace-nowrap">
                             HEVANIYA
                         </span>
                     </div>

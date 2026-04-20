@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
+import WhatsappChatWidget from "@/components/WhatsappChatWidget";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -32,7 +33,7 @@ export default function RootLayout({
         className={`${aboreto.variable} antialiased bg-cream text-dark-forest font-sans`}
       >
         <ReactLenis root>
-
+          <WhatsappChatWidget/>
           <Loader />
           <main className="min-h-screen">
             {children}

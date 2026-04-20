@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import EnquiryModal from "./EnquiryModal";
 
 // ============= Types & Interfaces =============
 type Direction = "left" | "right";
@@ -44,6 +45,8 @@ export default function FtCarous({ images, content }: Props) {
     const [isAnimating, setIsAnimating] = useState(false);
     const [direction, setDirection] = useState<Direction>("right");
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProperty, setSelectedProperty] = useState("");
 
     const totalSlides = content.mobile.length;
     const desktopSlides = content.desktop.length;
@@ -76,17 +79,21 @@ export default function FtCarous({ images, content }: Props) {
     }, [handleTransition, currentIndex, hoveredIndex]); // Added hoveredIndex as a dependency
 
     // ============= Render Helpers =============
-    const renderDesktopSection = (section: ContentItem, index: number) => {
-        const isHovered = hoveredIndex === index;
+    const renderCard = (section: ContentItem, index: number, isMobile: boolean = false) => {
+        const isHovered = !isMobile && hoveredIndex === index;
 
         return (
             <div
                 key={index}
                 className="relative cursor-pointer group h-full w-full"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(index)}
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+                onClick={() => {
+                    setSelectedProperty(section.title);
+                    setIsModalOpen(true);
+                }}
             >
-                {/* Hover overlay */}
+                {/* Hover overlay - Subtle on mobile, active on desktop */}
                 <div 
                     className={`absolute inset-0 bg-black/40 transition-opacity duration-700 ${
                         isHovered ? "opacity-0" : "opacity-100"
@@ -94,24 +101,32 @@ export default function FtCarous({ images, content }: Props) {
                 />
 
                 {/* Section content - Center aligned in the square */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-white z-[1] text-center">
-                    <h2 className="font-serif text-white text-center text-xl md:text-2xl tracking-widest uppercase transition-all duration-500 group-hover:scale-105">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-white z-[1] text-center">
+                    <h2 className="font-serif text-white text-center text-[13px] sm:text-base md:text-2xl tracking-widest uppercase transition-all duration-500 group-hover:scale-105">
                         {section.title}
                     </h2>
                     
                     <div 
                         className={`overflow-hidden transition-all duration-700 ease-in-out ${
-                            isHovered ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                            isHovered || isMobile ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                         }`}
                     >
-                        <p className="font-light mt-4 text-cream/90 text-center text-sm leading-relaxed max-w-[250px] mx-auto">
+                        <p className="font-light mt-2 md:mt-4 text-cream/90 text-center text-[10px] md:text-sm leading-relaxed max-w-[200px] md:max-w-[250px] mx-auto">
                             {section.description}
                         </p>
-                        <div className="w-12 h-[1px] bg-muted-gold mx-auto mt-6" />
+                        <div className="w-8 md:w-12 h-[1px] bg-muted-gold mx-auto mt-4 md:mt-6" />
                     </div>
                 </div>
             </div>
         );
+    };
+
+    const renderDesktopSection = (section: ContentItem, index: number) => {
+        return renderCard(section, index, false);
+    };
+
+    const renderMobileSection = (section: ContentItem, index: number) => {
+        return renderCard(section, index, true);
     };
 
     return (
@@ -192,12 +207,54 @@ export default function FtCarous({ images, content }: Props) {
                         </div>
                     </div>
 
-                    {/* Mobile Version stays identical */}
-                    <div className="block md:hidden relative overflow-hidden shadow-xl min-h-[70vh]">
-                        {/* ... Mobile content ... */}
+                    {/* Mobile Version - 2 Column Grid */}
+                    <div className="block md:hidden relative overflow-hidden shadow-xl min-h-[90vh] h-[135vh]">
+                        {/* Background Images for Mobile */}
+                        <div className="absolute inset-0">
+                            <AnimatePresence mode="popLayout">
+                                {images.mobile.map((src, index) => (
+                                    currentIndex === index && (
+                                        <motion.div
+                                            key={`slide-mobile-${index}`}
+                                            initial={{ opacity: 0, scale: 1.05 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.8 }}
+                                            className="absolute inset-0 w-full h-full"
+                                        >
+                                            <Image src={src} alt="Slide" fill className="object-cover" loading="lazy" unoptimized />
+                                        </motion.div>
+                                    )
+                                ))}
+                            </AnimatePresence>
+                            <div className="absolute inset-0 bg-black/50 z-10" />
+                        </div>
+
+                        {/* Mobile Grid Lines */}
+                        <div className="absolute inset-0 pointer-events-none z-30">
+                            <div className="flex h-full">
+                                <div className="flex-1 border-r border-white/20"></div>
+                                <div className="flex-1"></div>
+                            </div>
+                            <div className="absolute inset-0 flex flex-col">
+                                <div className="flex-1 border-b border-white/20"></div>
+                                <div className="flex-1 border-b border-white/20"></div>
+                                <div className="flex-1"></div>
+                            </div>
+                        </div>
+
+                        {/* Mobile Cards - 2x3 Grid */}
+                        <div className="absolute inset-0 grid grid-cols-2 grid-rows-3 z-20">
+                            {content.mobile.map((section, index) => renderMobileSection(section, index))}
+                        </div>
                     </div>
                 </div>
             </motion.div>
+            <EnquiryModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                propertyName={selectedProperty}
+            />
         </section>
     );
 }

@@ -28,16 +28,16 @@ export default function FeaturesSection({ features, heading, variant = "center",
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <section className="py-10 lg:pt-20 font-host">
+        <section className="pt-10 lg:pt-20 font-host">
             <div className=" mx-auto px-6 lg:px-20  ">
                 {/* Header */}
                 {variant === "center" ? (
-                    <h2 className="text-2xl md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-10 tracking-tight leading-tight">
+                    <h2 className="text-[24px] md:text-5xl lg:text-6xl text-[#425042] font-normal md:text-center mb-16 lg:mb-10 tracking-tight leading-tight">
                         {heading}
                     </h2>
                 ) : (
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-16 lg:mb-28">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight">
+                        <h2 className="text-[24px] md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight">
                             {heading}
                         </h2>
                         <Link href="/contact" className="flex items-center gap-2 px-4 py-5 border border-[#425042] text-[#425042] hover:bg-[#425042]/10 transition-colors uppercase tracking-widest text-sm font-medium shrink-0">

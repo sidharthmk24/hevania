@@ -11,6 +11,7 @@ interface TestimonialData {
   name: string;
   comment: string;
   rating: number;
+  image_url?: string;
 }
 
 /**

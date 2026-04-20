@@ -66,10 +66,10 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                 {/* Left Column */}
                 <div className="flex flex-col justify-start h-full min-h-[500px]">
                     <div className="max-w-xl w-full pt-2">
-                        <h2 className="text-3xl md:text-5xl lg:text-[52px] text-[#425042] mb-6 font-normal leading-[1.1]">
+                        <h2 className="text-[24px] md:text-5xl lg:text-[52px] text-[#425042] mb-6 font-normal leading-[1.1]">
                             Our Commitment to Sustainability
                         </h2>
-                        <p className="text-[#8D827C] text-base md:text-lg leading-relaxed font-light mt-6 sm:mt-8">
+                        <p className="text-[#425042] text-base md:text-lg leading-relaxed font-light mt-6 sm:mt-8">
                             Our commitment to sustainability drives us to create eco-friendly, energy-efficient spaces that benefit both our clients and the planet.
                         </p>
                     </div>
@@ -163,12 +163,12 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
             {/* Mobile Layout - Swiper */}
             <div className="md:hidden block">
                 <div className="px-6 mb-10">
-                    <h2 className="text-3xl text-[#425042] mb-4 font-normal leading-[1.3]">
+                    <h2 className="text-[24px] text-[#425042] mb-4 font-normal leading-[1.3]">
                         Our Commitment to Sustainability
                     </h2>
-                    <p className="text-[#8D827C] text-sm leading-relaxed font-light">
+                    <p className="text-[#425042] text-xs leading-relaxed font-light">
                         Our commitment to sustainability drives us to create eco-friendly, energy-efficient spaces that benefit both our clients and the planet.
-                    </p>
+                    </p>    
                 </div>
 
                 <div className="relative w-full overflow-visible [&_.swiper]:overflow-visible [&_.swiper-slide]:transition-all [&_.swiper-slide]:duration-300 [&_.swiper-slide]:ease-out [&_.swiper-slide]:scale-[0.85] [&_.swiper-slide]:opacity-50 [&_.swiper-slide-active]:scale-100 [&_.swiper-slide-active]:opacity-100 [&_.swiper-slide]:rounded-[20px] [&_.swiper-slide]:overflow-hidden [&_.swiper-slide]:h-auto">
@@ -222,8 +222,9 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                             animate={{ y: 0, opacity: 1, scale: 1 }}
                             exit={{ y: 20, opacity: 0, scale: 0.95 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-4xl bg-[#FDFBF9] rounded-[24px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+                            className="relative w-full max-w-6xl bg-[#FDFBF9] rounded-[24px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
                             onClick={(e) => e.stopPropagation()}
+                            data-lenis-prevent="true"
                         >
                             {/* Close Button */}
                             <button
@@ -248,7 +249,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
 
                             {/* Bottom Half: Content */}
                             <div className="p-6 sm:p-8 md:p-10 bg-white  -mt-6 relative z-10 flex flex-col min-h-[50%] flex-1 overflow-hidden">
-                                <div className="flex-grow overflow-y-auto pr-2">
+                                <div className="flex-grow overflow-y-auto pr-2" data-lenis-prevent="true">
                                     <h3 className="text-3xl sm:text-4xl font-normal text-[#425042] mb-4">
                                         {currentCardsData[selectedCardIndex].title}
                                     </h3>
@@ -259,7 +260,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
 
                                 {/* Next Story Footer inside Modal */}
                                 <div
-                                    className="pt-6 mt-6 border-t border-[#8D827C]/20 flex items-center justify-end group cursor-pointer w-full shrink-0"
+                                    className="pt-3 mt-3 border-t border-[#8D827C]/20 flex items-center justify-end group cursor-pointer w-full shrink-0"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         const nextIndex = (selectedCardIndex + 1) % currentCardsData.length;

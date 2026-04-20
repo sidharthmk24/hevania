@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, Variants, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export interface NavbarProps {
     theme?: "light" | "dark";
@@ -111,6 +112,9 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
                         onClick={() => setMobileMenuOpen(false)}
                     >
                         HEVANIYA
+
+                        {/* <Image className="h-10 w-10" src="/images/logoNoBg.png" alt="Logo" width={100} height={100} /> */}
+
                     </Link>
 
                     {/* Desktop Menu */}
