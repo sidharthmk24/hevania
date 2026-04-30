@@ -33,6 +33,16 @@ export default function GalleryLoopSection({
 
   return (
     <section className="pb-16 md:pb-32 w-full overflow-hidden">
+      <div className="text-center px-4 mb-10 md:mb-16">
+        <h2 className="text-[24px] md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight mb-4">
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="text-sm md:text-lg text-[#425042]/70 font-light max-w-2xl mx-auto">
+            {subtitle}
+          </p>
+        )}
+      </div>
       <div className="relative">
         <LogoLoop
           logos={logoItems}
