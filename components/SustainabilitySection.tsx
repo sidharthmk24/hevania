@@ -36,9 +36,11 @@ interface SustainabilitySectionProps {
     dynamicCards?: CardData[];
     /** Legacy: just image URLs */
     dynamicImages?: string[];
+    heading?: string;
+    subheading?: string;
 }
 
-const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySectionProps) => {
+const SustainabilitySection = ({ dynamicCards, dynamicImages, heading, subheading }: SustainabilitySectionProps) => {
     const currentCardsData = DEFAULT_CARDS.map((card, idx) => ({
         image: dynamicCards?.[idx]?.image || dynamicImages?.[idx] || card.image,
         title: dynamicCards?.[idx]?.title || card.title,
@@ -67,10 +69,10 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
                 <div className="flex flex-col justify-start h-full min-h-[500px]">
                     <div className="max-w-xl w-full pt-2">
                         <h2 className="text-[24px] md:text-5xl lg:text-[52px] text-[#425042] mb-6 font-normal leading-[1.1]">
-                            Our Commitment to Sustainability
+                            {heading || "Our Commitment to Sustainability"}
                         </h2>
-                        <p className="text-[#425042] text-base md:text-lg leading-relaxed font-light mt-6 sm:mt-8">
-                            Our commitment to sustainability drives us to create eco-friendly, energy-efficient spaces that benefit both our clients and the planet.
+                        <p className="text-[#425042] text-base md:text-lg leading-relaxed font-light mt-6 sm:mt-8 whitespace-pre-line">
+                            {subheading || "Our commitment to sustainability drives us to create eco-friendly, energy-efficient spaces that benefit both our clients and the planet."}
                         </p>
                     </div>
 
@@ -164,10 +166,10 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages }: SustainabilitySe
             <div className="md:hidden block">
                 <div className="px-6 mb-10">
                     <h2 className="text-[24px] text-[#425042] mb-4 font-normal leading-[1.3]">
-                        Our Commitment to Sustainability
+                        {heading || "Our Commitment to Sustainability"}
                     </h2>
-                    <p className="text-[#425042] text-xs leading-relaxed font-light">
-                        Our commitment to sustainability drives us to create eco-friendly, energy-efficient spaces that benefit both our clients and the planet.
+                    <p className="text-[#425042] text-xs leading-relaxed font-light whitespace-pre-line">
+                        {subheading || "Our commitment to sustainability drives us to create eco-friendly, energy-efficient spaces that benefit both our clients and the planet."}
                     </p>    
                 </div>
 

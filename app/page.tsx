@@ -186,8 +186,19 @@ export default async function Home() {
     .map((key) => (logoLoopContent[key] as Record<string, unknown>)?.image_url as string)
     .filter(Boolean);
 
+  // ——— Parse CMS Content ———
+  const heroData = sectionContent["hero"]?.["content"] as any;
+  const experienceData = sectionContent["experience"]?.["content"] as any;
+  const glimpsesData = sectionContent["glimpses"]?.["content"] as any;
+  const carouselData = sectionContent["carousel"]?.["content"] as any;
+  const journeyData = sectionContent["journey"]?.["content"] as any;
+  const featuresData = sectionContent["features"]?.["content"] as any;
+  const sustainabilityData = sectionContent["sustainability"]?.["content"] as any;
+  const testimonialsData = sectionContent["testimonials"]?.["content"] as any;
+  const faqData = sectionContent["faq"]?.["content"] as any;
+
   // ——— Features ———
-  const FEATURES: FeatureItem[] = [
+  const parsedFeatures: FeatureItem[] = featuresData?.features || [
     { icon: "SwimmingPool", label: "Scenic Open-Air Ambience" },
     { icon: "GamesArea", label: "Designer Lighting Setup" },
     { icon: "Gymnasium", label: "Built-in Sound & Music System" },
@@ -200,43 +211,42 @@ export default async function Home() {
   return (
     <>
       <Navbar />
-      <HeroSection heroSlides={heroSlides} />
+      <HeroSection heroSlides={heroSlides} content={heroData} />
       {/* <div className="pb-20">
         <ScrollFtSection data={scrollData} />
 
       </div> */}
-      <ExperienceSection image1={experienceImages[0]} image2={experienceImages[1]} />
+      <ExperienceSection image1={experienceImages[0]} image2={experienceImages[1]} content={experienceData} />
 
-      <GalleryLoopSection images={logoLoopImages.length > 0 ? logoLoopImages : undefined} />
-
-
-
-
-
+      <GalleryLoopSection 
+        images={logoLoopImages.length > 0 ? logoLoopImages : undefined} 
+        heading={glimpsesData?.heading}
+        subheading={glimpsesData?.subheading}
+      />
 
       <div className=" mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-0">
-        <h2 className="text-2xl md:text-4xl lg:text-6xl tracking-wide text-[#425042] md:text-center mb-10 lg:mb-10 font-normal w-full leading-[1.1]">
-          <span className="font-thin">Begin Your Journey</span>
+        <h2 className="text-2xl md:text-4xl lg:text-6xl tracking-wide text-[#425042] md:text-center mb-10 lg:mb-10 font-normal w-full leading-[1.1] whitespace-pre-line">
+          <span className="font-thin">{journeyData?.heading || "Begin Your Journey"}</span>
           <p className="text-base md:text-md leading-relaxed font-light mt-6 sm:mt-8">
-            Ready to see if Hevaniya is right for your celebration? We&apos;d love to meet you and show you what we&apos;ve created.
+            {journeyData?.description || "Ready to see if Hevaniya is right for your celebration? We'd love to meet you and show you what we've created."}
           </p>
         </h2>
       </div>
 
-      <FtCarouselSection images={images} content={content} />
+      <FtCarouselSection images={images} content={content} heading={carouselData?.heading} subheading={carouselData?.subheading} />
 
-      <FeaturesSection
+      {/*   <FeaturesSection
         variant="left"
-        features={FEATURES}
-        heading={<><span className="font-thin">Everything Your Looking For</span></>}
+        features={parsedFeatures}
+        heading={<><span className="font-thin">{featuresData?.heading || "Everything Your Looking For"}</span></>}
         completed={false}
-      />
+      /> */}
 
-      <SustainabilitySection dynamicCards={sustainCards} />
+      <SustainabilitySection dynamicCards={sustainCards} heading={sustainabilityData?.heading} subheading={sustainabilityData?.subheading} />
 
-      <Testimonials />
+      <Testimonials heading={testimonialsData?.heading} />
 
-      <FaqSection />
+      <FaqSection heading={faqData?.heading} subheading={faqData?.subheading} faqs={faqData?.faqs} />
     </>
   );
 }

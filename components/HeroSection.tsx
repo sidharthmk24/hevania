@@ -52,9 +52,15 @@ interface HeroSectionProps {
     heroSlides?: HeroSlide[];
     /** Legacy: just image URLs (still supported) */
     dynamicImages?: string[];
+    /** Global content override */
+    content?: {
+        topHeading?: string;
+        heading?: string;
+        subheading?: string;
+    };
 }
 
-export default function     HeroSection({ heroSlides, dynamicImages }: HeroSectionProps) {
+export default function HeroSection({ heroSlides, dynamicImages, content }: HeroSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -143,24 +149,24 @@ export default function     HeroSection({ heroSlides, dynamicImages }: HeroSecti
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-cream/90 text-sm md:text-2xl uppercase mb-4 font-semibold tracking-[0.2em]"
                         >
-                            {currentSlide.subtitle}
+                            {content?.topHeading || currentSlide.subtitle}
                         </motion.p>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-normal ${currentSlide.bottom_subtitle ? "mb-4" : "mb-8"}`}
+                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-normal ${(content?.subheading || currentSlide.bottom_subtitle) ? "mb-4" : "mb-8"}`}
                         >
-                            {currentSlide.title}
+                            {content?.heading || currentSlide.title}
                         </motion.h1>
-                        {currentSlide.bottom_subtitle && (
+                        {(content?.subheading || currentSlide.bottom_subtitle) && (
                             <motion.p
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 className="text-cream/90 text-sm md:text-xl font-light mb-8 max-w-3xl mx-auto"
                             >
-                                {currentSlide.bottom_subtitle}
+                                {content?.subheading || currentSlide.bottom_subtitle}
                             </motion.p>
                         )}
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

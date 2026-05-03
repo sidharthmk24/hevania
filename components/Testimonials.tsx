@@ -14,6 +14,10 @@ interface TestimonialData {
   image_url?: string;
 }
 
+interface TestimonialsProps {
+  heading?: string;
+}
+
 /**
  * Testimonial Component
  * Displays client testimonials in an infinite scrolling carousel.
@@ -21,7 +25,7 @@ interface TestimonialData {
  * 1. Header with title
  * 2. Scrolling testimonials in both directions
  */
-export default function Testimonial(): React.ReactElement {
+export default function Testimonial({ heading }: TestimonialsProps = {}): React.ReactElement {
   const [testimonialData, setTestimonialData] = useState<TestimonialData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -58,8 +62,8 @@ export default function Testimonial(): React.ReactElement {
         {/* Testimonial Header Section */}
         <header className="flex items-center justify-center flex-col lg:mb-10 mb-9 px-4 md:px-0 text-center">
           <h2 className="sr-only">Client Testimonials</h2>
-          <h2 className=" text-[1.5rem] sm:text-[1.5rem] md:text-[2.5rem] lg2:text-[3.5rem] 2xl:text-[5rem] leading-[28px] md:leading-[72px] xl:leading-[67px] 2xl:leading-[90px] ">
-            What Our Clients Say
+          <h2 className=" text-[1.5rem] sm:text-[1.5rem] md:text-[2.5rem] lg2:text-[3.5rem] 2xl:text-[5rem] leading-[28px] md:leading-[72px] xl:leading-[67px] 2xl:leading-[90px] whitespace-pre-line">
+            {heading || "What Our Clients Say"}
           </h2>
         </header>
 

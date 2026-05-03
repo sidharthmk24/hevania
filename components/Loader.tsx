@@ -17,7 +17,7 @@ export default function Loader() {
 
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, 2200);
 
         // Allow scrolling after exit animation finishes
         const overflowTimer = setTimeout(() => {
@@ -25,7 +25,7 @@ export default function Loader() {
             if (lenis) {
                 lenis.start();
             }
-        }, 3500);
+        }, 4000);
 
         return () => {
             clearTimeout(timer);
@@ -37,29 +37,54 @@ export default function Loader() {
         };
     }, [lenis]);
 
+    const HEVANIYA = "HEVANIYA".split("");
+
     return (
         <AnimatePresence>
             {isLoading && (
-                <motion.div
-                    className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream text-dark-forest"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.5, ease: "easeInOut" }}
-                >
-                    <motion.h1
-                        className="text-4xl md:text-6xl font-serif tracking-widest text-dark-forest mb-8 relative"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1.35 }}
-                        transition={{
-                            duration: 1.5,
-                            ease: "easeOut",
-                        }}
+                <div className="fixed inset-0 z-[100] pointer-events-none">
+                    {/* 5-Panel Sliding Curtain */}
+                    <div className="absolute inset-0 flex w-full h-full">
+                        {[0, 1, 2, 3, 4].map((i) => (
+                            <motion.div
+                                key={i}
+                                className="h-full w-1/5 bg-[#161C16] relative border-r border-[#EDEAE3]/[0.03] last:border-r-0"
+                                initial={{ y: "0%" }}
+                                exit={{ y: "-100%" }}
+                                transition={{ 
+                                    duration: 1.2, 
+                                    ease: [0.76, 0, 0.24, 1], 
+                                    delay: 0.15 + (i * 0.05) 
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Text Wrapper */}
+                    <motion.div
+                        className="absolute inset-0 flex flex-col items-center justify-center pl-[0.4em]"
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
                     >
-                        HEVANIYA
-                    </motion.h1>
-
-
-                </motion.div>
+                        <div className="overflow-hidden flex">
+                            {HEVANIYA.map((letter, i) => (
+                                <motion.span
+                                    key={i}
+                                    className="inline-block text-[#EDEAE3] text-2xl md:text-4xl lg:text-5xl font-serif tracking-[0.4em] uppercase"
+                                    initial={{ y: "100%" }}
+                                    animate={{ y: "0%" }}
+                                    transition={{
+                                        duration: 1.2,
+                                        ease: [0.76, 0, 0.24, 1],
+                                        delay: i * 0.06,
+                                    }}
+                                >
+                                    {letter}
+                                </motion.span>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
             )}
         </AnimatePresence>
     );

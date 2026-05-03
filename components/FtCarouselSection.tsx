@@ -26,6 +26,8 @@ interface Props {
         desktop: ContentItem[][];
         mobile: ContentItem[];
     };
+    heading?: string;
+    subheading?: string;
 }
 
 // ============= Constants =============
@@ -39,7 +41,7 @@ const CAROUSEL_CONFIG = {
     },
 };
 
-export default function FtCarous({ images, content }: Props) {
+export default function FtCarous({ images, content, heading, subheading }: Props) {
     // ============= State =============
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -130,7 +132,21 @@ export default function FtCarous({ images, content }: Props) {
     };
 
     return (
-        <section className="relative w-full">
+        <section className="relative w-full pb-10">
+            {(heading || subheading) && (
+                <div className="text-center px-4 mb-10 md:mb-16 pt-10">
+                    {heading && (
+                        <h2 className="text-[24px] md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight mb-4">
+                            {heading}
+                        </h2>
+                    )}
+                    {subheading && (
+                        <p className="text-sm md:text-lg text-[#425042]/70 font-light max-w-2xl mx-auto">
+                            {subheading}
+                        </p>
+                    )}
+                </div>
+            )}
             {/* Navigation Arrows */}
             <div className="hidden md:flex absolute inset-x-0 top-1/2 -translate-y-1/2 z-30 px-6 justify-between pointer-events-none">
                 {/* Your arrow buttons go here */}

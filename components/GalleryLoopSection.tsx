@@ -5,8 +5,8 @@ import LogoLoop from "./LogoLoop";
 
 interface GalleryLoopSectionProps {
   images?: string[];
-  title?: string;
-  subtitle?: string;
+  heading?: string;
+  subheading?: string;
 }
 
 const DEFAULT_IMAGES = [
@@ -22,8 +22,8 @@ const DEFAULT_IMAGES = [
 
 export default function GalleryLoopSection({
   images = DEFAULT_IMAGES,
-  title = "Glimpses of Hevaniya",
-  subtitle = "Explore the elegance and charm of our premium event spaces."
+  heading = "Glimpses of Hevaniya",
+  subheading = "Explore the elegance and charm of our premium event spaces."
 }: GalleryLoopSectionProps) {
 
   const logoItems = (images.length > 0 ? images : DEFAULT_IMAGES).map((src) => ({
@@ -35,11 +35,11 @@ export default function GalleryLoopSection({
     <section className="pb-16 md:pb-32 w-full overflow-hidden">
       <div className="text-center px-4 mb-10 md:mb-16">
         <h2 className="text-[24px] md:text-5xl lg:text-6xl text-[#425042] font-normal tracking-tight leading-tight mb-4">
-          {title}
+          {heading}
         </h2>
-        {subtitle && (
+        {subheading && (
           <p className="text-sm md:text-lg text-[#425042]/70 font-light max-w-2xl mx-auto">
-            {subtitle}
+            {subheading}
           </p>
         )}
       </div>

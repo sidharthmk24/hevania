@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import EnquiryModal from "./EnquiryModal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,195 +13,273 @@ if (typeof window !== "undefined") {
 interface ExperienceSectionProps {
     image1?: string;
     image2?: string;
+    content?: {
+        heading?: string;
+        subheading?: string;
+        description?: string;
+        metrics?: { value: string; label: string }[];
+        tags?: string;
+    };
 }
 
-export default function ExperienceSection({ image1, image2 }: ExperienceSectionProps) {
+export default function ExperienceSection({ image1, image2, content }: ExperienceSectionProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
     const img1Ref = useRef<HTMLDivElement>(null);
     const img2Ref = useRef<HTMLDivElement>(null);
-    const revealRefs = useRef<HTMLElement[]>([]);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const panelRefs = useRef<HTMLElement[]>([]);
 
-    const addReveal = (el: HTMLElement | null) => {
-        if (el && !revealRefs.current.includes(el)) revealRefs.current.push(el);
+    const addPanel = (el: HTMLElement | null) => {
+        if (el && !panelRefs.current.includes(el)) panelRefs.current.push(el);
     };
 
     useEffect(() => {
-        let ctx = gsap.context(() => {
-            gsap.from(revealRefs.current, {
-                opacity: 0,
-                y: 24,
-                stagger: 0.1,
-                duration: 0.9,
-                ease: "power3.out",
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top 78%",
                 },
             });
 
+            tl.from(headerRef.current, {
+                opacity: 0,
+                y: 20,
+                duration: 0.9,
+                ease: "power3.out",
+            });
+
+            tl.from(panelRefs.current, {
+                opacity: 0,
+                y: 22,
+                stagger: 0.1,
+                duration: 0.85,
+                ease: "power3.out",
+            }, "-=0.5");
+
             gsap.to(img1Ref.current, {
-                y: 30,
+                y: 45,
                 ease: "none",
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top bottom",
                     end: "bottom top",
-                    scrub: 1,
+                    scrub: 1.4,
                 },
             });
 
             gsap.to(img2Ref.current, {
-                y: -20,
+                y: -30,
                 ease: "none",
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top bottom",
                     end: "bottom top",
-                    scrub: 1,
+                    scrub: 1.4,
                 },
             });
+
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={sectionRef} className="w-full bg-[#F5F3EE] py-20 md:py-28">
-            <div className="mx-auto max-w-[1320px] px-6 md:px-10 lg:px-16">
+        <section
+            ref={sectionRef}
+            className="w-full bg-[#F7F5F0] py-24 md:py-36"
+            style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+        >
+            <div className="mx-auto  px-6 md:px-12 lg:px-20">
 
-                {/* ── Top header row ─────────────────────────────── */}
-                <div className="grid grid-cols-12 gap-4 mb-14 md:mb-20 border-t border-[#2F3E2F]/12 pt-8">
-
-                    <div
-                        ref={addReveal}
-                        className="col-span-12 md:col-span-3 flex items-center gap-2.5 self-start"
-                    >
-                        <span className="h-px w-6 bg-[#2F3E2F]/35 shrink-0" />
-                        <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#2F3E2F]/45 font-medium">
-                            Our Philosophy
-                        </span>
-                    </div>
-
-                    <h2
-                        ref={addReveal}
-                        className="col-span-12 md:col-span-6 text-[2.1rem] md:text-[2.9rem] lg:text-[3.4rem] font-light tracking-[-0.02em] text-[#1C2B1C] leading-[1.06]"
-                    >
-                        Where Exceptional<br />
-                        Experiences<br />
-                        <span className="text-[#2F3E2F]/40">Take Shape</span>
-                    </h2>
-
-                    <div
-                        ref={addReveal}
-                        className="col-span-12 md:col-span-3 flex items-start justify-end"
-                    >
+                {/* ── Centered header ─────────────────────────────── */}
+                <div ref={headerRef} className="text-center mb-16 md:mb-20">
+                    <div className="flex items-center justify-center gap-4 mb-7">
+                        <span className="block w-8 h-px bg-[#2C3A2C]/30" />
                         <span
-                            className="text-[4.5rem] font-thin leading-none text-[#2F3E2F]/[0.09] tracking-tighter select-none"
-                            aria-hidden="true"
+                            className="text-[0.58rem] tracking-[0.32em] uppercase text-[#2C3A2C]/45 font-medium"
+                            style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
                         >
-                            01
+                            {content?.heading || "Our Philosophy"}
                         </span>
+                        <span className="block w-8 h-px bg-[#2C3A2C]/30" />
                     </div>
+                    <h2
+                        className="font-light tracking-[-0.03em] leading-[1.02] text-[#1A2A1A] whitespace-pre-line"
+                        style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}
+                    >
+                        {content?.subheading ? (
+                            <span dangerouslySetInnerHTML={{ __html: content.subheading.replace(/\n/g, '<br/>') }} />
+                        ) : (
+                            <>
+                                Where Exceptional Experiences <br /> Takes Shape
+
+                            </>
+                        )}
+                    </h2>
                 </div>
 
-                {/* ── Main content grid ──────────────────────────── */}
-                <div className="grid grid-cols-12 gap-4 md:gap-6 items-start">
-
-                    {/* Col A — Tall primary image */}
-                    <div ref={img1Ref} className="col-span-12 md:col-span-5 relative">
-                        <div className="relative w-full aspect-[3/4] overflow-hidden">
+                {/* ── Main mosaic grid ─────────────────────────────── */}
+                <div
+                    className="grid gap-0.5"
+                    style={{ gridTemplateColumns: "1fr 1fr 1fr", gridTemplateRows: "auto auto" }}
+                >
+                    {/* A — Primary image, spans both rows */}
+                    <div
+                        ref={addPanel}
+                        className="relative overflow-hidden"
+                        style={{ gridColumn: "1", gridRow: "1 / 3" }}
+                    >
+                        <div
+                            ref={img1Ref}
+                            className="relative w-full h-full"
+                            style={{ aspectRatio: "3/4" }}
+                        >
                             <Image
                                 src={image1 || "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80"}
-                                alt="Luxury bedroom interior"
+                                alt="Luxury interior"
                                 fill
-                                className="object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
-                                sizes="(max-width: 768px) 100vw, 40vw"
+                                className="object-cover object-center transition-transform duration-700 hover:scale-[1.04]"
+                                sizes="(max-width: 768px) 100vw, 33vw"
                                 priority
                             />
-                            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/40 to-transparent">
-                                <p className="text-[0.62rem] tracking-[0.22em] uppercase text-white/70 font-medium">
-                                    Living Spaces
-                                </p>
-                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A0A]/42 via-transparent to-transparent" />
+                          
                         </div>
                     </div>
 
-                    {/* Col B — Text content */}
+                    {/* B — Text + stats panel */}
                     <div
-                        ref={addReveal}
-                        className="col-span-12 md:col-span-4 flex flex-col gap-8 pt-0 md:pt-3 md:px-4 lg:px-6"
+                        ref={addPanel}
+                        className="bg-[#EDEAE3] flex flex-col justify-between"
+                        style={{ gridColumn: "2", gridRow: "1", padding: "48px 40px" }}
                     >
                         <div className="space-y-5">
-                            <p className="text-[1rem] md:text-[1.05rem] leading-[1.8] text-[#2F3E2F]/70 font-light tracking-wide">
-                                They unfold seamlessly — & take your breath away.
-                            </p>
-                            <div className="h-px w-8 bg-[#2F3E2F]/18" />
-                            <p className="text-[1rem] md:text-[1.05rem] leading-[1.8] text-[#2F3E2F]/50 font-light tracking-wide">
-                                The truly exceptional moments are immersive experiences — unlike any other.
+                            <p
+                                className="text-[1.03rem] leading-[1.88] font-light tracking-[0.01em] whitespace-pre-line"
+                                style={{ color: "rgba(44,58,44,0.68)" }}
+                            >
+                                {content?.description || (
+                                    <>
+                                        They unfold seamlessly — and take your breath away.
+                                        <br/><br/>
+                                        Curated with obsessive attention to detail and a reverence for enduring craft.
+                                    </>
+                                )}
                             </p>
                         </div>
 
-                        {/* Stat strip */}
-                        <div className="flex items-center gap-4 border border-[#2F3E2F]/10 px-5 py-4 w-fit">
-                            <div>
-                                <p className="text-[1.6rem] font-light text-[#1C2B1C] leading-none tracking-tight">200+</p>
-                                <p className="text-[0.62rem] tracking-[0.2em] uppercase text-[#2F3E2F]/45 mt-1 font-medium">
-                                    Curated Spaces
-                                </p>
-                            </div>
-                            <div className="w-px h-10 bg-[#2F3E2F]/12 mx-2" />
-                            <div>
-                                <p className="text-[1.6rem] font-light text-[#1C2B1C] leading-none tracking-tight">12</p>
-                                <p className="text-[0.62rem] tracking-[0.2em] uppercase text-[#2F3E2F]/45 mt-1 font-medium">
-                                    Countries
-                                </p>
-                            </div>
+                        <div className="flex flex-wrap justify-center items-stretch mt-10 border border-[#2C3A2C]/12 bg-[#2C3A2C]/12 gap-px overflow-hidden">
+                            {(content?.metrics && content.metrics.length > 0 ? content.metrics : [
+                                { value: "200+", label: "Curated Spaces" },
+                                { value: "12", label: "Countries" }
+                            ]).map((metric, i) => (
+                                <div 
+                                    key={i} 
+                                    className="px-4 lg:px-7 py-5 flex-1 min-w-[40%] md:min-w-[20%] md:max-w-[25%] flex flex-col justify-center items-center text-center bg-[#EDEAE3]"
+                                >
+                                    <p
+                                        className="text-[1.95rem] font-light leading-none tracking-[-0.03em]"
+                                        style={{ color: "#1A2A1A" }}
+                                    >
+                                        {metric.value.replace(/[^0-9]/g, '')}
+                                        <span className="text-[1rem]" style={{ color: "rgba(44,58,44,0.35)" }}>
+                                            {metric.value.replace(/[0-9]/g, '')}
+                                        </span>
+                                    </p>
+                                    <p
+                                        className="text-[0.58rem] tracking-[0.26em] uppercase mt-2 font-medium"
+                                        style={{
+                                            color: "rgba(44,58,44,0.38)",
+                                            fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+                                        }}
+                                    >
+                                        {metric.label}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
-
-                        {/* CTA */}
-                        <a href="#" className="group inline-flex items-center gap-3 w-fit mt-2">
-                            <span className="text-[0.68rem] tracking-[0.24em] uppercase text-[#2F3E2F]/60 font-medium transition-colors duration-300 group-hover:text-[#2F3E2F]">
-                                Explore More
-                            </span>
-                            <span className="block h-px w-7 bg-[#2F3E2F]/35 transition-all duration-300 group-hover:w-12 group-hover:bg-[#2F3E2F]" />
-                        </a>
                     </div>
 
-                    {/* Col C — Secondary image */}
-                    <div ref={img2Ref} className="col-span-12 md:col-span-3 relative mt-0 md:mt-8">
-                        <div className="relative w-full aspect-[3/4] overflow-hidden">
+                    {/* C — Secondary image */}
+                    <div
+                        ref={addPanel}
+                        className="relative overflow-hidden"
+                        style={{ gridColumn: "3", gridRow: "1" }}
+                    >
+                        <div
+                            ref={img2Ref}
+                            className="relative w-full h-full"
+                            style={{ minHeight: "260px" }}
+                        >
                             <Image
                                 src={image2 || "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"}
-                                alt="Modern luxury living space"
+                                alt="Luxury retreat"
                                 fill
-                                className="object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
-                                sizes="(max-width: 768px) 100vw, 22vw"
+                                className="object-cover object-center transition-transform duration-700 hover:scale-[1.04]"
+                                sizes="(max-width: 768px) 100vw, 25vw"
                             />
-                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/40 to-transparent">
-                                <p className="text-[0.62rem] tracking-[0.22em] uppercase text-white/70 font-medium">
-                                    Retreats          
-                                </p>
-                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A0A]/42 via-transparent to-transparent" />
+                           
                         </div>
                     </div>
 
-                    {/* Bottom tag strip — spans text + secondary image cols */}
+                    {/* D — CTA panel */}
                     <div
-                        ref={addReveal}
-                        className="col-span-12 md:col-span-7 md:col-start-6 flex flex-wrap gap-2.5 pt-4 md:pt-6 border-t border-[#2F3E2F]/10"
+                        ref={addPanel}
+                        className="bg-[#E8E4DC] flex items-end cursor-pointer group hover:bg-[#E2DECA] transition-colors duration-500"
+                        style={{ gridColumn: "2", gridRow: "2", padding: "36px 40px" }}
+                        onClick={() => setIsModalOpen(true)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsModalOpen(true); } }}
                     >
-                        {["Interior Design", "Architecture", "Bespoke Stays", "Luxury Living", "Curated Art"].map((tag) => (
+                        <div className="inline-flex items-center gap-4 w-fit focus:outline-none">
                             <span
-                                key={tag}
-                                className="text-[0.63rem] tracking-[0.18em] uppercase text-[#2F3E2F]/45 font-medium border border-[#2F3E2F]/12 px-3 py-1.5 hover:border-[#2F3E2F]/35 hover:text-[#2F3E2F]/65 transition-colors duration-200 cursor-default"
+                                className="text-[0.6rem] tracking-[0.32em] uppercase font-medium transition-colors duration-300 group-hover:text-[rgba(44,58,44,0.85)]"
+                                style={{
+                                    color: "rgba(44,58,44,0.45)",
+                                    fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+                                }}
                             >
-                                {tag}
+                                Enquire Now
                             </span>
-                        ))}
+                            <span className="block h-px w-7 bg-[#2C3A2C]/28 transition-all duration-300 group-hover:w-14 group-hover:bg-[#2C3A2C]/55" />
+                        </div>
+                    </div>
+
+                    {/* E — Tags panel */}
+                    <div
+                        ref={addPanel}
+                        className="bg-[#EDEAE3] flex items-end"
+                        style={{ gridColumn: "3", gridRow: "2", padding: "36px 32px" }}
+                    >
+                        <div className="flex flex-wrap gap-1.5">
+                            {(content?.tags ? content.tags.split(',').map(t => t.trim()) : ["Interior Design", "Architecture", "Bespoke Stays", "Luxury Living", "Curated Art"]).map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="text-[0.58rem] tracking-[0.2em] uppercase font-medium border px-2.5 py-1.5 cursor-default transition-all duration-200 hover:border-[#2C3A2C]/28 hover:text-[#2C3A2C]/62"
+                                    style={{
+                                        color: "rgba(44,58,44,0.38)",
+                                        borderColor: "rgba(44,58,44,0.12)",
+                                        fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+                                    }}
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
                     </div>
 
                 </div>
             </div>
+
+            <EnquiryModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                propertyName="Experience"
+            />
         </section>
     );
 }

@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import WhatsappChatWidget from "@/components/WhatsappChatWidget";
+import CallWidget from "@/components/CallWidget";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       >
         <ReactLenis root>
           <WhatsappChatWidget/>
+          <CallWidget />
           <Loader />
           <main className="min-h-screen">
             {children}

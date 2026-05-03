@@ -9,7 +9,7 @@ interface FaqItem {
     answer: string;
 }
 
-const faqs: FaqItem[] = [
+const DEFAULT_FAQS: FaqItem[] = [
     {
         question: "What types of plots do you offer for sale and rent?",
         answer: "We offer a diverse range of residential, commercial, and agricultural plots, carefully selected to provide long-term value and growth.",
@@ -36,7 +36,13 @@ const faqs: FaqItem[] = [
     }
 ];
 
-export default function FaqSection() {
+interface FaqSectionProps {
+    heading?: string;
+    subheading?: string;
+    faqs?: FaqItem[];
+}
+
+export default function FaqSection({ heading, subheading, faqs = DEFAULT_FAQS }: FaqSectionProps = {}) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const [showMore, setShowMore] = useState(false);
 
@@ -48,11 +54,11 @@ export default function FaqSection() {
         <section className="w-full max-w-full mx-auto px-6 md:px-12 lg:px-20 md:py-20 py-10 flex flex-col md:flex-row gap-12 md:gap-24 font-sans">
             {/* Left Column */}
             <div className="md:w-[40%] flex flex-col gap-6 pt-4">
-                <h2 className="text-2xl md:text-5xl font-light text-[#2F3E2F] leading-[1.1] tracking-tight">
-                    Frequently Asked<br />Questions
+                <h2 className="text-2xl md:text-5xl font-light text-[#2F3E2F] leading-[1.1] tracking-tight whitespace-pre-line">
+                    {heading || "Frequently Asked\nQuestions"}
                 </h2>
-                <p className="text-[#888] text-md md:text-[1.05rem] leading-relaxed max-w-lg">
-                    Got questions? We&apos;ve got answers no jargon,<br />just direct clarity
+                <p className="text-[#888] text-md md:text-[1.05rem] leading-relaxed max-w-lg whitespace-pre-line">
+                    {subheading || "Got questions? We've got answers no jargon,\njust direct clarity"}
                 </p>
             </div>
 
