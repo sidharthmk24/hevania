@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import WhatsappChatWidget from "@/components/WhatsappChatWidget";
 import CallWidget from "@/components/CallWidget";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const aboreto = Aboreto({
   variable: "--font-aboreto",
@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${aboreto.variable} antialiased bg-cream text-dark-forest font-sans`}
       >
         <ReactLenis root>
-          <WhatsappChatWidget/>
+          <WhatsappChatWidget />
           <CallWidget />
           <Loader />
           <main className="min-h-screen">
