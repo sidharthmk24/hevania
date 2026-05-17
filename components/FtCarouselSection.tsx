@@ -113,7 +113,7 @@ export default function FtCarous({ images, content, heading, subheading }: Props
                             isHovered || isMobile ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                         }`}
                     >
-                        <p className="font-light mt-2 md:mt-4 text-cream/90 text-center text-[10px] md:text-sm leading-relaxed max-w-[200px] md:max-w-[250px] mx-auto">
+                        <p className="font-bold mt-2 md:mt-4 text-cream/90 text-center text-[10px] md:text-sm leading-relaxed max-w-[200px] md:max-w-[90%] mx-auto">
                             {section.description}
                         </p>
                         <div className="w-8 md:w-12 h-[1px] bg-muted-gold mx-auto mt-4 md:mt-6" />

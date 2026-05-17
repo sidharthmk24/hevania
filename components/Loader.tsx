@@ -70,7 +70,7 @@ export default function Loader() {
                             {HEVANIYA.map((letter, i) => (
                                 <motion.span
                                     key={i}
-                                    className="inline-block text-[#EDEAE3] text-2xl md:text-4xl lg:text-5xl font-serif tracking-[0.4em] uppercase"
+                                    className="inline-block text-[#EDEAE3] text-2xl md:text-4xl lg:text-7xl font-serif tracking-[0.4em] uppercase"
                                     initial={{ y: "100%" }}
                                     animate={{ y: "0%" }}
                                     transition={{

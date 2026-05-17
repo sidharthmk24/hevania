@@ -184,10 +184,10 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                                     className={`px-8 py-4 font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${
                                         button.primary
                                             ? hoveredButton === idx 
-                                                ? "bg-[#425042]/80 text-white" 
+                                                ? "bg-cream text-[#425042]" 
                                                 : "bg-[#425042] text-white"
                                             : hoveredButton === idx 
-                                                ? "bg-cream/80 text-[#425042]" 
+                                                ? "bg-[#425042] text-white" 
                                                 : "bg-cream text-[#425042]"
                                     }`}
                                 >
