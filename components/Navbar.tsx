@@ -43,7 +43,7 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
     }, [mobileMenuOpen]);
 
     const links = [
-        { name: "Homess", href: "/" },
+        { name: "Home", href: "/" },
         { name: "Contact", href: "/contact" },
         { name: "About", href: "/about" },
         { name: "Blog", href: "/blog" },
