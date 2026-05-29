@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 
 const TEAM = [
     {
-        name: "Mukund Sharma",
+        name: "Mukundn Sharma",
         role: "Founder & Creative Director",
         image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
         bio: "With over 20 years in luxury event management, Mukund brings a unique vision of elegance and nature-integrated celebrations."
