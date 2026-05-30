@@ -292,13 +292,13 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                         <div className="space-y-4 border-l-2 border-[#C6A75E]/30 pl-6">
                             <p
                                 className="text-sm leading-[1.9] font-light tracking-[0.01em] whitespace-pre-line"
-                                style={{ color: "rgba(44,58,44,0.70)", fontSize: "0.98rem" }}
+                                style={{ color: "rgba(44,58,44,0.70)", fontSize: "0.90rem" }}
                             >
                                 {content?.description || (
                                     <>
                                         Are you looking for a beautiful riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to HEVANIYA — a riverside destination made for special celebrations and peaceful getaways in the heart of nature.
                                         {"\n\n"}
-                                        Llocated in Vaikom, Kottayam, HEVANIYA is one of the most loved venues in Kerala for weddings, Haldi ceremonies, engagements, private celebrations, corporate events, and staycations. With lovely river views, green surroundings, and open skies, our venue gives you a calm and beautiful setting for any occasion.
+                                        Located in Vaikom, Kottayam, HEVANIYA is one of the most loved venues in Kerala for weddings, Haldi ceremonies, engagements, private celebrations, corporate events, and staycations. With lovely river views, green surroundings, and open skies, our venue gives you a calm and beautiful setting for any occasion.
 Whether you are planning a riverside wedding, a fun celebration, or a quiet nature-friendly staycation, HEVANIYA is the perfect place for you. The peaceful atmosphere here makes every moment feel truly special.
 Conveniently located near Kochi (Ernakulam), Kottayam, and Alappuzha, HEVANIYA feels like a private riverside escape away from the city — making it the ideal choice for anyone looking for a unique and memorable venue in Kerala.
 Our friendly team of event professionals is always here to help with all your planning and service needs. We take care of every detail, so you can simply relax and enjoy your special day.
