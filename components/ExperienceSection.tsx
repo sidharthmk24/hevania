@@ -301,13 +301,7 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                                         Curated with obsessive attention to detail and a reverence for enduring craft.
                                     </>
                                 )}
-                                /* {content?.description || (
-                                    <>
-                                        At HEVANIYA, we believe a venue is more than just a location — it is the canvas upon which life's most beautiful memories are painted.
-                                        {"\n\n"}
-                                        Curated with obsessive attention to detail and a reverence for enduring craft.
-                                    </>
-                                )} */
+                               
                             </p>
                         </div>
 
