@@ -298,7 +298,11 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                                     <>
                                         Are you looking for a beautiful riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to HEVANIYA — a riverside destination made for special celebrations and peaceful getaways in the heart of nature.
                                         {"\n\n"}
-                                        Curated with obsessive attention to detail and a reverence for enduring craft.
+                                        Located in Vaikom, Kottayam, HEVANIYA is one of the most loved venues in Kerala for weddings, Haldi ceremonies, engagements, private celebrations, corporate events, and staycations. With lovely river views, green surroundings, and open skies, our venue gives you a calm and beautiful setting for any occasion.
+Whether you are planning a riverside wedding, a fun celebration, or a quiet nature-friendly staycation, HEVANIYA is the perfect place for you. The peaceful atmosphere here makes every moment feel truly special.
+Conveniently located near Kochi (Ernakulam), Kottayam, and Alappuzha, HEVANIYA feels like a private riverside escape away from the city — making it the ideal choice for anyone looking for a unique and memorable venue in Kerala.
+Our friendly team of event professionals is always here to help with all your planning and service needs. We take care of every detail, so you can simply relax and enjoy your special day.
+
                                     </>
                                 )}
                                
