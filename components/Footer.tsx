@@ -109,7 +109,7 @@ export default function Footer() {
                         <ul className="space-y-5 text-[14px] font-light text-[#425042]">
                             <li className="flex flex-col gap-1">
                                 <span className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E]">Localisation</span>
-                                123 Luxury Lane, Mumbai, MH 400001
+                                Vaikom, Kottayam, Kerala.
                             </li>
                             <li className="flex flex-col gap-1">
                                 <span className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E]">Direct Line</span>
