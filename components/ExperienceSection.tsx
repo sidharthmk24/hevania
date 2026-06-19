@@ -297,7 +297,7 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                                 {content?.description || (
                                     <>
                                         <p>
-        Looking for a riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to Hevaniya — a peaceful riverside destination built for celebrations and quiet getaways, right in the heart of nature.
+        Looking for a riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to Hevaniya — a peaceful riverside destination built for celebrations and quiet getaways, right in the heart of nature.<br />
     </p>
 
     <h3 className="font-bold text-base font-inherit">A Venue for Every Occasion</h3>
