@@ -9,16 +9,16 @@ import Footer from "@/components/Footer";
 
 const TEAM = [
     {
-        name: "Mukundn Sharma",
+        name: "SEBASTIAN NEEDUMPARAMBIL",
         role: "Founder & Creative Director",
         image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
-        bio: "With over 20 years in luxury event management, Mukund brings a unique vision of elegance and nature-integrated celebrations."
+        bio: "With over 20 years in luxury event management, Sebastian brings a unique vision of elegance and nature-integrated celebrations."
     },
     {
-        name: "Aisha Verma",
+        name: "SONIYA",
         role: "Head of Event Planning",
         image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
-        bio: "Aisha transforms complex logistical challenges into seamless, unforgettable experiences for our most discerning clients."
+        bio: "Soniya transforms complex logistical challenges into seamless, unforgettable experiences for our most discerning clients."
     },
     {
         name: "David Ross",
