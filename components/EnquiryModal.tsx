@@ -75,7 +75,7 @@ export default function EnquiryModal({ isOpen, onClose, propertyName = "General 
                                     <span className="text-[#cda776] italic font-light">DAY WITH US</span>
                                 </h2>
                                 <p className="mt-6 text-sm md:text-base font-light text-white/60 leading-relaxed">
-                                    Enquire about {propertyName}. Our concierge will be in touch shortly to discuss your bespoke requirements.
+                                    Share a few details with us. We'll be in touch soon to help plan your celebration or stay at Hevaniya.
                                 </p>
                             </div>
 
