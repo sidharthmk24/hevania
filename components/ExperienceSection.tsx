@@ -296,13 +296,15 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                             >
                                 {content?.description || (
                                     <>
-                                        Are you looking for a beautiful riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to HEVANIYA — a riverside destination made for special celebrations and peaceful getaways in the heart of nature.
+                                        Looking for a riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to Hevaniya — a peaceful riverside destination built for celebrations and quiet getaways, right in the heart of nature.
                                         {"\n\n"}
-                                        Located in Vaikom, Kottayam, HEVANIYA is one of the most loved venues in Kerala for weddings, Haldi ceremonies, engagements, private celebrations, corporate events, and staycations. With lovely river views, green surroundings, and open skies, our venue gives you a calm and beautiful setting for any occasion.
-Whether you are planning a riverside wedding, a fun celebration, or a quiet nature-friendly staycation, HEVANIYA is the perfect place for you. The peaceful atmosphere here makes every moment feel truly special.
-Conveniently located near Kochi (Ernakulam), Kottayam, and Alappuzha, HEVANIYA feels like a private riverside escape away from the city — making it the ideal choice for anyone looking for a unique and memorable venue in Kerala.
-Our friendly team of event professionals is always here to help with all your planning and service needs. We take care of every detail, so you can simply relax and enjoy your special day.
+                                        A Venue for Every Occasion
 
+Located in Vaikom, Kottayam, Hevaniya is one of Kerala's most loved spaces for weddings, Haldi ceremonies, engagements, private celebrations, corporate events, and staycations. With open skies, river views, and green surroundings, every occasion gets a calm, beautiful setting to match.
+                                        Close to the City, Far From the Noise
+
+Just a short drive from Kochi (Ernakulam), Kottayam, and Alappuzha, Hevaniya feels like your own private escape — without being far from anywhere. It's the kind of place that makes a wedding, a getaway, or a corporate offsite feel genuinely memorable.
+Our team takes care of every detail, so you can simply relax and enjoy the moment.
                                     </>
                                 )}
                                
