@@ -57,7 +57,7 @@ export default function Footer() {
                             HEVANIYA
                         </h2>
                         <p className="text-[14px] font-light text-[#425042] leading-relaxed max-w-sm mb-10">
-                            Curating extraordinary experiences in the world's most exquisite settings. Every detail, a testament to elegance.
+                            A riverside destination for celebrations and stays in Vaikom, Kerala.
                         </p>
 
                         <div className="flex gap-6 items-center hover:opacity-100 transition-opacity duration-500">
@@ -105,10 +105,10 @@ export default function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.3 }}
                     >
-                        <h4 className="text-md uppercase text-[#2F3E2F] tracking-widest mb-8 font-semibold">Concierge</h4>
+                        <h4 className="text-md uppercase text-[#2F3E2F] tracking-widest mb-8 font-semibold">Reach Us</h4>
                         <ul className="space-y-5 text-[14px] font-light text-[#425042]">
                             <li className="flex flex-col gap-1">
-                                <span className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E]">Localisation</span>
+                                <span className="text-[12px] uppercase tracking-[0.2em] font-semibold text-[#C6A75E]">Our Location</span>
                                 Vaikom, Kottayam, Kerala.
                             </li>
                             <li className="flex flex-col gap-1">
