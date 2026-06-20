@@ -228,7 +228,7 @@ export default async function Home() {
         <h2 className="text-2xl md:text-4xl lg:text-6xl tracking-wide text-[#425042] md:text-center mb-10 lg:mb-10 font-normal w-full leading-[1.1] whitespace-pre-line">
           <span className="font-thin">{journeyData?.heading || "Begin Your Journey"}</span>
           <p className="text-base md:text-md leading-relaxed font-light mt-6 sm:mt-8">
-            {journeyData?.description || "Ready to see if Hevaniya is right for your celebration? We'd love to meet you and show you what we've created."}
+            {journeyData?.description || "Ready to see if Hevaniya is the right fit for your celebration or stay? Come visit us, and let's start planning together ."}
           </p>
         </h2>
       </div>
