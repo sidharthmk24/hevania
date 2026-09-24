@@ -291,23 +291,31 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                         {/* Description */}
                         <div className="space-y-4 border-l-2 border-[#C6A75E]/30 pl-6">
                             <p
-                                className="leading-[1.88] font-light tracking-[0.01em] whitespace-pre-line"
-                                style={{ color: "rgba(44,58,44,0.70)", fontSize: "0.98rem" }}
+                                className="text-sm leading-[1.9] font-light tracking-[0.01em] whitespace-pre-line"
+                                style={{ color: "rgba(44,58,44,0.70)", fontSize: "0.90rem" }}
                             >
                                 {content?.description || (
                                     <>
-                                        At HEVANIYA, we believe a venue is more than just a location — it is the canvas upon which life's most beautiful memories are painted.
-                                        {"\n\n"}
-                                        Curated with obsessive attention to detail and a reverence for enduring craft.
-                                    </>
+                                        <p>
+        Looking for a riverside event venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to HEVANIYA — a peaceful riverside destination built for celebrations and quiet getaways, right in the heart of nature.
+    </p>
+
+    <h3 className="font-bold text-base font-inherit">A Venue for Every Occasion</h3>
+    
+        Located in Vaikom, Kottayam, Hevaniya is one of Kerala's most loved spaces for weddings, Haldi ceremonies, engagements, private celebrations, corporate events, and staycations. With open skies, river views, and green surroundings, every occasion gets a calm, beautiful setting to match.
+    </p>
+
+    <h3 className="font-bold text-base font-inherit">Close to the City, Far From the Noise</h3>
+   
+        Just a short drive from Kochi (Ernakulam), Kottayam, and Alappuzha, Hevaniya feels like your own private escape — without being far from anywhere. It's the kind of place that makes a wedding, a getaway, or a corporate offsite feel genuinely memorable.
+    </p>
+
+    <p>
+        Our team takes care of every detail, so you can simply relax and enjoy the moment.
+    </p>
+</>
                                 )}
-                                {content?.description || (
-                                    <>
-                                        At HEVANIYA, we believe a venue is more than just a location — it is the canvas upon which life's most beautiful memories are painted.
-                                        {"\n\n"}
-                                        Curated with obsessive attention to detail and a reverence for enduring craft.
-                                    </>
-                                )}
+                               
                             </p>
                         </div>
 
