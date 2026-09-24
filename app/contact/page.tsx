@@ -1,73 +1,57 @@
-"use client";
+import { supabaseServer } from "@/lib/supabaseServer";
+import ContactClient, { ContactClientProps } from "./ContactClient";
 
-import React from "react";
-import ContactForm from "@/components/ContactForm";
-import ContactMap from "@/components/ContactMap";
-import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
+export const dynamic = "force-dynamic";
 
-export default function ContactPage() {
-    return (
-        <>
-            <Navbar theme="dark" />
-            <section className=" min-h-screen pt-32 pb-16">
-                <div className=" mx-auto px-6  md:px-20">
-                    <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-16 md:gap-24 lg:gap-32 mb-20">
-                        {/* Left Column: Contact Info */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="flex flex-col space-y-12"
-                        >
-                            <div className="space-y-8">
-                                <h1 className="text-[48px] md:text-[56px] leading-[1.05] font-sans font-light text-[#2F3E2F]">
-                                    Reach Out <br />
-                                    <span className="text-[#2F3E2F]">to HEVANIYA</span>
-                                </h1>
+const DEFAULT_INFO = {
+    heading: "Reach Out\nto HEVANIYA",
+    description: "Whether it's a new brief or a quick question, we'd love to hear from you.",
+    query_label: "Alternatively for your Queries contact",
+    phone: "+91 98765 43210",
+    phone_tel: "+917990933700",
+    email: "HEVANIYA@gmail.com",
+};
 
-                                <p className="text-[16px] text-[#2F3E2F] font-sans font-light max-w-sm leading-relaxed">
-                                    Whether it's a new brief or a quick question, we'd love to hear from you.
-                                </p>
-                            </div>
+const DEFAULT_MAP = {
+    embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15228.472944065609!2d72.8465225!3d19.0176147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce9555555555%3A0x0!2zMTnCsDAxJzAzLjQiTiA3MsKwNTAnNDcuNSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
+    map_title: "HEVANIYA Estate",
+};
 
-                            <div className="pt-12 border-t border-gray-200">
-                                <p className="text-[14px] text-[#2F3E2F] font-sans font-light mb-6">
-                                    Alternatively for your Queries contact
-                                </p>
-                                <div className="space-y-2">
-                                    <a
-                                        href="tel:+917990933700"
-                                        className="block text-[18px] font-sans font-semibold text-[#C6A75E] hover:opacity-80 transition-opacity"
-                                    >
-                                        +91 98765 43210
-                                    </a>
-                                    <a
-                                        href="mailto:sales@HEVANIYA.com"
-                                        className="block text-[18px] font-sans font-semibold text-[#C6A75E] hover:opacity-80 transition-opacity"
-                                    >
-                                        HEVANIYA@gmail.com
-                                    </a>
-                                </div>
-                            </div>
-                        </motion.div>
+export default async function ContactPage() {
+    let contactInfo = { ...DEFAULT_INFO };
+    let contactMap = { ...DEFAULT_MAP };
 
-                        {/* Right Column: Contact Form */}
-                        <div className="pt-4">
-                            <ContactForm />
-                        </div>
-                    </div>
+    try {
+        const { data, error } = await supabaseServer
+            .from("section_content")
+            .select("*")
+            .in("section", ["contact_info", "contact_map"])
+            .order("created_at", { ascending: true });
 
-                    {/* Bottom: Map */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                    >
-                        <ContactMap />
-                    </motion.div>
-                </div>
-            </section>
-        </>
-    );
+        if (!error && data) {
+            const infoRow = data.find(r => r.section === "contact_info");
+            if (infoRow?.content_json) {
+                contactInfo = {
+                    heading: infoRow.content_json.heading || DEFAULT_INFO.heading,
+                    description: infoRow.content_json.description || DEFAULT_INFO.description,
+                    query_label: infoRow.content_json.query_label || DEFAULT_INFO.query_label,
+                    phone: infoRow.content_json.phone || DEFAULT_INFO.phone,
+                    phone_tel: infoRow.content_json.phone_tel || DEFAULT_INFO.phone_tel,
+                    email: infoRow.content_json.email || DEFAULT_INFO.email,
+                };
+            }
+
+            const mapRow = data.find(r => r.section === "contact_map");
+            if (mapRow?.content_json) {
+                contactMap = {
+                    embed_url: mapRow.content_json.embed_url || DEFAULT_MAP.embed_url,
+                    map_title: mapRow.content_json.map_title || DEFAULT_MAP.map_title,
+                };
+            }
+        }
+    } catch (err) {
+        console.error("Error fetching contact page CMS data:", err);
+    }
+
+    return <ContactClient info={contactInfo} map={contactMap} />;
 }
