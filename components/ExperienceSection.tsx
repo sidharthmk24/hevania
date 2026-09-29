@@ -278,10 +278,10 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                                     <span dangerouslySetInnerHTML={{ __html: content.subheading.replace(/\n/g, "<br/>") }} />
                                 ) : (
                                     <>
-                                        Where Exceptional <br />
-                                        Experiences{" "}
+                                        Where <br />
+                                        MEMORABLE MOMENTS{" "}
                                         <span className="italic" style={{ color: "#C6A75E" }}>
-                                         <br className="md:block hidden" />   Take Shape
+                                         <br className="md:block hidden" />   FIND THEIR SETTING
                                         </span>
                                     </>
                                 )}
