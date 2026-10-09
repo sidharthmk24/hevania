@@ -34,12 +34,12 @@ export default function ContactForm() {
             <div className="relative pt-6">
                 <motion.label
                     htmlFor={id}
-                    className="absolute left-0 cursor-text pointer-events-none text-[#2F3E2F]/60"
+                    className="absolute left-0 cursor-text pointer-events-none text-[#2F3E2F] font-medium tracking-wide uppercase"
                     initial={false}
                     animate={{
                         y: isActive ? -28 : 2,
                         fontSize: isActive ? "12px" : "15px",
-                        opacity: isActive ? 0.8 : 0.6
+                        opacity: isActive ? 1 : 0.85
                     }}
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
@@ -124,7 +124,7 @@ export default function ContactForm() {
                                 onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
                                 className="mt-1 w-3.5 h-3.5 rounded-none border-gray-300 text-[#009EDB] focus:ring-0 cursor-pointer"
                             />
-                            <label htmlFor="consent" className="text-[11px] text-gray-400 font-sans leading-tight cursor-pointer">
+                            <label htmlFor="consent" className="text-[11px] text-gray-600 font-sans leading-tight cursor-pointer">
                                 Consent to contact me via Call, SMS, Email or Whatsapp
                             </label>
                         </div>

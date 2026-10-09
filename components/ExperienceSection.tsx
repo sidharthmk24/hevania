@@ -301,13 +301,13 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
     </p>
 
     <h3 className="font-bold text-base font-inherit">A Venue for Every Occasion</h3>
-    
+    <p className="mb-4">
         Located in Vaikom, Kottayam, Hevaniya hosts weddings, Haldi ceremonies, engagements and corporate events, along with private staycations. Open skies, river views and green surroundings give every occasion a calm, beautiful backdrop.
     </p>
 
     <h3 className="font-bold text-base font-inherit">Close to the City, Far From the Noise</h3>
-   
-        Just a short drive from Kochi, Kottayam and Alappuzha, Hevaniya feels like a private escape without the long journey. .
+    <p className="mb-4">
+        Just a short drive from Kochi, Kottayam and Alappuzha, Hevaniya feels like a private escape without the long journey.
     </p>
 
     <p>
