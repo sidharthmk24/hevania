@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
@@ -53,9 +54,15 @@ export default function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 1 }}
                     >
-                        <h2 className="text-[24px] font-aboreto text-[#2F3E2F] mb-8 tracking-widest uppercase">
-                            HEVANIYA
-                        </h2>
+                        <Link href="/" className="inline-block mb-6 transition-opacity hover:opacity-90">
+                            <Image
+                                src="/images/newlogo-removebg.png"
+                                alt="Hevaniya Logo"
+                                width={220}
+                                height={70}
+                                className="h-12 md:h-14 w-auto object-contain"
+                            />
+                        </Link>
                         <p className="text-[14px] font-light text-[#425042] leading-relaxed max-w-sm mb-10">
                             A riverside destination for celebrations and stays in Vaikom, Kerala.
                         </p>

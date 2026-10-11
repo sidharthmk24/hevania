@@ -4,7 +4,7 @@ import React from "react";
 export const InfiniteMovingCards = ({
     items,
     direction = "left",
-    speed = "fast",
+    speed = "normal",
     pauseOnHover = true,
     className,
 }: {
@@ -23,28 +23,41 @@ export const InfiniteMovingCards = ({
     const containerRef = React.useRef<HTMLDivElement>(null);
     const scrollerRef = React.useRef<HTMLUListElement>(null);
 
+    // Guarantee that the base set has at least 8 items so that half the track easily exceeds
+    // the screen width on any display size (mobile up to 4K), preventing any empty gap.
+    const displayItems = React.useMemo(() => {
+        if (!items || items.length === 0) return [];
+        let base = [...items];
+        while (base.length < 8) {
+            base = [...base, ...items];
+        }
+        return [...base, ...base];
+    }, [items]);
+
+    if (!items || items.length === 0) return null;
+
     return (
         <div
             ref={containerRef}
             className={cn(
-                "scroller relative w-full max-w-full 2xl:max-w-[150rem] xl:max-w-[100rem] lg:max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]",
+                "scroller relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_5%,white_95%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,white_8%,white_92%,transparent)]",
                 className
             )}
         >
             <ul
                 ref={scrollerRef}
                 className={cn(
-                    " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
+                    "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
                     direction === "left" ? "animate-scroll-left" : "animate-scroll-right",
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
                 style={{
-                    "--animation-duration": speed === "fast" ? "8s" : speed === "normal" ? "15s" : "30s",
+                    "--animation-duration": speed === "fast" ? "25s" : speed === "normal" ? "40s" : "60s",
                 } as React.CSSProperties}
             >
-                {[...items, ...items].map((item, idx) => (
+                {displayItems.map((item, idx) => (
                     <li
-                        className="md:w-[30vw] sm:w-[20vw] 2xl:w-[30vw] w-[82vw] max-w-[340px] sm:max-w-none min-h-[30vh] relative border-[#2F3E2F] border-[1px] pt-[24px] sm:pt-[30px] pb-[20px] sm:pb-[26px] px-[16px] sm:px-[21px] shrink-0"
+                        className="w-[85vw] sm:w-[320px] md:w-[380px] lg:w-[400px] min-h-[180px] relative border-[#2F3E2F]/20 border-[1px] bg-[#F5F5F0]/60 backdrop-blur-sm pt-[24px] sm:pt-[28px] pb-[20px] sm:pb-[24px] px-[18px] sm:px-[22px] shrink-0"
                         key={idx}
                     >
                         <blockquote>

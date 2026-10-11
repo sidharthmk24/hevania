@@ -105,16 +105,20 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className={`fixed top-0 w-full z-50 transition-colors duration-300 ${navBg}`}
             >
-                <div className=" mx-auto px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center relative z-50">
+                <div className="mx-auto px-6 md:px-12 lg:px-20 py-2 md:py-3 flex justify-between items-center relative z-50">
                     <Link
                         href="/"
-                        className={`text-2xl tracking-widest transition-colors ${textColor}`}
+                        className="flex items-center transition-opacity hover:opacity-90"
                         onClick={() => setMobileMenuOpen(false)}
                     >
-                        HEVANIYA
-
-                        {/* <Image className="h-10 w-10" src="/images/logoNoBg.png" alt="Logo" width={100} height={100} /> */}
-
+                        <Image
+                            className="h-11 sm:h-12 md:h-14 w-auto object-contain"
+                            src="/images/newlogo-removebg.png"
+                            alt="Hevaniya Logo"
+                            width={220}
+                            height={70}
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Menu */}
