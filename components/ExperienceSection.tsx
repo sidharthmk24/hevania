@@ -290,7 +290,7 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
 
                         {/* Description */}
                         <div className="space-y-4 border-l-2 border-[#C6A75E]/30 pl-6">
-                            <p
+                            <div
                                 className="text-sm leading-[1.9] font-light tracking-[0.01em] whitespace-pre-line"
                                 style={{ color: "rgba(44,58,44,0.70)", fontSize: "0.90rem" }}
                             >
@@ -316,7 +316,7 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
 </>
                                 )}
                                
-                            </p>
+                            </div>
                         </div>
 
                         {/* Metrics grid */}
