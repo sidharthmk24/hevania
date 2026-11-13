@@ -4,12 +4,12 @@ import ContactClient, { ContactClientProps } from "./ContactClient";
 export const dynamic = "force-dynamic";
 
 const DEFAULT_INFO = {
-    heading: "Reach Out\nto HEVANIYA",
-    description: "Whether it's a new brief or a quick question, we'd love to hear from you.",
+    heading: "Let's plan your special day",
+    description: "Planning a wedding, reception, haldi, birthday, or a cozy stay at our riverside estate? Connect with us directly through any of the channels below.",
     query_label: "Alternatively for your Queries contact",
-    phone: "+91 98765 43210",
-    phone_tel: "+917990933700",
-    email: "HEVANIYA@gmail.com",
+    phone: "+91 8907 252255",
+    phone_tel: "+918907252255",
+    email: "info@hevaniya.com",
 };
 
 const DEFAULT_MAP = {

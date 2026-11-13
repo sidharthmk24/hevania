@@ -54,11 +54,6 @@ interface FaqSectionProps {
 
 export default function FaqSection({ heading, subheading, faqs }: FaqSectionProps = {}) {
     const [activeTab, setActiveTab] = useState<"events" | "stays">("events");
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-    const toggleOpen = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
 
     // If custom FAQs are passed from the CMS, split them across the two categories
     const customEvents = faqs ? faqs.slice(0, Math.ceil(faqs.length / 2)) : [];
@@ -71,184 +66,118 @@ export default function FaqSection({ heading, subheading, faqs }: FaqSectionProp
     return (
         <section 
             id="faq-section"
-            className="w-full bg-[#F7F5F0] py-24 md:py-36 font-sans border-t border-[#2C3A2C]/10 overflow-hidden"
+            className="w-full bg-[#F7F5F0] py-20 md:py-28 font-sans border-t border-[#2C3A2C]/10 overflow-hidden"
         >
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+            <div className="mx-auto px-6 md:px-16 lg:px-24 w-full">
                 
-                {/* ── Editorial Two-Column Grid ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-                    
-                    {/* ── Left Column: Sticky Editorial Context ── */}
-                    <div className="lg:col-span-5 lg:sticky lg:top-28 flex flex-col space-y-4">
-                        <div className="flex items-center gap-4">
-                            <span className="block w-8 h-px bg-[#2C3A2C]/30" />
-                            <span
-                                className="text-[0.58rem] tracking-[0.32em] uppercase text-[#C6A75E] font-bold"
-                                style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                            >
-                                Got Questions?
-                            </span>
-                        </div>
-                        <h2
-                            className="font-light tracking-[-0.03em] leading-[1.05] text-[#1A2A1A]"
-                            style={{ fontSize: "clamp(2rem, 3.8vw, 3.4rem)", fontFamily: "Georgia, 'Times New Roman', serif" }}
+                {/* ── Centered Header ── */}
+                <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+                    <div className="inline-flex items-center justify-center gap-3 mb-3">
+                        <span className="block w-6 h-px bg-[#C6A75E]" />
+                        <span className="text-[11px] font-sans font-semibold tracking-[0.25em] uppercase text-[#C6A75E]">
+                            Got Questions?
+                        </span>
+                        <span className="block w-6 h-px bg-[#C6A75E]" />
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold font-sans text-[#1A2A1A] tracking-tight leading-tight">
+                        {heading || "Frequently Asked Questions (FAQ)"}
+                    </h2>
+                    <p className="mt-3 text-sm sm:text-base text-[#425042]/75 font-sans font-light max-w-xl mx-auto leading-relaxed">
+                        {subheading || "Find absolute clarity on our premium event venues, luxury stay accommodations, and dining experiences."}
+                    </p>
+                </div>
+
+                {/* ── Category Pill Switcher ── */}
+                <div className="flex justify-center mb-10 md:mb-12">
+                    <div className="inline-flex bg-[#EDEAE3] p-1.5 border border-[#2C3A2C]/10 rounded-full shadow-2xs">
+                        <button
+                            id="tab-events-button"
+                            onClick={() => setActiveTab("events")}
+                            className={`relative py-2.5 px-6 sm:px-8 text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase transition-colors duration-300 rounded-full z-10 cursor-pointer ${
+                                activeTab === "events" ? "text-white" : "text-[#2F3E2F]/65 hover:text-[#2F3E2F]"
+                            }`}
                         >
-                            {heading || "Frequently Asked Questions"}
-                        </h2>
-                        <p className="text-[#425042]/75 text-sm md:text-base leading-relaxed font-light max-w-lg">
-                            {subheading || "Find absolute clarity on our premium event venues, luxury stay accommodations, and dining experiences."}
-                        </p>
-                    </div>
-
-                    {/* ── Right Column: Interactive Tabs & Accordions ── */}
-                    <div className="lg:col-span-7 space-y-8 w-full">
-                        
-                        {/* ── Premium Sliding Pill Switcher ── */}
-                        <div className="flex bg-[#EDEAE3] p-1.5 border border-[#2C3A2C]/10  max-w-md mr-auto lg:mx-0 relative">
-                            <button
-                                id="tab-events-button"
-                                onClick={() => {
-                                    setActiveTab("events");
-                                    setOpenIndex(0);
-                                }}
-                                className={`relative flex-1 py-3.5 px-4 text-center text-[0.62rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase transition-colors duration-300 focus:outline-none  z-10 ${
-                                    activeTab === "events" ? "text-white" : "text-[#2F3E2F]/60 hover:text-[#2F3E2F]/90"
-                                }`}
-                                style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                            >
-                                {activeTab === "events" && (
-                                    <motion.div
-                                        layoutId="activeTabBackground"
-                                        className="absolute inset-0 bg-[#2C3A2C]  -z-10"
-                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                    />
-                                )}
-                                Events & Venues
-                            </button>
-                            <button
-                                id="tab-stays-button"
-                                onClick={() => {
-                                    setActiveTab("stays");
-                                    setOpenIndex(0);
-                                }}
-                                className={`relative flex-1 py-3.5 px-4 text-center text-[0.62rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase transition-colors duration-300 focus:outline-none  z-10 ${
-                                    activeTab === "stays" ? "text-white" : "text-[#2F3E2F]/60 hover:text-[#2F3E2F]/90"
-                                }`}
-                                style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                            >
-                                {activeTab === "stays" && (
-                                    <motion.div
-                                        layoutId="activeTabBackground"
-                                        className="absolute inset-0 bg-[#2C3A2C]  -z-10"
-                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                    />
-                                )}
-                                Stays & Dining
-                            </button>
-                        </div>
-
-                        {/* ── Accordion List ── */}
-                        <div className="space-y-4">
-                            <AnimatePresence mode="wait">
+                            {activeTab === "events" && (
                                 <motion.div
-                                    key={activeTab}
-                                    initial={{ opacity: 0, y: 15 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -15 }}
-                                    transition={{ duration: 0.35, ease: "easeOut" }}
-                                    className="space-y-4"
-                                >
-                                    {currentFaqs.map((faq, index) => {
-                                        const isOpen = openIndex === index;
-                                        return (
-                                            <div
-                                                key={`${activeTab}-${index}`}
-                                                className={`border transition-all duration-300 rounded-none overflow-hidden ${
-                                                    isOpen 
-                                                        ? "bg-[#EDEAE3] border-[#C6A75E]/30 shadow-[0_4px_20px_rgba(44,58,44,0.06)]" 
-                                                        : "bg-[#EDEAE3]/40 hover:bg-[#EDEAE3]/80 border-[#2C3A2C]/5 hover:border-[#2C3A2C]/10"
-                                                }`}
-                                            >
-                                                {/* Header Button */}
-                                                <button
-                                                    id={`faq-toggle-${activeTab}-${index}`}
-                                                    onClick={() => toggleOpen(index)}
-                                                    className="w-full flex justify-between items-start py-5 px-6 text-left focus:outline-none group"
-                                                >
-                                                    <div className="flex items-start">
-                                                        {/* Luxury Index Number */}
-                                                        <span 
-                                                            className={`text-[0.62rem] md:text-xs font-bold tracking-wider mr-4 mt-[0.25rem] transition-colors duration-300 ${
-                                                                isOpen ? "text-[#C6A75E]" : "text-[#2F3E2F]/40 group-hover:text-[#C6A75E]/70"
-                                                            }`}
-                                                            style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                                                        >
-                                                            {String(index + 1).padStart(2, '0')}
-                                                        </span>
-                                                        
-                                                        {/* Question Text */}
-                                                        <span
-                                                            className={`text-[0.98rem] md:text-[1.08rem] font-medium transition-all duration-300 leading-snug ${
-                                                                isOpen ? "text-[#1A2A1A] " : "text-[#2F3E2F] group-hover:text-[#C6A75E]"
-                                                            }`}
-                                                            style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
-                                                        >
-                                                            {faq.question}
-                                                        </span>
-                                                    </div>
-
-                                                    {/* Minimalist Plus-to-Minus Vector Toggle */}
-                                                    <span className="ml-4 mt-[0.35rem] transition-transform duration-300 flex-shrink-0">
-                                                        <div className="relative w-4 h-4 flex items-center justify-center">
-                                                            {/* Horizontal Segment */}
-                                                            <div 
-                                                                className={`absolute w-3.5 h-[1.2px] transition-all duration-300 ${
-                                                                    isOpen ? "bg-[#C6A75E] rotate-180" : "bg-[#2F3E2F]/60 group-hover:bg-[#C6A75E]"
-                                                                }`} 
-                                                            />
-                                                            {/* Vertical Segment (collapses to 0 height when open) */}
-                                                            <div 
-                                                                className={`absolute h-3.5 w-[1.2px] transition-all duration-300 ${
-                                                                    isOpen ? "bg-[#C6A75E] rotate-90 scale-y-0" : "bg-[#2F3E2F]/60 group-hover:bg-[#C6A75E]"
-                                                                }`} 
-                                                            />
-                                                        </div>
-                                                    </span>
-                                                </button>
-
-                                                {/* Framer Motion Height/Opacity expandable panel */}
-                                                <AnimatePresence initial={false}>
-                                                    {isOpen && (
-                                                        <motion.div
-                                                            key="content"
-                                                            initial="collapsed"
-                                                            animate="open"
-                                                            exit="collapsed"
-                                                            variants={{
-                                                                open: { opacity: 1, height: "auto" },
-                                                                collapsed: { opacity: 0, height: 0 }
-                                                            }}
-                                                            transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-                                                            className="overflow-hidden"
-                                                        >
-                                                            <div className="pb-6 pl-12 pr-6 pt-1 border-t border-[#2C3A2C]/5">
-                                                                <p 
-                                                                    className="text-[#425042]/85 text-sm md:text-[0.95rem] leading-relaxed font-light whitespace-pre-line"
-                                                                >
-                                                                    {faq.answer}
-                                                                </p>
-                                                            </div>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
-                                        );
-                                    })}
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-
+                                    layoutId="activeFaqTab"
+                                    className="absolute inset-0 bg-[#2C3A2C] rounded-full -z-10 shadow-xs"
+                                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                />
+                            )}
+                            Events & Venues
+                        </button>
+                        <button
+                            id="tab-stays-button"
+                            onClick={() => setActiveTab("stays")}
+                            className={`relative py-2.5 px-6 sm:px-8 text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase transition-colors duration-300 rounded-full z-10 cursor-pointer ${
+                                activeTab === "stays" ? "text-white" : "text-[#2F3E2F]/65 hover:text-[#2F3E2F]"
+                            }`}
+                        >
+                            {activeTab === "stays" && (
+                                <motion.div
+                                    layoutId="activeFaqTab"
+                                    className="absolute inset-0 bg-[#2C3A2C] rounded-full -z-10 shadow-xs"
+                                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                />
+                            )}
+                            Stays & Dining
+                        </button>
                     </div>
+                </div>
+
+                {/* ── FAQ List (Matching Full Container Width) ── */}
+                <div className="w-full">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -12 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="space-y-6 md:space-y-8 w-full"
+                        >
+                            {currentFaqs.map((faq, index) => (
+                                <div
+                                    key={`${activeTab}-${index}`}
+                                    className="w-full bg-white border border-[#E2DDD5] shadow-xs overflow-hidden transition-all duration-200 hover:shadow-sm"
+                                >
+                                    {/* Question Row */}
+                                    <div className="relative flex items-center bg-[#F6F4EE]/90 py-5 sm:py-6 px-6 sm:px-8 md:px-10 border-b border-[#E8E4DC]">
+                                        {/* Left Accent Stripe (Top Half) */}
+                                        <div className="absolute left-0 top-0 bottom-0 w-1 sm:w-1.5 bg-[#BC5D43]" />
+
+                                        <div className="flex items-center gap-4 sm:gap-6 w-full pl-2 sm:pl-3">
+                                            {/* Large "Q." Marker */}
+                                            <span className="w-8 sm:w-10 shrink-0 text-2xl sm:text-3xl font-bold font-sans text-[#BC5D43] leading-none select-none">
+                                                Q.
+                                            </span>
+                                            {/* Question Text */}
+                                            <h3 className="text-[15px] sm:text-base md:text-[18px] font-semibold font-sans text-[#1A2A1A] leading-snug">
+                                                {faq.question}
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    {/* Answer Row */}
+                                    <div className="relative flex items-start bg-white py-5 sm:py-6 px-6 sm:px-8 md:px-10">
+                                        {/* Left Neutral Stripe (Bottom Half) */}
+                                        <div className="absolute left-0 top-0 bottom-0 w-1 sm:w-1.5 bg-[#D1C9BE]" />
+
+                                        <div className="flex items-start gap-4 sm:gap-6 w-full pl-2 sm:pl-3">
+                                            {/* Large "A." Marker */}
+                                            <span className="w-8 sm:w-10 shrink-0 text-2xl sm:text-3xl font-bold font-sans text-[#9E948A] leading-none select-none mt-0.5">
+                                                A.
+                                            </span>
+                                            {/* Answer Text */}
+                                            <p className="text-xs sm:text-sm md:text-[15px] text-[#425042]/85 font-sans font-light leading-relaxed">
+                                                {faq.answer}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
 
             </div>

@@ -43,16 +43,18 @@ export default function GalleryLoopSection({
           </p>
         )}
       </div>
-      <div className="relative">
-        <LogoLoop
-          logos={logoItems}
-          speed={35}
-          logoHeight={340}
-          logoWidth={500}
-          gap={30}
-          fadeOut
-          fadeOutColor="white"
-        />
+      <div className="px-6 md:px-12 lg:px-20">
+        <div className="relative overflow-hidden">
+          <LogoLoop
+            logos={logoItems}
+            speed={35}
+            logoHeight={340}
+            logoWidth={500}
+            gap={30}
+            fadeOut
+            fadeOutColor="white"
+          />
+        </div>
       </div>
     </section>
   );

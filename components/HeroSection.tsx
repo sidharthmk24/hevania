@@ -71,8 +71,6 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [hoveredButton, setHoveredButton] = useState<number | null>(null);
 
     // Resolve slides: prefer heroSlides prop, then apply dynamicImages fallback, then defaults
@@ -82,6 +80,16 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
             ...slide,
             image: dynamicImages?.[idx] || slide.image,
         }));
+
+    // Active single slide display
+    const activeSlide = slides[0];
+
+    /* 
+    ====================================================================
+    CAROUSEL STATE & HANDLERS (COMMENTED OUT - KEPT FOR REFERENCE)
+    ====================================================================
+    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
     const nextSlide = useCallback(() => {
         setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
@@ -104,13 +112,29 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
         const timeout = setTimeout(() => setIsAutoPlaying(true), 10000);
         return () => clearTimeout(timeout);
     };
-
-    const currentSlide = slides[currentSlideIndex];
+    ====================================================================
+    */
 
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-            {/* Background Image Carousel with Parallax */}
+            {/* Background Image with Parallax */}
             <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
+                {/* Single Image View */}
+                <div className="absolute inset-0">
+                    <Image
+                        src={activeSlide.image}
+                        alt="Luxury Event Venue"
+                        fill
+                        priority
+                        className="object-cover"
+                        unoptimized
+                    />
+                </div>
+
+                {/* 
+                ============================================================
+                CAROUSEL BACKGROUND IMAGE SLIDER (COMMENTED OUT)
+                ============================================================
                 <AnimatePresence mode="popLayout">
                     <motion.div
                         key={currentSlideIndex}
@@ -121,7 +145,7 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                         className="absolute inset-0"
                     >
                         <Image
-                            src={currentSlide.image}
+                            src={slides[currentSlideIndex].image}
                             alt={`Luxury Interior ${currentSlideIndex + 1}`}
                             fill
                             priority
@@ -130,11 +154,73 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                         />
                     </motion.div>
                 </AnimatePresence>
+                ============================================================
+                */}
                 <div className="absolute inset-0 bg-black/60 z-10" />
             </motion.div>
 
             {/* Content */}
             <div className="relative z-10 text-center px-6 py-12 md:py-16 max-w-5xl mx-auto w-[95%] md:w-full">
+                {/* Static Content View */}
+                <div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-cream/90 text-sm md:text-2xl uppercase mb-4 font-semibold tracking-[0.2em]"
+                    >
+                        {content?.topHeading || activeSlide.subtitle}
+                    </motion.p>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-normal ${(content?.subheading || activeSlide.bottom_subtitle) ? "mb-4" : "mb-8"}`}
+                    >
+                        {content?.heading || activeSlide.title}
+                    </motion.h1>
+                    {(content?.subheading || activeSlide.bottom_subtitle) && (
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            className="text-cream/90 text-sm md:text-xl font-light mb-8 max-w-3xl mx-auto"
+                        >
+                            {content?.subheading || activeSlide.bottom_subtitle}
+                        </motion.p>
+                    )}
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        {activeSlide.buttons.map((button, idx) => (
+                            <motion.button
+                                key={idx}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
+                                onMouseEnter={() => setHoveredButton(idx)}
+                                onMouseLeave={() => setHoveredButton(null)}
+                                onClick={() => setIsModalOpen(true)}
+                                className={`px-8 py-4 font-medium uppercase tracking-widest text-sm rounded-none transition-colors shadow-lg min-w-[200px] ${
+                                    button.primary
+                                        ? hoveredButton === idx 
+                                            ? "bg-cream text-[#425042]" 
+                                            : "bg-[#425042] text-white"
+                                        : hoveredButton === idx 
+                                            ? "bg-[#425042] text-white" 
+                                            : "bg-cream text-[#425042]"
+                                }`}
+                            >
+                                {button.text}
+                            </motion.button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 
+                ============================================================
+                CAROUSEL CONTENT SWITCHER (COMMENTED OUT)
+                ============================================================
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlideIndex}
@@ -149,28 +235,28 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-cream/90 text-sm md:text-2xl uppercase mb-4 font-semibold tracking-[0.2em]"
                         >
-                            {content?.topHeading || currentSlide.subtitle}
+                            {content?.topHeading || slides[currentSlideIndex].subtitle}
                         </motion.p>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-normal ${(content?.subheading || currentSlide.bottom_subtitle) ? "mb-4" : "mb-8"}`}
+                            className={`text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-tight tracking-wider font-normal ${(content?.subheading || slides[currentSlideIndex].bottom_subtitle) ? "mb-4" : "mb-8"}`}
                         >
-                            {content?.heading || currentSlide.title}
+                            {content?.heading || slides[currentSlideIndex].title}
                         </motion.h1>
-                        {(content?.subheading || currentSlide.bottom_subtitle) && (
+                        {(content?.subheading || slides[currentSlideIndex].bottom_subtitle) && (
                             <motion.p
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 className="text-cream/90 text-sm md:text-xl font-light mb-8 max-w-3xl mx-auto"
                             >
-                                {content?.subheading || currentSlide.bottom_subtitle}
+                                {content?.subheading || slides[currentSlideIndex].bottom_subtitle}
                             </motion.p>
                         )}
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            {currentSlide.buttons.map((button, idx) => (
+                            {slides[currentSlideIndex].buttons.map((button, idx) => (
                                 <motion.button
                                     key={idx}
                                     initial={{ opacity: 0, scale: 0.9 }}
@@ -197,9 +283,15 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                         </div>
                     </motion.div>
                 </AnimatePresence>
+                ============================================================
+                */}
             </div>
 
-            {/* Desktop Navigation Arrows */}
+            {/* 
+            ================================================================
+            CAROUSEL NAVIGATION CONTROLS (COMMENTED OUT)
+            ================================================================
+            Desktop Navigation Arrows
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 flex justify-between px-4 md:px-8 pointer-events-none">
                 <motion.button
                     initial={{ opacity: 0, x: -20 }}
@@ -226,7 +318,7 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                 </motion.button>
             </div>
 
-            {/* Mobile Navigation Arrows */}
+            Mobile Navigation Arrows
             <div className="absolute bottom-10 inset-x-0 md:hidden z-20 flex justify-center gap-8 pointer-events-none">
                 <motion.button
                     initial={{ opacity: 0, y: 20 }}
@@ -250,11 +342,13 @@ export default function HeroSection({ heroSlides, dynamicImages, content }: Hero
                     <ChevronRight className="w-5 h-5" />
                 </motion.button>
             </div>
+            ================================================================
+            */}
 
             <EnquiryModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                propertyName={currentSlide.title}
+                propertyName={activeSlide.title}
             />
         </section>
     );

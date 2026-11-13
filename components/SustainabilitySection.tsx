@@ -77,7 +77,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages, heading, subheadin
                     </div>
 
                     <div
-                        className="relative w-full h-[70vh] md:h-[90vh] lg:h-[100vh] rounded-[24px] overflow-hidden mt-12 md:mt-20 group cursor-pointer"
+                        className="relative w-full h-[70vh] md:h-[90vh] lg:h-[100vh]  overflow-hidden mt-12 md:mt-20 group cursor-pointer"
                         onClick={() => setSelectedCardIndex(0)}
                     >
                         <Image
@@ -107,7 +107,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages, heading, subheadin
                 {/* Right Column */}
                 <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
                     <div
-                        className="relative w-full h-[70vh] md:h-[80vh] lg:h-[70vh] rounded-[24px] overflow-hidden group cursor-pointer"
+                        className="relative w-full h-[70vh] md:h-[80vh] lg:h-[70vh]  overflow-hidden group cursor-pointer"
                         onClick={() => setSelectedCardIndex(1)}
                     >
                         <Image
@@ -134,7 +134,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages, heading, subheadin
                     </div>
 
                     <div
-                        className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-[24px] overflow-hidden group cursor-pointer"
+                        className="relative w-full h-[300px] md:h-[400px] lg:h-[500px]  overflow-hidden group cursor-pointer"
                         onClick={() => setSelectedCardIndex(2)}
                     >
                         <Image
@@ -224,7 +224,7 @@ const SustainabilitySection = ({ dynamicCards, dynamicImages, heading, subheadin
                             animate={{ y: 0, opacity: 1, scale: 1 }}
                             exit={{ y: 20, opacity: 0, scale: 0.95 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-6xl bg-[#FDFBF9] rounded-[24px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+                            className="relative w-full max-w-6xl bg-[#FDFBF9]  overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
                             onClick={(e) => e.stopPropagation()}
                             data-lenis-prevent="true"
                         >

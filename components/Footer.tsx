@@ -186,10 +186,19 @@ export default function Footer() {
                     </div>
 
                     {/* Footer Bottom Line */}
-                    <div className="w-full border-t border-[#425042]/10 pt-6 pb-4 flex flex-col justify-center items-center">
-                        <p className="text-[10px] md:text-sm text-[#425042] font-light text-center">
+                    <div className="w-full border-t border-[#425042]/10 pt-6 pb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-[10px] md:text-sm text-[#425042] font-light text-center md:text-left">
                             A Product of HEVANIYA | All Rights Reserved HEVANIYA ©{new Date().getFullYear()}
                         </p>
+                        <div className="flex items-center gap-6 text-[11px] md:text-xs text-[#425042]/80 font-light">
+                            <Link href="/privacy" className="hover:text-[#2F3E2F] hover:underline underline-offset-4 transition-colors">
+                                Privacy Policy
+                            </Link>
+                            <span className="text-[#425042]/30">•</span>
+                            <Link href="/terms" className="hover:text-[#2F3E2F] hover:underline underline-offset-4 transition-colors">
+                                Terms & Conditions
+                            </Link>
+                        </div>
                     </div>
                 </div>
 

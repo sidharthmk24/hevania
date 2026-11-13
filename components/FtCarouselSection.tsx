@@ -157,6 +157,7 @@ export default function FtCarous({ images, content, heading, subheading }: Props
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
+                className="px-6 md:px-12 lg:px-20"
             >
                 <div className="bg-dark-forest sm:p-0">
                     {/* Desktop Version */}

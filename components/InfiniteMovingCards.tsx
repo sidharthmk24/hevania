@@ -47,7 +47,7 @@ export const InfiniteMovingCards = ({
             <ul
                 ref={scrollerRef}
                 className={cn(
-                    "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
+                    "flex min-w-full shrink-0 gap-5 py-4 w-max flex-nowrap",
                     direction === "left" ? "animate-scroll-left" : "animate-scroll-right",
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
@@ -55,50 +55,59 @@ export const InfiniteMovingCards = ({
                     "--animation-duration": speed === "fast" ? "25s" : speed === "normal" ? "40s" : "60s",
                 } as React.CSSProperties}
             >
-                {displayItems.map((item, idx) => (
-                    <li
-                        className="w-[85vw] sm:w-[320px] md:w-[380px] lg:w-[400px] min-h-[180px] relative border-[#2F3E2F]/20 border-[1px] bg-[#F5F5F0]/60 backdrop-blur-sm pt-[24px] sm:pt-[28px] pb-[20px] sm:pb-[24px] px-[18px] sm:px-[22px] shrink-0"
-                        key={idx}
-                    >
-                        <blockquote>
-                            <div>
-                                <div className="relative z-20 flex flex-row items-center gap-4">
-                                    <div className="h-14 w-14 rounded-full overflow-hidden border border-[#2F3E2F]/10 shadow-sm shrink-0 bg-stone-100 flex items-center justify-center">
+                {displayItems.map((item, idx) => {
+                    const rating = Math.max(1, Math.min(5, Number(item.rating) || 5));
+
+                    return (
+                        <li
+                            className="w-[85vw] sm:w-[340px] md:w-[380px] lg:w-[420px] h-[210px] sm:h-[220px] flex flex-col justify-between overflow-hidden relative rounded-2xl border border-[#2F3E2F]/15 bg-[#F5F5F0]/90 backdrop-blur-sm p-6 shrink-0 shadow-sm hover:shadow-md transition-shadow"
+                            key={idx}
+                        >
+                            <div className="flex flex-col h-full justify-between overflow-hidden">
+                                {/* Header: Avatar, Name, Rating */}
+                                <div className="flex items-center gap-3.5 shrink-0">
+                                    <div className="h-12 w-12 rounded-full overflow-hidden border border-[#2F3E2F]/15 shadow-sm shrink-0 bg-stone-100 flex items-center justify-center">
                                         {item.image_url ? (
-                                            <img 
-                                                src={item.image_url} 
-                                                alt={item.name} 
-                                                className="h-full w-full object-cover transition-transform duration-500 hover:scale-110" 
+                                            <img
+                                                src={item.image_url}
+                                                alt={item.name}
+                                                className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
                                             />
                                         ) : (
-                                            <span className="text-[#2F3E2F]/30 text-xl font-freightNeoSemibold">
-                                                {item.name.charAt(0)}
+                                            <span className="text-[#2F3E2F]/40 text-lg font-semibold uppercase">
+                                                {item.name ? item.name.charAt(0) : "G"}
                                             </span>
                                         )}
                                     </div>
-                                    <div className="flex flex-col leading-tight">
-                                        <div className="text-lg sm:text-xl text-customBrown font-freightNeoSemibold tracking-tight">{item.name}</div>
-                                        <div className="text-xs sm:text-sm text-[#2F3E2F]/70 flex mt-1">
-                                            {Array.from({ length: item.rating }).map((_, index) => (
-                                                <span key={index} className="text-yellow-500/90 text-xs">
+                                    <div className="flex flex-col min-w-0">
+                                        <div className="text-base sm:text-lg font-semibold text-[#1A2A1A] tracking-tight truncate">
+                                            {item.name}
+                                        </div>
+                                        <div className="flex items-center gap-0.5 mt-0.5">
+                                            {Array.from({ length: rating }).map((_, i) => (
+                                                <span key={i} className="text-amber-500 text-xs">
                                                     ★
                                                 </span>
                                             ))}
-                                            {Array.from({ length: 5 - item.rating }).map((_, index) => (
-                                                <span key={index} className="text-gray-300 text-xs">
+                                            {Array.from({ length: 5 - rating }).map((_, i) => (
+                                                <span key={i} className="text-gray-300 text-xs">
                                                     ★
                                                 </span>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Body: Testimonial Comment */}
+                                <div className="mt-3.5 overflow-hidden flex-1 flex items-start">
+                                    <p className="text-xs sm:text-sm font-light text-[#2F3E2F]/85 leading-relaxed break-words break-all [overflow-wrap:anywhere] whitespace-normal line-clamp-4">
+                                        &ldquo;{item.comment}&rdquo;
+                                    </p>
+                                </div>
                             </div>
-                            <div className="mt-4 sm:mt-5">
-                                <p className="mt-2 text-sm sm:text-base font-FreightNeoProNormal 2xl:text-md text-[#2F3E2F]">{item.comment}</p>
-                            </div>
-                        </blockquote>
-                    </li>
-                ))}
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );

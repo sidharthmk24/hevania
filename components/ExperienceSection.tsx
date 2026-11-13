@@ -18,6 +18,34 @@ const DEFAULT_IMAGES = [
     "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80",
 ];
 
+const DEFAULT_PILLS = [
+    "Weddings",
+    "Engagements",
+    "Haldi & Pre-wedding",
+    "Baby Showers",
+    "Birthdays",
+    "Corporate Events",
+    "Family Get-togethers",
+];
+
+const BOTTOM_COLUMNS = [
+    {
+        title: "A Venue for Every Occasion",
+        description:
+            "Wedding mornings by the water. Haldi in the afternoon light. Engagements, baby showers, birthdays and corporate gatherings, in an open natural setting with room for your own decor, your own caterer and your own way of celebrating.",
+    },
+    {
+        title: "A Riverside Staycation, Made for Slow Days",
+        description:
+            "Wake up to the river. Have chai on the porch, walk through the greenery and do nothing for a while. Made for couples, families and small groups who want a weekend away without a long journey.",
+    },
+    {
+        title: "Close to the City, Far from the Noise",
+        description:
+            "A short drive from Kochi, Kottayam and Alappuzha, so guests arrive easily and still feel they have gone somewhere. Our team looks after the details, so you can enjoy the day.",
+    },
+];
+
 interface ExperienceSectionProps {
     image1?: string;
     image2?: string;
@@ -38,6 +66,7 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
     const sectionRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const rightRef = useRef<HTMLDivElement>(null);
+    const bottomRef = useRef<HTMLDivElement>(null);
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -96,75 +125,132 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
     // GSAP scroll animations
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.from(headerRef.current, {
-                opacity: 0,
-                x: -50,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-            });
+            if (headerRef.current) {
+                gsap.from(headerRef.current, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top 80%",
+                    },
+                });
+            }
 
-            gsap.from(rightRef.current, {
-                opacity: 0,
-                x: 50,
-                duration: 1,
-                ease: "power3.out",
-                delay: 0.15,
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-            });
+            if (rightRef.current) {
+                gsap.from(rightRef.current, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    delay: 0.15,
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top 80%",
+                    },
+                });
+            }
+
+            if (bottomRef.current) {
+                gsap.from(bottomRef.current, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    delay: 0.25,
+                    scrollTrigger: {
+                        trigger: bottomRef.current,
+                        start: "top 85%",
+                    },
+                });
+            }
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
-    const metrics = content?.metrics && content.metrics.length > 0
-        ? content.metrics
-        : [
-            { value: "200+", label: "Curated Spaces" },
-            { value: "12", label: "Countries" },
-            { value: "25+", label: "Years of Excellence" },
-            { value: "150+", label: "Events Hosted" },
-        ];
-
-    const tags = content?.tags
+    const pills = content?.tags
         ? content.tags.split(",").map((t) => t.trim())
-        : ["Interior Design", "Architecture", "Bespoke Stays", "Luxury Living", "Curated Art"];
+        : DEFAULT_PILLS;
+
+    const headingText = content?.subheading || content?.heading || "The River, The Sky,\nYour Moment,\nYour Way";
+
+    const descriptionText =
+        content?.description ||
+        "Some places you visit. Some you remember. Hevaniya sits on the banks of the river in Vaikom, with open sky above, green all around, and the water keeping its own slow time.";
 
     return (
         <section
             ref={sectionRef}
-            className="w-full bg-[#F7F5F0] py-24 md:py-36 overflow-hidden"
+            className="w-full bg-[#F7F5F0] text-[#1A2A1A] py-20 md:py-28 overflow-hidden"
             style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
         >
-            <div className="mx-auto px-6 md:px-12 lg:px-20">
-                {/* ── Centered header ─────────────────────────────── */}
-              
+            <div className="mx-auto px-6 md:px-16 lg:px-24 w-full">
+                {/* ── TOP: Perfect For label + Pills ──────────────── */}
+                <div className="mb-12 md:mb-16">
+                    <span
+                        className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A75E] block mb-4"
+                        style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
+                    >
+                        PERFECT FOR
+                    </span>
+                    <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                        {pills.map((pill) => (
+                            <span
+                                key={pill}
+                                className="px-4 py-2 rounded-full border border-[#2C3A2C]/15 bg-white/70 text-xs sm:text-sm text-[#2C3A2C] font-normal hover:bg-[#1A2A1A] hover:text-white hover:border-[#1A2A1A] transition-all cursor-default whitespace-nowrap shadow-sm"
+                                style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
+                            >
+                                {pill}
+                            </span>
+                        ))}
+                    </div>
+                </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+                {/* ── MIDDLE: Heading on Left (with written text down), Image on Right ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+                    {/* Left: Main Heading + Written Text Down */}
+                    <div ref={headerRef} className="lg:col-span-5 flex flex-col justify-between">
+                        <div>
+                            <h2
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-normal tracking-[-0.02em] text-[#1A2A1A] leading-[1.08] whitespace-pre-line"
+                            >
+                                {headingText}
+                            </h2>
+                        </div>
 
-                    {/* ── LEFT: Auto Carousel ──────────────────────────────── */}
-                    <div ref={headerRef} className="lg:col-span-7 relative">
+                        <div className="mt-8 lg:mt-auto pt-6 lg:pt-10">
+                            <p
+                                className="text-sm md:text-base leading-relaxed max-w-lg font-light"
+                                style={{ color: "rgba(44,58,44,0.75)" }}
+                            >
+                                {descriptionText}
+                            </p>
+                        </div>
+                    </div>
 
-                        {/* Main image frame */}
-                        <div className="relative aspect-[16/10] overflow-hidden shadow-2xl ">
+                    {/* Right: Image Frame */}
+                    <div ref={rightRef} className="lg:col-span-7 flex items-center">
+                        <div
+                            className="relative w-full aspect-[16/10] overflow-hidden rounded-none  bg-black/10  group"
+                            onClick={() => setIsModalOpen(true)}
+                        >
                             {carouselImages.map((src, i) => (
                                 <div
                                     key={i}
                                     className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                                    style={{ opacity: activeSlide === i ? 1 : 0, zIndex: activeSlide === i ? 1 : 0 }}
+                                    style={{
+                                        opacity: activeSlide === i ? 1 : 0,
+                                        zIndex: activeSlide === i ? 1 : 0,
+                                    }}
                                 >
                                     <Image
                                         src={src}
                                         alt={`Experience ${i + 1}`}
                                         fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, 58vw"
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        sizes="(max-width: 768px) 100vw, 60vw"
                                         priority={i === 0}
                                     />
                                     <div className="absolute inset-0 bg-[#1A2A1A]/10 mix-blend-overlay" />
@@ -172,36 +258,39 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                             ))}
 
                             {/* Gradient overlay at bottom */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#1A2A1A]/50 via-transparent to-transparent z-10" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
 
                             {/* Slide counter */}
                             <div
-                                className="absolute top-6 right-6 z-20 flex items-center gap-2"
+                                className="absolute top-4 right-4 z-20 flex items-center gap-2"
                                 style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
                             >
-                                <span className="text-white/50 text-[0.6rem] tracking-[0.3em] uppercase">
+                                <span className="text-white/90 text-[0.65rem] tracking-[0.25em] uppercase bg-black/40 backdrop-blur-md px-2.5 py-1 rounded">
                                     {String(activeSlide + 1).padStart(2, "0")} / {String(carouselImages.length).padStart(2, "0")}
                                 </span>
                             </div>
 
                             {/* Dot navigation + progress */}
-                            <div className="absolute bottom-6 left-6 z-20 flex items-center gap-3">
+                            <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 cursor-pointer">
                                 {carouselImages.map((_, i) => (
                                     <button
                                         key={i}
-                                        onClick={() => handleDotClick(i)}
-                                        className="relative overflow-hidden focus:outline-none"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleDotClick(i);
+                                        }}
+                                        className="relative overflow-hidden focus:outline-none rounded-full cursor-pointer"
                                         aria-label={`Go to slide ${i + 1}`}
                                         style={{
-                                            width: activeSlide === i ? "2.5rem" : "0.5rem",
-                                            height: "2px",
-                                            background: "rgba(255,255,255,0.3)",
+                                            width: activeSlide === i ? "2rem" : "0.5rem",
+                                            height: "3px",
+                                            background: "rgba(255,255,255,0.4)",
                                             transition: "width 0.4s ease",
                                         }}
                                     >
                                         {activeSlide === i && (
                                             <span
-                                                className="absolute left-0 top-0 h-full bg-white"
+                                                className="absolute left-0 top-0 h-full bg-white "
                                                 style={{ width: `${progress}%`, transition: "width 0.05s linear" }}
                                             />
                                         )}
@@ -209,206 +298,37 @@ export default function ExperienceSection({ image1, image2, content }: Experienc
                                 ))}
                             </div>
                         </div>
-
-                        {/* ── Perfect For: event pills ─────────────────────── */}
-                        <div className="mt-6">
-                            {/* Superscript label */}
-                            <div className="mb-4">
-                                <span
-                                    className="text-xs font-bold uppercase tracking-[0.2em] text-[#C6A75E] block"
-                                    style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                                >
-                                    Perfect For
-                                </span>
-                                <div className="h-[1px] bg-gradient-to-r from-[#C6A75E] to-transparent w-[50px] mt-2" />
-                            </div>
-
-                            {/* Event type cards */}
-                            <div className="grid grid-cols-3 gap-2">
-                                {[
-                                    { label: "Weddings", icon: "💍" },
-                                    { label: "Engagements", icon: "🥂" },
-                                    { label: "Haldi Ceremonies", icon: "🌸" },
-                                    { label: "Baby Showers", icon: "🍼" },
-                                    { label: "Birthdays", icon: "🎂" },
-                                    { label: "Corporate Events", icon: "✦" },
-                                ].map((event) => (
-                                    <div
-                                        key={event.label}
-                                        className="group flex flex-col items-center justify-center gap-1.5 py-3.5 px-2 border border-[#2C3A2C]/12 bg-[#F7F5F0] hover:text-[#ffffff] hover:bg-[#1A2A1A] hover:border-[#1A2A1A] transition-all duration-300 cursor-default"
-                                    >
-                                        {/* <span className="text-base leading-none group-hover:scale-110 transition-transform duration-300">
-                                            {event.icon}
-                                        </span> */}
-                                        <span
-                                            className="text-[0.52rem] uppercase tracking-[0.12em] font-normal text-center leading-tight  transition-colors duration-300"
-                                            style={{
-                                                
-                                                fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
-                                            }}
-                                        >
-                                            {event.label}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
                     </div>
+                </div>
 
-                    {/* ── RIGHT: Content Panel ─────────────────────────────── */}
-                    <div ref={rightRef} className="lg:col-span-5 space-y-10 pt-20 lg:pt-0">
-
-                        {/* Label + Heading */}
-                        <div className="space-y-5">
-                            {/* <div className="flex items-center gap-4">
-                                <span className="block w-8 h-px bg-[#2C3A2C]/30" />
-                                <span
-                                    className="text-[0.58rem] tracking-[0.36em] uppercase text-[#C6A75E] font-semibold"
-                                    style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                                >
-                                    {content?.heading || "Our Philosophy"}
-                                </span>
-                            </div> */}
-
-                            <h2
-                                className="font-light tracking-[-0.03em] leading-[1.05] text-[#1A2A1A] whitespace-pre-line "
-                                style={{ fontSize: "clamp(2rem, 3.6vw, 3.4rem)" }}
-                            >
-                                {content?.subheading ? (
-                                    <span dangerouslySetInnerHTML={{ __html: content.subheading.replace(/\n/g, "<br/>") }} />
-                                ) : (
-                                    <>
-                                        Where <br />
-                                        MEMORABLE MOMENTS{" "}
-                                        <span className="italic" style={{ color: "#C6A75E" }}>
-                                         <br className="md:block hidden" />   FIND THEIR SETTING
-                                        </span>
-                                    </>
-                                )}
-                            </h2>
-                        </div>
-
-                        {/* Description */}
-                        <div className="space-y-4 border-l-2 border-[#C6A75E]/30 pl-6">
-                            <div
-                                className="text-sm leading-[1.9] font-light tracking-[0.01em] whitespace-pre-line"
-                                style={{ color: "rgba(44,58,44,0.70)", fontSize: "0.90rem" }}
-                            >
-                                {content?.description || (
-                                    <>
-                                        <p>
-        Looking for a riverside venue or a nature-friendly staycation in Vaikom, Kerala? Welcome to HEVANIYA, a peaceful riverside spot where nature is part of every celebration and quiet getaway.
-    </p>
-
-    <h3 className="font-bold text-base font-inherit">A Venue for Every Occasion</h3>
-    <p className="mb-4">
-        Located in Vaikom, Kottayam, Hevaniya hosts weddings, Haldi ceremonies, engagements and corporate events, along with private staycations. Open skies, river views and green surroundings give every occasion a calm, beautiful backdrop.
-    </p>
-
-    <h3 className="font-bold text-base font-inherit">Close to the City, Far From the Noise</h3>
-    <p className="mb-4">
-        Just a short drive from Kochi, Kottayam and Alappuzha, Hevaniya feels like a private escape without the long journey.
-    </p>
-
-    <p>
-        Our team takes care of every detail, so you can simply relax and enjoy the moment.
-    </p>
-</>
-                                )}
-                               
-                            </div>
-                        </div>
-
-                        {/* Metrics grid */}
-                        {/* <div className="grid grid-cols-2 gap-px bg-[#2C3A2C]/10 border border-[#2C3A2C]/10">
-                            {metrics.slice(0, 4).map((metric, i) => (
+                {/* ── BOTTOM: Divider line & 3 Columns ───────────────────── */}
+                <div ref={bottomRef} className="mt-14 md:mt-20">
+                    <div className="border-t border-[#2C3A2C]/15 pt-10 md:pt-14">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
+                            {BOTTOM_COLUMNS.map((col, index) => (
                                 <div
-                                    key={i}
-                                    className="bg-[#F7F5F0] px-6 py-5 flex flex-col gap-1"
+                                    key={col.title}
+                                    className={`flex flex-col gap-3 ${
+                                        index === 0
+                                            ? "md:pr-10 md:border-r md:border-[#2C3A2C]/15"
+                                            : index === 1
+                                            ? "md:px-10 md:border-r md:border-[#2C3A2C]/15"
+                                            : "md:pl-10"
+                                    }`}
                                 >
+                                    <h3 className="text-lg sm:text-xl font-bold text-[#1A2A1A] tracking-tight leading-snug">
+                                        {col.title}
+                                    </h3>
                                     <p
-                                        className="text-[1.9rem] font-light leading-none tracking-[-0.03em]"
-                                        style={{ color: "#1A2A1A" }}
+                                        className="text-xs sm:text-sm leading-relaxed font-light"
+                                        style={{ color: "rgba(44,58,44,0.70)" }}
                                     >
-                                        {metric.value.replace(/[^0-9]/g, "")}
-                                        <span
-                                            className="text-[1rem]"
-                                            style={{ color: "#C6A75E" }}
-                                        >
-                                            {metric.value.replace(/[0-9]/g, "")}
-                                        </span>
-                                    </p>
-                                    <p
-                                        className="text-[0.55rem] tracking-[0.26em] uppercase font-medium mt-1"
-                                        style={{
-                                            color: "rgba(44,58,44,0.38)",
-                                            fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
-                                        }}
-                                    >
-                                        {metric.label}
+                                        {col.description}
                                     </p>
                                 </div>
                             ))}
-                        </div> */}
-
-                        {/* Tags + CTA row */}
-                        {/* <div className="flex flex-wrap items-center gap-3 pt-2">
-                            {tags.slice(0, 3).map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="text-[0.55rem] tracking-[0.2em] uppercase font-medium border px-3 py-1.5 cursor-default transition-all duration-200 hover:border-[#2C3A2C]/28 hover:text-[#2C3A2C]/62"
-                                    style={{
-                                        color: "rgba(44,58,44,0.40)",
-                                        borderColor: "rgba(44,58,44,0.14)",
-                                        fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
-                                    }}
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-
-                            <button
-                                onClick={() => setIsModalOpen(true)}
-                                className="ml-auto inline-flex items-center gap-4 group focus:outline-none"
-                                style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                            >
-                                <span
-                                    className="text-[0.6rem] tracking-[0.32em] uppercase font-medium transition-colors duration-300 group-hover:text-[rgba(44,58,44,0.85)]"
-                                    style={{ color: "rgba(44,58,44,0.45)" }}
-                                >
-                                    Enquire Now
-                                </span>
-                                <span className="block h-px w-7 bg-[#2C3A2C]/28 transition-all duration-300 group-hover:w-14 group-hover:bg-[#2C3A2C]/55" />
-                            </button>
-                        </div> */}
-
-                        {/* Two-column feature highlights */}
-                        {/* <div className="grid grid-cols-2 gap-8 border-t border-[#2C3A2C]/10 pt-8">
-                            <div>
-                                <h4
-                                    className="text-[#1A2A1A] font-semibold text-xs mb-3 uppercase tracking-wider"
-                                    style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                                >
-                                    Artistic Vision
-                                </h4>
-                                <p className="text-xs leading-relaxed" style={{ color: "rgba(44,58,44,0.50)" }}>
-                                    Every detail is curated to create a visually stunning experience.
-                                </p>
-                            </div>
-                            <div>
-                                <h4
-                                    className="text-[#1A2A1A] font-semibold text-xs mb-3 uppercase tracking-wider"
-                                    style={{ fontFamily: "'Helvetica Neue', Helvetica, sans-serif" }}
-                                >
-                                    Heritage
-                                </h4>
-                                <p className="text-xs leading-relaxed" style={{ color: "rgba(44,58,44,0.50)" }}>
-                                    Decades of expertise in managing high-end destination events.
-                                </p>
-                            </div>
-                        </div> */}
+                        </div>
                     </div>
-
                 </div>
             </div>
 
