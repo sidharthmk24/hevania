@@ -97,6 +97,7 @@ export default function AboutClient({
                         src={hero.image_url}
                         alt={hero.heading}
                         fill
+                        unoptimized
                         className="object-cover scale-110"
                         priority
                     />
@@ -160,6 +161,7 @@ export default function AboutClient({
                                     src={philosophy.image_url}
                                     alt="Philosophy"
                                     fill
+                                    unoptimized
                                     className="object-cover"
                                 />
                                 <div className="absolute inset-0 bg-dark-forest/10 mix-blend-overlay" />
@@ -363,6 +365,7 @@ export default function AboutClient({
                                             src={member.image_url}
                                             alt={member.name}
                                             fill
+                                            unoptimized
                                             className="object-cover transition-transform duration-1000 group-hover:scale-110"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-dark-forest/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
@@ -402,6 +405,7 @@ export default function AboutClient({
                     src={cta.image_url}
                     alt="Footer CTA"
                     fill
+                    unoptimized
                     className="object-cover scale-105"
                 />
                 <div className="absolute inset-0 bg-dark-forest/90 backdrop-blur-sm" />
